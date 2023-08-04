@@ -9,7 +9,7 @@ module.exports = {
      * Add seed commands here.
      *
      * Example:
-     */
+    
       await queryInterface.bulkInsert('roles', [{
         name: 'Admin',
        description: 'Administrator',
@@ -24,7 +24,7 @@ module.exports = {
        updatedAt: '2023-07-31 06:51:23'
       }
       ], {});
-    
+     */
   },
 
   async down (queryInterface, Sequelize) {
