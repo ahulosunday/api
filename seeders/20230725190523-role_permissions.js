@@ -11,6 +11,8 @@ module.exports = {
     await queryInterface.bulkInsert('role_permissions', [{
      roleId: 1,
      permissionId: 1,
+     createdAt: DataTypes.NOW(),
+       updatedAt: DataTypes.NOW()
     }], {});
 */
   },
