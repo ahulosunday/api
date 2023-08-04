@@ -5,9 +5,24 @@
     "database": "sequelize_db",
     "host": "dpg-cj6cob17120s739vf9l0-a",
     "port": 5432,
-    "dialect": "postgres v4.0.0"
+    "dialect": "postgres"
     
 
+  },
+  "development": {
+    "username": "root",
+    "password": "",
+    "database": "sequelize_db",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   }
  
 }
+
