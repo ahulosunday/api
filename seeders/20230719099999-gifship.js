@@ -22,8 +22,8 @@ module.exports = {
      },{
        name: 'Vulnerable Group Social Health Programmes (VSSHP)',
        userId: '1',
-       createdAt: DataTypes.NOW(),
-       updatedAt: DataTypes.NOW()
+       createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
      }
      
      ], {});
