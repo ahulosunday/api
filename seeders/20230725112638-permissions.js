@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up (queryInterface, DataTypes) {
     await queryInterface.bulkInsert('permissions', [
       {
         name: 'ADD_ROLES',
@@ -334,7 +334,7 @@ module.exports = {
     ], {});
   },
 
-  async down (queryInterface, Sequelize) {
+  async down (queryInterface, DataTypes) {
     /**
      * Add commands to revert seed here.
      *

@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up (queryInterface, DataTypes) {
     /**
      * Add seed commands here.
      *
@@ -11,14 +11,14 @@ module.exports = {
      await queryInterface.bulkInsert('gifships', [{
        name: 'Formal Sector Social Health Insurance Programmes (FSSHIP)',
        userId: '1',
-       createdAt: DataTypes.NOW(),
-       updatedAt: DataTypes.NOW()
+       createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
        
      },{
        name: 'Informal Sector Social Health Insurance Programmes (ISSHIP)',
        userId: '1',
-       createdAt: DataTypes.NOW(),
-       updatedAt: DataTypes.NOW()
+       createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
      },{
        name: 'Vulnerable Group Social Health Programmes (VSSHP)',
        userId: '1',
@@ -30,7 +30,7 @@ module.exports = {
     
   },
 
-  async down (queryInterface, Sequelize) {
+  async down (queryInterface, DataTypes) {
     /**
      * Add commands to revert seed here.
      *
