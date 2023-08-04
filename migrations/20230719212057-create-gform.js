@@ -306,7 +306,7 @@ module.exports = {
       type: DataTypes.INTEGER,
       allowNull: false,
       references:{
-        model: 'gifshipTypes',
+        model: 'gifshiptypes',
         key: 'id',
         
       },

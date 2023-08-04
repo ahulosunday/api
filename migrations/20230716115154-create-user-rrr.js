@@ -63,7 +63,7 @@ module.exports = {
         notNull: true,
       },
       references:{
-        model: 'gifshipTypes',
+        model: 'gifshiptypes',
         key: 'id',
         
       },
