@@ -1,4 +1,11 @@
 {
+  "development": {
+    "username": "root",
+    "password": "",
+    "database": "sequelize_db",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
    "production": {
     "username": "sequelize_db_user",
     "password": "XWtDIHQEU4rGbKmrjgXC4oOGwAGd0mA3",
@@ -9,13 +16,7 @@
     
 
   },
-  "development": {
-    "username": "root",
-    "password": "",
-    "database": "sequelize_db",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
+  
   "test": {
     "username": "root",
     "password": null,
