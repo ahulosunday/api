@@ -7,7 +7,7 @@
     "port": 5432,
     "dialect": "postgres"
   },
-   "production": { 
+   "development": { 
      "username": "sequelize_db_user",
     "password": "XWtDIHQEU4rGbKmrjgXC4oOGwAGd0mA3",
     "database": "sequelize_db",
@@ -16,7 +16,7 @@
     "dialect": "postgres"
   },
   
-  "development": {
+  "production": {
     "username": "root",
     "password": "",
     "database": "sequelize_db",
