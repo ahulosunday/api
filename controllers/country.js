@@ -1,5 +1,4 @@
 const { country, users } = require('../models');
-const jwt = require('jsonwebtoken')
 
 
 const getCountrys = async(req, res) =>{

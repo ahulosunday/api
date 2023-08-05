@@ -13,13 +13,13 @@ const Login = async (req, res) => {
             return res.status(400).json({error: "Invalid username or Password!"});
           }
          
-       if(await bcrypt.compare(password, user.password)){
+       //if(await bcrypt.compare(password, user.password)){
        const token = jwt.sign({id:user.id}, jwtkey);
-       const { password, ...other} = user
+       //const { password, ...other} = user
               res.cookie("access_token", token, {
         httpOnly: true
        }).status(200).json(user);
-       }     
+      // }     
     } catch (error) {
         return res.status(500).json({ error: "Invalid username or password" })
     }
