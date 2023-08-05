@@ -16,6 +16,19 @@ module.exports = {
        createdAt: '2023-07-31 06:51:23',
        updatedAt: '2023-07-31 06:51:23'
        
+      },{
+         name: 'Admin',
+        id:2,
+       description: 'Administrator',
+       createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+      },
+      {
+         name: 'Guest',
+        id:3,
+       description: 'Guest User',
+       createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
       }
       ], {});
      
