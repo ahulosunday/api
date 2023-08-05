@@ -1,5 +1,5 @@
 {
-  "test": {
+  "production": {
     "username": "sequelize_db_user",
     "password": "XWtDIHQEU4rGbKmrjgXC4oOGwAGd0mA3",
     "database": "sequelize_db",
@@ -16,7 +16,7 @@
     "dialect": "postgres"
   },
   
-  "production": {
+  "test": {
     "username": "root",
     "password": "",
     "database": "sequelize_db",
