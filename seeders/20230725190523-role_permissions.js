@@ -8,8 +8,19 @@ module.exports = {
      *
      * Example:
      * */
-      //await queryInterface.bulkDelete('role_permissions', null, {});
-    await queryInterface.bulkInsert('role_permissions', [
+   await queryInterface.bulkDelete('role_permissions', null, {});
+   
+
+  },
+
+  async down (queryInterface, DataTypes) {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     **/ 
+    // await queryInterface.bulkDelete('role_permissions', null, {});
+      await queryInterface.bulkInsert('role_permissions', [
       {
      roleId: 1,
      permissionId: 1,
@@ -74,16 +85,5 @@ module.exports = {
     }
     
     ], {});
-
-  },
-
-  async down (queryInterface, DataTypes) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     **/ 
-     await queryInterface.bulkDelete('role_permissions', null, {});
-     
   }
 };
