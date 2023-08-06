@@ -290,7 +290,7 @@ module.exports = {
     ,
     { id: 43,
      roleId: 1,
-     permissionId: 43s,
+     permissionId: 43,
       createdAt: '2023-07-31 06:51:23',
        updatedAt: '2023-07-31 06:51:23'
     }
