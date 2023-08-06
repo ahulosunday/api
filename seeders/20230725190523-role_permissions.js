@@ -8,6 +8,7 @@ module.exports = {
      *
      * Example:
      * */
+      await queryInterface.bulkDelete('role_permissions', null, {});
     await queryInterface.bulkInsert('role_permissions', [
       {
      roleId: 1,
@@ -81,7 +82,8 @@ module.exports = {
      * Add commands to revert seed here.
      *
      * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+     **/ 
+     await queryInterface.bulkDelete('role_permissions', null, {});
+     
   }
 };
