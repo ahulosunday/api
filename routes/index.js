@@ -53,7 +53,7 @@ router.put('/role/:id',requireJsonContent, role.updateRole)
 //========================================
 router.get('/permissions', perm.getPermissions);
 router.get('/role-permissions/', role_perm.getRolesPermissionAll);
-router.get('/:id/role-permissions/', role_perm.getRolesPermissions);
+router.get('/:id/role-permissions', role_perm.getRolesPermissions);
 router.delete('/:id/role-permissions/', role_perm.deleteRolePemissions);
 router.delete('/:id/role-permissions/', role_perm.deleteRolePemissionRoleId);
 router.delete('/:permissionId/:roleId/role-permissions/', role_perm.deleteRolePemissionRoleIdPermissionId);///role/${permissionId}/${id}
