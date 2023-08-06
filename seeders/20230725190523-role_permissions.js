@@ -8,7 +8,7 @@ module.exports = {
      *
      * Example:
      * */
-   await queryInterface.bulkDelete('role_permissions', null, {});
+ 
     await queryInterface.bulkInsert('role_permissions', [
       { id: 1,
          
