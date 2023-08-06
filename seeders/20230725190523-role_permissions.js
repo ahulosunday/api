@@ -133,7 +133,244 @@ module.exports = {
       createdAt: '2023-07-31 06:51:23',
        updatedAt: '2023-07-31 06:51:23'
     }
-    
+    ,
+    { id: 21,
+     roleId: 1,
+     permissionId: 21,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 22,
+     roleId: 1,
+     permissionId: 22,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 23,
+     roleId: 1,
+     permissionId: 23,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 24,
+     roleId: 1,
+     permissionId: 24,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 25,
+     roleId: 1,
+     permissionId: 25,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 26,
+     roleId: 1,
+     permissionId: 26,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 27,
+     roleId: 1,
+     permissionId: 27,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 28,
+     roleId: 1,
+     permissionId: 28,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 29,
+     roleId: 1,
+     permissionId: 29,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 30,
+     roleId: 1,
+     permissionId: 30,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 31,
+     roleId: 1,
+     permissionId: 31,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 32,
+     roleId: 1,
+     permissionId: 32,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 33,
+     roleId: 1,
+     permissionId: 33,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 34,
+     roleId: 1,
+     permissionId: 34,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 35,
+     roleId: 1,
+     permissionId: 35,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 36,
+     roleId: 1,
+     permissionId: 36,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 37,
+     roleId: 1,
+     permissionId: 37,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 38,
+     roleId: 1,
+     permissionId: 38,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 39,
+     roleId: 1,
+     permissionId: 39,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 40,
+     roleId: 1,
+     permissionId: 40,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 41,
+     roleId: 1,
+     permissionId: 41,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 42,
+     roleId: 1,
+     permissionId: 42,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 43,
+     roleId: 1,
+     permissionId: 43s,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 44,
+     roleId: 1,
+     permissionId: 44,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 45,
+     roleId: 1,
+     permissionId: 45,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 46,
+     roleId: 1,
+     permissionId: 46,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 47,
+     roleId: 1,
+     permissionId: 47,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 48,
+     roleId: 1,
+     permissionId: 48,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 49,
+     roleId: 1,
+     permissionId: 49,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 50,
+     roleId: 1,
+     permissionId: 50,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 51,
+     roleId: 1,
+     permissionId: 51,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 52,
+     roleId: 1,
+     permissionId: 52,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 53,
+     roleId: 1,
+     permissionId: 53,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
+    ,
+    { id: 54,
+     roleId: 1,
+     permissionId: 54,
+      createdAt: '2023-07-31 06:51:23',
+       updatedAt: '2023-07-31 06:51:23'
+    }
     ], {});
 
   },
