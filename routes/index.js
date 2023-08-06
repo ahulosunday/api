@@ -148,7 +148,7 @@ router.get('/lookups/:id/country',lookup.lookUpCountry)
 const pathImg ="https://aisnet.onrender.com/"
 const storage = multer.diskStorage({
   destination: function (req, file, cb){
-    cb(null, pathImg + 'public/upload')
+    cb(null, pathImg + 'upload')
   },
   filename: function (req, file, cb){
     cb(null, Date.now() + file.originalname)
