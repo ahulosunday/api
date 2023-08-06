@@ -145,9 +145,10 @@ router.get('/lookups/:id/region',lookup.lookUpRegion)
 router.get('/lookups/:id/country',lookup.lookUpCountry)
 /**/
 //===============image function=========
+const pathImg ="https://aisnet.onrender.com/"
 const storage = multer.diskStorage({
   destination: function (req, file, cb){
-    cb(null, '../clients/public/upload')
+    cb(null, pathImg + 'public/upload')
   },
   filename: function (req, file, cb){
     cb(null, Date.now() + file.originalname)
