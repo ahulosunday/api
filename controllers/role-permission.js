@@ -13,7 +13,7 @@ const getRolesPermissionAll = async(req, res) =>{
 }
 const getRolesPermissions = async(req, res) =>{
     try{
-        const  roleId = req.params.id
+        const  roleId = req.params.roleId
         const perrRole = await role_permissions.findAll({where:{roleId: roleId}, include:[permissions] })
         return res.status(200).json(perrRole)
     }
