@@ -7,8 +7,8 @@ const getGifshipPackages = async(req, res) =>{
         const GifshipPackage = await gifshipPackage.findAll({ include: [users, gifshiptype, gifship] })
         return res.status(200).json(GifshipPackage)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -19,8 +19,8 @@ const getGifshipPackageWithGigshipTypeId =async(req, res) =>{
         const GifshipPackage = await gifshipPackage.findAll({ include: [users, ], where : { gifshipTypeId : GifshipTypeId}})
         return res.status(200).json(GifshipPackage)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -31,8 +31,8 @@ const getGifshipPackage =async(req, res) =>{
         const GifshipPackage = await gifshipPackage.findOne({ where:{id : GifshipPackageId}})
         return res.status(200).json(GifshipPackage)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -43,8 +43,8 @@ try{
      const col = await gifshipPackage.create(body);
     return res.status(200).json(col)
 }
-catch(error){
-    return res.status(500).json({ error: error.message })
+catch(err){
+    return res.status(500).json({ err: err.message })
 }
   
    
@@ -59,8 +59,8 @@ const deleteGifshipPackage = async(req, res) =>{
         return res.status(200).json(ress);    
         
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 
@@ -80,8 +80,8 @@ const deleteGifshipPackage = async(req, res) =>{
         ress.save()
         return res.status(200).json(ress)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 

@@ -10,7 +10,7 @@ const Login = async (req, res) => {
             where: { username: username}
           });
           if(user.length === 0){
-            return res.status(400).json({error: "Invalid username or Password!"});
+            return res.status(400).json({err: "Invalid username or Password!"});
           }
          
        if(await bcrypt.compare(password, user.password)){
@@ -20,8 +20,8 @@ const Login = async (req, res) => {
         httpOnly: true
        }).status(200).json(user);
        }     
-    } catch (error) {
-        return res.status(500).json({ error: "Invalid username or password" })
+    } catch (err) {
+        return res.status(500).json({ err: "Invalid username or password" })
     }
 }
 

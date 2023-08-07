@@ -7,8 +7,8 @@ const getRegions = async(req, res) =>{
         const Regions = await regions.findAll({include: [country,users] })
         return res.status(200).json(Regions)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -18,8 +18,8 @@ const loadRegions = async(req, res) =>{
         const Regions = await regions.findAll({where:{countryId: countryId}})
         return res.status(200).json(Regions)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -31,8 +31,8 @@ const getRegion =async(req, res) =>{
         const Regions = await regions.findOne({ where:{id : RegionId}})
         return res.status(200).json(Regions)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -43,8 +43,8 @@ try{
      const col = await regions.create(body);
     return res.status(200).json(col)
 }
-catch(error){
-    return res.status(500).json({ error: error.message })
+catch(err){
+    return res.status(500).json({ err: err.message })
 } 
 }
 
@@ -57,8 +57,8 @@ const deleteRegion = async(req, res) =>{
         return res.status(200).json(ress);    
         
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 
@@ -73,8 +73,8 @@ const deleteRegion = async(req, res) =>{
         ress.save()
         return res.status(200).json(req.body)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 

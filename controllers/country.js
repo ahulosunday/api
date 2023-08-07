@@ -6,8 +6,8 @@ const getCountrys = async(req, res) =>{
         const Countrys = await country.findAll({ include: {model: users }})
         return res.status(200).json(Countrys)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -19,8 +19,8 @@ const getCountry =async(req, res) =>{
         const Countrys = await country.findOne({ where:{id : CountryId}})
         return res.status(200).json(Countrys)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -31,8 +31,8 @@ try{
      const col = await country.create({ name: req.body.name , code: req.body.code,shortname: req.body.shortname,currency: req.body.currency, userId: req.body.userId});
     return res.status(200).json(col)
 }
-catch(error){
-    return res.status(500).json({ error: error.message })
+catch(err){
+    return res.status(500).json({ err: err.message })
 }
   
    
@@ -48,8 +48,8 @@ const deleteCountry = async(req, res) =>{
         return res.status(200).json(token);    
         
     }
-    catch(error){
-        return res.status(200).json(error.message);
+    catch(err){
+        return res.status(200).json(err.message);
     }
 }
 
@@ -66,8 +66,8 @@ const deleteCountry = async(req, res) =>{
         ress.save()
         return res.status(200).json(ress)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 

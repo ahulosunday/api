@@ -8,8 +8,8 @@ const getGforms = async(req, res) =>{
         const Gform = await gform.findAll({include: [country,users, regions, states, lga, hospital], orderby:{'surname': 'ASC'} })
         return res.status(200).json(Gform)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -22,8 +22,8 @@ const getGformuserId = async(req, res) =>{
              })
         return res.status(200).json(Gform)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -34,8 +34,8 @@ const getGform =async(req, res) =>{
         const Gform = await gform.findOne({ include:[users, states,lga,country,regions,hospital, hmo, gifship, gifshipPackage, gifshiptype], where:{id : GformId}})
         return res.status(200).json(Gform)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -46,8 +46,8 @@ try{
      const col = await gform.create({ idCode, surname,	middlename,	lastname, sex,	dob,	marital,	phone,	email, address,	bloodGroup,	countryOrigin,	regionOrigin,	stateOrigin,	lgaOrigin,	regiteredCountry,	regiteredRegion,	regiteredState,	regiteredLga,	residentCountry,	residentRegion,	residentState,	residentLga,	gifshipId, gifshipTypeId,	nin,	hospitalId,	hmoId,	userId, gifshipPackageId});
     return res.status(200).json(col)
 }
-catch(error){
-    return res.status(500).json({ error: error.message })
+catch(err){
+    return res.status(500).json({ err: err.message })
 }
   
    
@@ -72,8 +72,8 @@ const deleteGform = async(req, res) =>{
           return res.status(200).json("Can not delete the parent data while dependants exist.");   
         
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 
@@ -113,8 +113,8 @@ const deleteGform = async(req, res) =>{
         ress.save()
         return res.status(200).json(ress)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 

@@ -5,8 +5,8 @@ const {gifship, users, gifshiptype }  = require('../models');
 const createGifship = async (req, res) => {
         try {
         
-    } catch (error) {
-       return res.json(error)
+    } catch (err) {
+       return res.json(err)
     }
 }
 const GifshipbyId = async(req, res )=>{
@@ -15,8 +15,8 @@ const GifshipbyId = async(req, res )=>{
        const gif = await gifshiptype.findAll({include: [users ], where:{ gifshipId: id}});
         return res.status(200).json(gif)
     }
-    catch(errors){
-     return res.status(200).json(errors)
+    catch(err){
+     return res.status(200).json(err)
     }
 }
 const getGifship = async(req, res )=>{
@@ -24,8 +24,8 @@ const getGifship = async(req, res )=>{
        const gif = await gifship.findAll({include: [users]});
         return res.status(200).json(gif)
     }
-    catch(errors){
-     return res.status(200).json(errors)
+    catch(err){
+     return res.status(200).json(err)
     }
 }
 
@@ -42,8 +42,8 @@ const getGifshipList = async(req, res )=>{
        });
         return res.status(200).json(gif)
     }
-    catch(errors){
-     return res.status(200).json(errors)
+    catch(err){
+     return res.status(200).json(err)
     }
 }
 const getGifshipDelete = async(req, res )=>{
@@ -54,8 +54,8 @@ const getGifshipDelete = async(req, res )=>{
         const gif = await gifshiptype.destroy({ where:{id: id }});
         return res.status(200).json("One record deleted successfully");
     }
-    catch(errors){
-     return res.status(200).json(errors)
+    catch(err){
+     return res.status(200).json(err)
     }
 }
 const GifshipEdit = async(req, res )=>{
@@ -64,8 +64,8 @@ const GifshipEdit = async(req, res )=>{
       const gif = await gifshiptype.update({ where:{id: id }});
         return res.status(200).json(gif);
     }
-    catch(errors){
-     return res.status(200).json(errors)
+    catch(err){
+     return res.status(200).json(err)
     }
 }
 //Gifshipone
@@ -75,8 +75,8 @@ const Gifshipone = async(req, res )=>{
       const gif = await gifshiptype.findOne({ where:{id: id }});
         return res.status(200).json(gif);
     }
-    catch(errors){
-     return res.status(200).json(errors)
+    catch(err){
+     return res.status(200).json(err)
     }
 }
 //============GifshipUpdate
@@ -93,8 +93,8 @@ const GifshipUpdate = async(req, res )=>{
 
         return res.status(200).json(gif);
     }
-    catch(errors){
-     return res.status(200).json(errors)
+    catch(err){
+     return res.status(200).json(err)
     }
 }
 

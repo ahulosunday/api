@@ -7,8 +7,8 @@ const getLgas = async(req, res) =>{
         const Lga = await lga.findAll({include: [country,users, regions, states], orderby:{'stateId': 'DESC'} })
         return res.status(200).json(Lga)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -20,8 +20,8 @@ const getLga =async(req, res) =>{
         const Lga = await lga.findOne({ where:{id : LgaId}})
         return res.status(200).json(Lga)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -32,8 +32,8 @@ try{
      const col = await lga.create(body);
     return res.status(200).json(col)
 }
-catch(error){
-    return res.status(500).json({ error: error.message })
+catch(err){
+    return res.status(500).json({ err: err.message })
 }
   
    
@@ -48,8 +48,8 @@ const deleteLga = async(req, res) =>{
         return res.status(200).json(ress);    
         
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 
@@ -67,8 +67,8 @@ const deleteLga = async(req, res) =>{
         ress.save()
         return res.status(200).json(ress)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 const loadLgaswithState = async(req, res) =>{
@@ -77,8 +77,8 @@ const loadLgaswithState = async(req, res) =>{
         const state = await lga.findAll({where:{stateId: stateId}})
         return res.status(200).json(state)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }

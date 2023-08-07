@@ -7,8 +7,8 @@ const getHmos = async(req, res) =>{
         const Hmos = await hmo.findAll({ include: [users]})
         return res.status(200).json(Hmos)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -20,8 +20,8 @@ const getHmo =async(req, res) =>{
         const Hmos = await hmo.findOne({ where:{id : HmoId}})
         return res.status(200).json(Hmos)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -32,8 +32,8 @@ try{
      const col = await hmo.create({ name: req.body.name , code: req.body.code,userId: req.body.userId});
     return res.status(200).json(col)
 }
-catch(error){
-    return res.status(500).json({ error: error.message })
+catch(err){
+    return res.status(500).json({ err: err.message })
 }
   
    
@@ -50,8 +50,8 @@ const deleteHmo = async(req, res) =>{
         return res.status(200).json(ress);    
         
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 
@@ -66,8 +66,8 @@ const deleteHmo = async(req, res) =>{
         ress.save()
         return res.status(200).json(ress)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 

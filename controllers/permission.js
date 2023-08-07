@@ -7,8 +7,8 @@ const getPermissions = async(req, res) =>{
         const perm = await permissions.findAll()
         return res.status(200).json(perm)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -18,8 +18,8 @@ const getRolesPermissions = async(req, res) =>{
         const perrRole = await role_permissions.findAll({include:[permissions], where:{roleId: id}})
         return res.status(200).json(perrRole)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }

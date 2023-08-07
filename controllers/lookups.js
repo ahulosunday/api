@@ -7,8 +7,8 @@ const lookUpWard = async(req, res) =>{
         const wards = await ward.findOne({where:{ id : id}})
         return res.status(200).json(wards)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -18,8 +18,8 @@ const lookUpLga = async(req, res) =>{
         const Lga = await lga.findOne({where:{ id : id}})
         return res.status(200).json(Lga)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -29,8 +29,8 @@ const lookUpState = async(req, res) =>{
         const Lga = await states.findOne({where:{ id : id}})
         return res.status(200).json(Lga)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -40,8 +40,8 @@ const lookUpRegion = async(req, res) =>{
         const Lga = await regions.findOne({where:{ id : id}})
         return res.status(200).json(Lga)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -51,8 +51,8 @@ const lookUpCountry = async(req, res) =>{
         const Lga = await country.findOne({where:{ id : id}})
         return res.status(200).json(Lga)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }

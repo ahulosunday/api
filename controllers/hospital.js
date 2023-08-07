@@ -7,8 +7,8 @@ const getHospitals = async(req, res) =>{
         const hospitals = await hospital.findAll({include: [country,users, regions, states,lga, ward] })
         return res.status(200).json(hospitals)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -20,8 +20,8 @@ const getHospital =async(req, res) =>{
         const hospitals = await hospital.findAll({include: [country,users, regions, states,lga, ward], where:{id : hospitalId}})
         return res.status(200).json(hospitals)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -32,8 +32,8 @@ try{
         const hospitals = await hospital.findOne({ where:{id : hospitalId}, include: [country,users, regions, states,lga, ward]})
         return res.status(200).json(hospitals)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 const getHospitalWithLga = async(req, res)=>{
@@ -46,8 +46,8 @@ try{
         const hospitals = await hospital.findAll({ where:{countryId : hospitalId, regionId: regionIdId, stateId: stateIdId, lgaId: lgaId}, include: [country,users, regions, states,lga]})
         return res.status(200).json(hospitals)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 //
@@ -57,8 +57,8 @@ try{
      const col = await hospital.create(body);
     return res.status(200).json(col)
 }
-catch(error){
-    return res.status(500).json({ error: error.message })
+catch(err){
+    return res.status(500).json({ err: err.message })
 }
   
    
@@ -73,8 +73,8 @@ const deleteHospital = async(req, res) =>{
         return res.status(200).json(ress);    
         
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 
@@ -97,8 +97,8 @@ const deleteHospital = async(req, res) =>{
         ress.save()
         return res.status(200).json(ress)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 
