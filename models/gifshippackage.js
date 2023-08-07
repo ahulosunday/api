@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(users, {foreignKey: 'userId'})
       this.belongsTo(gifship, {foreignKey: 'gifshipId'})
-      this.belongsTo(gifshiptype, {foreignKey: 'gifshiptypeId'})
+      this.belongsTo(gifshiptype, {foreignKey: 'gifshipTypeId'})
     }
   }
   gifshipPackage.init({
