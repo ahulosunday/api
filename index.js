@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(
   cors({
-    origin: inProduction ? "https://aisnet.onrender.com" : "http://localhost:3000"
+    origin: inProduction ? "https://aisnet.onrender.com" : "https://aisnet.onrender.com"
   })
 );
 
