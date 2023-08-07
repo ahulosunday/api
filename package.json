@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "set NODE_ENV=production && index.js",
-    "production": "node index.js",
+    "start": "set NODE_ENV=production&&n index.js",
+    "production": "set NODE_ENV=production&&n index.js",
     "dev":"nodemon index.js"
   },
   "keywords": [],
