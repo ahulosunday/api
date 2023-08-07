@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build" : "NODE_ENV=production",
     "start": "NODE_ENV=production&&node index.js",
     "production": "NODE_ENV=production&&node index.js",
     "dev":"nodemon index.js"
