@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-   "start": "node index.js",
+    "build" : "NODE_ENV=production",
+    "start": "node index.js",
     "production": "node index.js",
     "dev":"nodemon index.js"
   },
