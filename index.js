@@ -15,6 +15,11 @@ app.use(express.urlencoded({ extended: true }));
 
 //================POSTS USERS==========
 app.use('/api', routes);
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 
 app.listen({ port: 6001}, async () => {
