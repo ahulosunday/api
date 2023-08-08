@@ -4,8 +4,7 @@ const cors = require("cors")
 const express  = require('express');
 const routes = require('./routes');
 const cookieParser = require('cookie-parser')
-
-//require("dotenv").config({ path: "./.env.example" });
+//require("dotenv").config({ path: "./.env" });
 
 const port = process.env.DB_PORT || 6001;
 const inProduction = process.env.NODE_ENV === "production";
@@ -14,7 +13,8 @@ const app = express();
 app.use(express.json()) 
 app.use(bodyParser.json())
 app.use(cookieParser())
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+//app.use(express.static(__dirname, 'public'));
 
 app.use(
   cors({
@@ -23,7 +23,7 @@ app.use(
 );
 
 //================POSTS USERS==========
-app.use('/api', routes);
+app.use('/api/auth', routes);
 
 app.listen({ port: port}, async () => {
   // console.log('app running on http://localhost:6001')
@@ -31,6 +31,4 @@ app.listen({ port: port}, async () => {
    console.log('App connected successfully: port: ' + port)
 
 })
-
- 
 

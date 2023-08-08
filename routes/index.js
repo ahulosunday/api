@@ -28,22 +28,18 @@ const requireJsonContent = (request, response, next) => {
     next()
   }
 }
-
 //Create user and login routes=============================
 router.post('/login',requireJsonContent, login.Login);
 router.post('/logout', logout.Logout);
 router.post('/users', requireJsonContent, user.createUser);
 router.put('/changepassword/:id',requireJsonContent, user.changePassword);
 router.get('/users', user.findAllUser);
-
 //========================================================
-
 router.get('/post',requireJsonContent, posts.getPosts);
 router.get('/post/:id',requireJsonContent, posts.getPost );
 router.post('/post', requireJsonContent, posts.addPost);
 router.delete('/post/:id', requireJsonContent, posts.deletePost );
 router.put('/post/:id',requireJsonContent,  posts.updatePost);
-
 //===============================
 router.get('/role', role.getRoles);
 router.get('/role/:id',role.getRole)
@@ -56,7 +52,7 @@ router.get('/role-permissions/', role_perm.getRolesPermissionAll);
 router.get('/:roleId/role-permissions', role_perm.getRolesPermissions);
 router.delete('/:id/role-permissions/', role_perm.deleteRolePemissions);
 router.delete('/:id/role-permissions/', role_perm.deleteRolePemissionRoleId);
-router.delete('/:permissionId/:roleId/role-permissions/', role_perm.deleteRolePemissionRoleIdPermissionId);///role/${permissionId}/${id}
+router.delete('/:permissionId/:roleId/role-permissions/', role_perm.deleteRolePemissionRoleIdPermissionId);
 router.post('/role-permissions/',requireJsonContent, role_perm.addRolesPermissions);
 //===================================
 router.get('/user-rrr/', user_rrr.getUser_rrrs);
@@ -137,18 +133,16 @@ router.delete('/gifshipPackage/:id', gifshipPackage.deleteGifshipPackage);
 router.get('/gifshipPackage/:id', gifshipPackage.getGifshipPackage);
 router.get('/gifshipPackageList/:id', gifshipPackage.getGifshipPackageWithGigshipTypeId);
 router.put('/gifshipPackage/:id', gifshipPackage.updateGifshipPackage);
-//getGifshipPackageWithGigshipTypeId
 //==============LOOKUPS TABLES==========
 router.get('/lookups/:id/lga',lookup.lookUpLga)
 router.get('/lookups/:id/state',lookup.lookUpState)
 router.get('/lookups/:id/region',lookup.lookUpRegion)
 router.get('/lookups/:id/country',lookup.lookUpCountry)
-/**/
 //===============image function=========
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb){
-    cb(null, '../clients/public/upload')
+    cb(null, 'public/upload')
   },
   filename: function (req, file, cb){
     cb(null, Date.now() + file.originalname)
@@ -161,7 +155,7 @@ const upload = multer({
     })
 router.post('/uploadfile', upload.single('file'), function(req, res){
   const file = req.file
-  return res.status(200).json(file.filename)
+  return res.status(200).json({filename:file.filename})
 
   
 })
