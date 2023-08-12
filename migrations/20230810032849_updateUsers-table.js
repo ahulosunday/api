@@ -24,7 +24,7 @@ const migrationCommands = (transaction) => [
         type: Sequelize.INTEGER,
         field: "isActive",
         allowNull: false,
-        defaultValue: false,
+        defaultValue: 0,
       },
       { transaction },
     ],
