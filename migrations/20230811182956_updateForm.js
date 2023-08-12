@@ -73,7 +73,7 @@ const migrationCommands = (transaction) => [
     params: [
       "gforms",
       "residentWard",
-      { type: Sequelize.INTEGER, field: "residentWard", allowNull: false },
+      { type: Sequelize.INTEGER, field: "residentWard", allowNull: true },
       { transaction },
     ],
   },
@@ -82,7 +82,7 @@ const migrationCommands = (transaction) => [
     params: [
       "gforms",
       "registeredWard",
-      { type: Sequelize.INTEGER, field: "registeredWard", allowNull: false },
+      { type: Sequelize.INTEGER, field: "registeredWard", allowNull: true },
       { transaction },
     ],
   },
@@ -91,7 +91,7 @@ const migrationCommands = (transaction) => [
     params: [
       "gforms",
       "wardOrigin",
-      { type: Sequelize.INTEGER, field: "wardOrigin", allowNull: false },
+      { type: Sequelize.INTEGER, field: "wardOrigin", allowNull: true },
       { transaction },
     ],
   },
