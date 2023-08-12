@@ -7,8 +7,8 @@ const getStates = async(req, res) =>{
         const States = await states.findAll({include: [country,users, regions] })
         return res.status(200).json(States)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -20,8 +20,8 @@ const getState =async(req, res) =>{
         const States = await states.findOne({ where:{id : StateId}})
         return res.status(200).json(States)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -32,8 +32,8 @@ try{
      const col = await states.create(body);
     return res.status(200).json(col)
 }
-catch(error){
-    return res.status(500).json({ error: error.message })
+catch(err){
+    return res.status(500).json({ err: err.message })
 }
   
    
@@ -48,8 +48,8 @@ const deleteState = async(req, res) =>{
         return res.status(200).json(ress);    
         
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 
@@ -66,8 +66,8 @@ const deleteState = async(req, res) =>{
         ress.save()
         return res.status(200).json(ress)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 const loadStateswithRegion = async(req, res) =>{
@@ -76,8 +76,8 @@ const loadStateswithRegion = async(req, res) =>{
         const state = await states.findAll({where:{regionId: regionId}})
         return res.status(200).json(state)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }

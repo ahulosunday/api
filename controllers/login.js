@@ -7,7 +7,7 @@ const Login = async (req, res) => {
        const jwtkey = "jwtkey"
         const { username, password } = req.body
         const user = await users.findOne({ 
-            where: { username: username}
+            where: { username: username, isActive:true}
           });
           if(user.length === 0){
             return res.status(400).json({err: "Invalid username or Password!"});

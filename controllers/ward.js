@@ -7,8 +7,8 @@ const getWards = async(req, res) =>{
         const Ward = await ward.findAll({include: [country,users, regions, states, lga], orderby:{'lgaId': 'DESC'} })
         return res.status(200).json(Ward)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -20,8 +20,8 @@ const getWard =async(req, res) =>{
         const Ward = await ward.findOne({ where:{id : WardId}})
         return res.status(200).json(Ward)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -32,8 +32,8 @@ try{
      const col = await ward.create(body);
     return res.status(200).json(col)
 }
-catch(error){
-    return res.status(500).json({ error: error.message })
+catch(err){
+    return res.status(500).json({ err: err.message })
 }
   
    
@@ -48,8 +48,8 @@ const deleteWard = async(req, res) =>{
         return res.status(200).json(ress);    
         
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 
@@ -68,7 +68,7 @@ const deleteWard = async(req, res) =>{
         ress.save()
         return res.status(200).json(ress)
     }
-    catch(error){
+    catch(err){
         return res.status(200).json(error.message)
     }
 }

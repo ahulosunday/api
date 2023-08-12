@@ -8,8 +8,8 @@ const getRoles = async(req, res) =>{
         const roles = await role.findAll()
         return res.status(200).json(roles)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -21,8 +21,8 @@ const getRole =async(req, res) =>{
         const roles = await role.findOne({ where:{id : roleId}})
         return res.status(200).json(roles)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 
 }
@@ -32,8 +32,8 @@ try{
      const rol = await role.create({ name: req.body.name , description: req.body.description, userId: req.body.userId});
     return res.status(200).json(rol)
 }
-catch(error){
-    return res.status(500).json({ error: error.message })
+catch(err){
+    return res.status(500).json({ err: err.message })
 }
   
    
@@ -51,8 +51,8 @@ const deleteRole = async(req, res) =>{
         }
        return null
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 
@@ -67,8 +67,8 @@ const deleteRole = async(req, res) =>{
         ress.save()
         return res.status(200).json(ress)
     }
-    catch(error){
-        return res.status(200).json(error.message)
+    catch(err){
+        return res.status(200).json(err.message)
     }
 }
 

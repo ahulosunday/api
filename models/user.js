@@ -104,7 +104,20 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty:{msg: 'Phone is required'},
 
       }
-     },
+     }
+     ,
+     isActive:{
+      type:  DataTypes.INTEGER,
+      defaultValue: false,
+      allowNull: false,
+      validate:{
+        notEmpty:true,
+        notNull:true,
+       
+
+      }
+     }
+     
 
   }, {
     sequelize,

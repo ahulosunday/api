@@ -21,10 +21,21 @@ module.exports = (sequelize, DataTypes) => {
     { 
       type: DataTypes.STRING,
        allowNull: false,
-        unique: true,
+        unique:true,
         validate:{
           notEmpty: true,
-          notNull:true,
+          notNull:true
+          /*
+          len:{
+            args:[1,2],
+            msg: "Invalid NIN number"
+          },
+          isNumeric:{
+            args: true,
+            msg: "NIN must be numeric"
+          }
+          */
+          
           
         }
         },
@@ -64,7 +75,12 @@ validate:{
         },
         duration:{
       type: DataTypes.INTEGER,
-    defaultValue:0,
+       defaultValue:0,
+       allowNull:false,
+       validate:{
+        notEmpty:true,
+        notNull:true,
+       },
       },
    gifshipId:{
         type: DataTypes.INTEGER,
@@ -95,6 +111,24 @@ type:DataTypes.DATE,
 allowNull: false,
 defaultValue: DataTypes.DATE
       },
+      minNumber:{
+        allowNull:false,
+        type:DataTypes.INTEGER,
+        validate:{
+          notEmpty:true,
+          notNull:true
+        }
+
+      },
+      maxNumber:{
+        type:DataTypes.INTEGER,
+        allowNull: false,
+        validate:{
+          notEmpty:true,
+          notNull:true
+        }
+
+      }
   }, {
     sequelize,
     modelName: 'user_rrr',

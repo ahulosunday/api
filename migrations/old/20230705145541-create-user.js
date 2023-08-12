@@ -47,7 +47,10 @@ module.exports = {
         allowNull:false,
         unique: true,
         validate:{
-        notEmpty:{msg: 'Email can not be empty'},
+        notEmpty:{
+      
+          msg: 'Email can not be empty'
+          },
         isEmail: true,
 
       }

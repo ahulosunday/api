@@ -155,6 +155,15 @@ module.exports = (sequelize, DataTypes) => {
       }
       
       },
+      wardOrigin:  {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate:{
+        notEmpty: true,
+        notNull: true,
+      }
+      
+      },
     
     regiteredCountry: {
       type: DataTypes.INTEGER,
@@ -184,6 +193,15 @@ module.exports = (sequelize, DataTypes) => {
       
       },
     regiteredLga: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate:{
+        notEmpty: true,
+        notNull: true,
+      }
+      
+      },
+      registeredWard:  {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate:{
@@ -228,6 +246,15 @@ module.exports = (sequelize, DataTypes) => {
       }
       
       },
+      residentWard:  {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate:{
+        notEmpty: true,
+        notNull: true,
+      }
+      
+      },
     gifshipId:  {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -261,6 +288,10 @@ module.exports = (sequelize, DataTypes) => {
       validate:{
         notEmpty: true,
         notNull: true,
+        len:{
+          args:[11,11],
+          msg: 'Invalid NIN Number'
+        }
       }
       
       },

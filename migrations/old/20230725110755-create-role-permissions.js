@@ -42,6 +42,8 @@ module.exports = {
         type: DataTypes.DATE
       },
 
+    },{
+      indexes:[{ unique:true,  fields:['roleId', 'permissionId'] }]
     });
   },
   async down(queryInterface, DataTypes) {

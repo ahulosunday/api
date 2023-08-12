@@ -42,8 +42,8 @@ const getGform =async(req, res) =>{
 
 const addGform = async(req, res) =>{
 try{
-      const { idCode, surname,	middlename,	lastname, sex,	dob,	marital,	phone,	email, address,	bloodGroup,	countryOrigin,	regionOrigin,	stateOrigin,	lgaOrigin,	regiteredCountry,	regiteredRegion,	regiteredState,	regiteredLga,	residentCountry,	residentRegion,	residentState,	residentLga,	gifshipId,	gifshipTypeId,	nin,	hospitalId,	hmoId,	userId, gifshipPackageId} = req.body
-     const col = await gform.create({ idCode, surname,	middlename,	lastname, sex,	dob,	marital,	phone,	email, address,	bloodGroup,	countryOrigin,	regionOrigin,	stateOrigin,	lgaOrigin,	regiteredCountry,	regiteredRegion,	regiteredState,	regiteredLga,	residentCountry,	residentRegion,	residentState,	residentLga,	gifshipId, gifshipTypeId,	nin,	hospitalId,	hmoId,	userId, gifshipPackageId});
+      const { idCode, surname,	middlename,	lastname, sex,	dob,	marital,	phone,	email, address,	bloodGroup,	countryOrigin,	regionOrigin,	stateOrigin,	lgaOrigin,	regiteredCountry,	regiteredRegion,	regiteredState,	regiteredLga,	residentCountry,	residentRegion,	residentState,	residentLga,	gifshipId,	gifshipTypeId,	nin,	hospitalId,	hmoId,	userId, gifshipPackageId, residentWard,	registeredWard,	wardOrigin} = req.body
+     const col = await gform.create({ idCode, surname,	middlename,	lastname, sex,	dob,	marital,	phone,	email, address,	bloodGroup,	countryOrigin,	regionOrigin,	stateOrigin,	lgaOrigin,	regiteredCountry,	regiteredRegion,	regiteredState,	regiteredLga,	residentCountry,	residentRegion,	residentState,	residentLga,	gifshipId, gifshipTypeId,	nin,	hospitalId,	hmoId,	userId, gifshipPackageId, residentWard,	registeredWard,	wardOrigin});
     return res.status(200).json(col)
 }
 catch(err){
@@ -80,7 +80,7 @@ const deleteGform = async(req, res) =>{
  const updateGform = async(req, res) =>{
    try{
         const GformId = req.params.id
-       const {surname,	middlename,	lastname, sex,	dob,	marital,	phone,	email, address,	bloodGroup,	countryOrigin,	regionOrigin,	stateOrigin,	lgaOrigin,	regiteredCountry,	regiteredRegion,	regiteredState,	regiteredLga,	residentCountry,	residentRegion,	residentState,	residentLga,	gifshipId,	gifshipTypeId,	nin,	hospitalId,	hmoId,	userId, gifshipPackageId} = req.body
+       const {surname,	middlename,	lastname, sex,	dob,	marital,	phone,	email, address,	bloodGroup,	countryOrigin,	regionOrigin,	stateOrigin,	lgaOrigin,	regiteredCountry,	regiteredRegion,	regiteredState,	regiteredLga,	residentCountry,	residentRegion,	residentState,	residentLga,	gifshipId,	gifshipTypeId,	nin,	hospitalId,	hmoId,	userId, gifshipPackageId, residentWard,	registeredWard,	wardOrigin} = req.body
         const ress = await gform.findOne({ where:{id : GformId}})
         ress.surname = surname
         ress.middlename= middlename
@@ -110,6 +110,9 @@ const deleteGform = async(req, res) =>{
         ress.hospitalId = hospitalId
         ress.hmoId = hmoId
         ress.userId = userId
+        ress.residentWard = residentWard
+        ress.registeredWard	= registeredWard
+        ress.wardOrigin = wardOrigin
         ress.save()
         return res.status(200).json(ress)
     }

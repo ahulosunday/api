@@ -82,7 +82,15 @@ module.exports = {
         allowNull: false,
         type: DataTypes.DATE
       }
-    });
+    },
+    {
+    indexes: [
+        {
+            unique: true,
+            fields: ['gifshipId', 'gifshipTypeId', 'name']
+        }
+    ]
+});
   },
   async down(queryInterface, DataTypes) {
     await queryInterface.dropTable('gifshipPackages');

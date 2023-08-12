@@ -25,10 +25,20 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
 
     }
-  }, {
-    sequelize,
-    modelName: 'role_permissions',
+  }, 
+ 
 
+   {
+     
+    sequelize,
+    indexes:[{
+      fields:['roleId','permissionId'],
+      type:'UNIQUE',
+      name:'role_permissions_roleId_permissionId'
+      
+    }],
+    modelName: 'role_permissions',
+    
     
   });
   return role_permissions;

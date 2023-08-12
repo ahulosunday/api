@@ -20,7 +20,7 @@ const lookup = require('../controllers/lookups')
 const user_rrr = require('../controllers/user_rrr')
 const perm = require('../controllers/permission')
 const role_perm = require('../controllers/role-permission')
-
+const enrolee_rrr_code = require('../controllers/user_rrr_code')
 const requireJsonContent = (request, response, next) => {
   if (request.headers['content-type'] !== 'application/json') {
       response.status(400).send('Server requires application/json')
@@ -28,12 +28,16 @@ const requireJsonContent = (request, response, next) => {
     next()
   }
 }
+//READ EXCEL FILE===========
+
 //Create user and login routes=============================
 router.post('/login',requireJsonContent, login.Login);
 router.post('/logout', logout.Logout);
 router.post('/users', requireJsonContent, user.createUser);
 router.put('/changepassword/:id',requireJsonContent, user.changePassword);
 router.get('/users', user.findAllUser);
+router.put('/activate/:id/',requireJsonContent, user.ActivateUser)
+router.put('/upload/:id/',requireJsonContent, user.changePassport)
 //========================================================
 router.get('/post',requireJsonContent, posts.getPosts);
 router.get('/post/:id',requireJsonContent, posts.getPost );
@@ -63,6 +67,14 @@ router.delete('/user-rrr/:id/', user_rrr.deleteUser_rrr )
 router.put('/user-rrr/:id/',requireJsonContent, user_rrr.updateUser_rrr)
 router.get('/user-rrr/rrr/:id/', user_rrr.getUser_rrrByRRR)
 //====================================
+router.get('/codes/', requireJsonContent, enrolee_rrr_code.getEnrolee_rrr_codes);
+router.get('/xyx/:id/', requireJsonContent, enrolee_rrr_code.getEnrolee_rrr_code)
+router.get('/code/:userId/0/', enrolee_rrr_code.getEnrolee_rrr_codeByUserId)
+router.get('/code/:code/', enrolee_rrr_code.getEnrolee_rrr_codeByCode);
+router.get('/code/:userId/:code/', requireJsonContent,enrolee_rrr_code.getEnrolee_rrr_codeByUserIdCode )
+router.post('/code/',requireJsonContent, enrolee_rrr_code.addEnrolee_rrr_code)
+router.post('/codes/', requireJsonContent, enrolee_rrr_code.addEnrolee_rrr_codes)
+//=======================================================
 router.get('/country', country.getCountrys);
 router.get('/country/:id',country.getCountry)
 router.post('/country',requireJsonContent, country.addCountry)
@@ -150,7 +162,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({
     storage,
-    limits:{fieldSize:1000000},
+    //limits:{fieldSize:1000000},
     
     })
 router.post('/uploadfile', upload.single('file'), function(req, res){

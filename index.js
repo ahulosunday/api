@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
-//app.use(express.static(__dirname, 'public'));
+app.use(express.static('public'));
 
 app.use(
   cors({
@@ -28,7 +28,7 @@ app.use('/api/auth', routes);
 app.listen({ port: port}, async () => {
   // console.log('app running on http://localhost:6001')
    await sequelize.authenticate()
-   console.log('App connected successfully: port: ' + port)
+   console.log('App connected successfully: port: ' + port + ', Production? '+ inProduction)
 
 })
 

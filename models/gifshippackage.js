@@ -38,6 +38,11 @@ module.exports = (sequelize, DataTypes) => {
       },
     qty:{
       type: DataTypes.INTEGER,
+      defaultValue: 0,
+      }
+    ,
+     maxNumber:{
+      type: DataTypes.INTEGER,
       defaultValue: 0
       }
     ,
@@ -53,7 +58,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     defaultValue:0,
       },
-  }, {
+  },
+  
+   {
     sequelize,
     modelName: 'gifshipPackage',
   });

@@ -12,7 +12,7 @@ const getGifshipPackages = async(req, res) =>{
     }
 
 }
-//getGifshipPackageWithGigshipTypeId
+
 const getGifshipPackageWithGigshipTypeId =async(req, res) =>{
    try{
         const GifshipTypeId = req.params.id
@@ -39,7 +39,7 @@ const getGifshipPackage =async(req, res) =>{
 
 const addGifshipPackage = async(req, res) =>{
 try{
-    const body = { name, amount,	userId,	gifshipTypeId,gifshipId,qty,duration} = req.body
+    const body = { name, amount,	userId,	gifshipTypeId,gifshipId,qty,duration, maxNumber} = req.body
      const col = await gifshipPackage.create(body);
     return res.status(200).json(col)
 }
@@ -52,9 +52,11 @@ catch(err){
 
 const deleteGifshipPackage = async(req, res) =>{
     try{
+        /*
         const token = req.cookies.access_token
         if(!token) return res.status(401).json("Not authenticated")
-        const GifshipPackageId = req.params.id
+        */
+        const GifshipPackageId = req.params.id;
         const ress = await gifshipPackage.destroy({ where:{id : GifshipPackageId}})
         return res.status(200).json(ress);    
         
@@ -67,7 +69,7 @@ const deleteGifshipPackage = async(req, res) =>{
  const updateGifshipPackage = async(req, res) =>{
    try{
         const GifshipPackageId = req.params.id
-        const {name,	amount,	userId,	gifshipTypeId, gifshipId, 	qty, duration} = req.body
+        const {name,	amount,	userId,	gifshipTypeId, gifshipId, 	qty, duration, maxNumber} = req.body
         const ress = await gifshipPackage.findOne({ where:{id : GifshipPackageId}})
         ress.name = name
         ress.amount= amount
