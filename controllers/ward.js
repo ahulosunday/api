@@ -41,8 +41,7 @@ catch(err){
 
 const deleteWard = async(req, res) =>{
     try{
-        const token = req.cookies.access_token
-        if(!token) return res.status(401).json("Not authenticated")
+       
         const WardId = req.params.id
         const ress = await ward.destroy({ where:{id : WardId}})
         return res.status(200).json(ress);    

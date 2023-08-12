@@ -43,9 +43,7 @@ const deleteHmo = async(req, res) =>{
     try{
        
         const HmoId = req.params.id
-        const token = req.cookies.access_token
-        if(!token) return res.status(401).json("Not authenticated")
-        
+       
         const ress = await hmo.destroy({ where:{id : HmoId}})
         return res.status(200).json(ress);    
         

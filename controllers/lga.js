@@ -41,8 +41,7 @@ catch(err){
 
 const deleteLga = async(req, res) =>{
     try{
-        const token = req.cookies.access_token
-        if(!token) return res.status(401).json("Not authenticated")
+       
         const LgaId = req.params.id
         const ress = await lga.destroy({ where:{id : LgaId}})
         return res.status(200).json(ress);    

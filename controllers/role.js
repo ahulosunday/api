@@ -42,8 +42,7 @@ catch(err){
 const deleteRole = async(req, res) =>{
     try{
         const roleId = req.params.id
-        const token = req.cookies.access_token
-        if(!token) return res.status(401).json("Not authenticated")
+        
         const perms = await perm.deleteRolePemissionRoleId(req,res)
         if(perms){
         const ress = await role.destroy({ where:{id : roleId}})

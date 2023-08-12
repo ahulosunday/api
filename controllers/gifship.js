@@ -49,8 +49,7 @@ const getGifshipList = async(req, res )=>{
 const getGifshipDelete = async(req, res )=>{
     try{
         const id  = req.params.id
-        const token = req.cookies.access_token
-        if(!token) return res.status(401).json("Not authenticated")
+       
         const gif = await gifshiptype.destroy({ where:{id: id }});
         return res.status(200).json("One record deleted successfully");
     }

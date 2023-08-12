@@ -66,8 +66,7 @@ catch(err){
 
 const deleteHospital = async(req, res) =>{
     try{
-         const token = req.cookies.access_token
-        if(!token) return res.status(401).json("Not authenticated")
+        
         const hospitalId = req.params.id
         const ress = await hospital.destroy({ where:{id : hospitalId}})
         return res.status(200).json(ress);    

@@ -40,8 +40,8 @@ catch(err){
 
 const deleteCountry = async(req, res) =>{
     try{
-        const token = req.cookies.access_token
-        if(!token) return res.status(401).json("Not authenticated")
+        //const token = req.cookies.access_token
+       // if(!token) return res.status(401).json("Not authenticated")
         const CountryId = req.params.id
              
         const ress = await country.destroy({ where:{id : CountryId}})

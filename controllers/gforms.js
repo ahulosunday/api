@@ -55,8 +55,7 @@ catch(err){
 
 const deleteGform = async(req, res) =>{
     try{
-        const token = req.cookies.access_token
-        if(!token) return res.status(401).json("Not authenticated");
+        
         const GformId = req.params.id;
         const gforms = await gform.findOne({
             where:{id : GformId}

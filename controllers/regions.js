@@ -50,8 +50,7 @@ catch(err){
 
 const deleteRegion = async(req, res) =>{
     try{
-         const token = req.cookies.access_token
-        if(!token) return res.status(401).json("Not authenticated")
+        
         const RegionId = req.params.id
         const ress = await regions.destroy({ where:{id : RegionId}})
         return res.status(200).json(ress);    

@@ -41,8 +41,7 @@ catch(err){
 
 const deleteState = async(req, res) =>{
     try{
-       const token = req.cookies.access_token
-        if(!token) return res.status(401).json("Not authenticated")
+       
         const StateId = req.params.id
        const ress = await states.destroy({ where:{id : StateId}})
         return res.status(200).json(ress);    
