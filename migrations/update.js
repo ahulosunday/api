@@ -9,7 +9,8 @@ module.exports = {
      * Add seed commands here.
      *
      */
-      await queryInterface.sequelize.query('UPDATE users set isActive = 1 where id =1');
+    await queryInterface.renameColumn('users','isActive','isactive');
+      await queryInterface.sequelize.query('UPDATE users set isactive = 1 where id =1');
      
   },
 
@@ -19,7 +20,7 @@ module.exports = {
      *
      * Example:
      * */ 
-     await queryInterface.bulkDelete('roles', null, {});
+     //await queryInterface.bulkDelete('roles', null, {});
     
   }
 };
