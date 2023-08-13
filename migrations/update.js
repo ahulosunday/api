@@ -9,7 +9,7 @@ module.exports = {
      * Add seed commands here.
      *
      */
-      await queryInterface.sequelize.query("UPDATE users set `isActive` = 1 where id =1");
+      await queryInterface.sequelize.query('UPDATE users set isActive = 1 where id =1');
      
   },
 
