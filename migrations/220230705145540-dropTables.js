@@ -38,7 +38,7 @@ module.exports = {
        await queryInterface.dropTable('states');
        await queryInterface.dropTable('regions');
        await queryInterface.dropTable('countries');
-       await queryInterface.dropTable('gifshippackages');
+       await queryInterface.dropTable('gifshipPackages');
        await queryInterface.dropTable('gifshiptypes');
        await queryInterface.dropTable('gifships');
        await queryInterface.dropTable('users');
