@@ -9,8 +9,8 @@ module.exports = {
      * Add seed commands here.
      *
      */
-    await queryInterface.renameColumn('users','isActive','isactive');
-      await queryInterface.sequelize.query('UPDATE users set isactive = 1 where id =1');
+    await queryInterface.renameColumn('users','isactive','isActive');
+      //await queryInterface.sequelize.query('UPDATE users set isactive = 1 where id =1');
      
   },
 
