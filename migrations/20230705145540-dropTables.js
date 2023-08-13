@@ -20,7 +20,7 @@ module.exports = {
        await queryInterface.dropTable('gifshiptypes');
        await queryInterface.dropTable('gifships');
        await queryInterface.dropTable('users');
-       await queryInterface.query('delete from sequelizemeta');
+       await queryInterface.sequelize.query('delete from sequelizemeta');
     
   },
   async down(queryInterface, DataTypes) {
