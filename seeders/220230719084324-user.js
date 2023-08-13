@@ -20,7 +20,7 @@ module.exports = {
         roleid: 1,
         imgurl: 'images.png',
         phone:'08161381937',
-        isActive:0,
+        isActive:1,
         createdAt: '2023-07-31 06:51:23',
        updatedAt: '2023-07-31 06:51:23'
        
