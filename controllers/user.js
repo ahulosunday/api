@@ -21,7 +21,7 @@ const findAllUser = async (req, res) => {
     
     try {
 
-        const user = await users.findAll();
+        const user = await users.findAll({  order:[['surname', 'ASC'], ['othername', 'ASC']]});
         return res.status(201).json(user);
     } catch (err) {
         return res.status(500).json({ err: err })

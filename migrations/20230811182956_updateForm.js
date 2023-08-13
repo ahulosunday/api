@@ -73,7 +73,7 @@ const migrationCommands = (transaction) => [
     params: [
       "gforms",
       "residentWard",
-      { type: Sequelize.INTEGER, field: "residentWard", allowNull: true },
+      { type: Sequelize.INTEGER, field: "residentWard", allowNull: false },
       { transaction },
     ],
   },
@@ -82,7 +82,7 @@ const migrationCommands = (transaction) => [
     params: [
       "gforms",
       "registeredWard",
-      { type: Sequelize.INTEGER, field: "registeredWard", allowNull: true },
+      { type: Sequelize.INTEGER, field: "registeredWard", allowNull: false },
       { transaction },
     ],
   },
@@ -91,29 +91,15 @@ const migrationCommands = (transaction) => [
     params: [
       "gforms",
       "wardOrigin",
-      { type: Sequelize.INTEGER, field: "wardOrigin", allowNull: true },
+      { type: Sequelize.INTEGER, field: "wardOrigin", allowNull: false },
       { transaction },
     ],
   },
-  {
-    fn: "addIndex",
-    params: ["hospitals", { transaction }],
-  },
-  {
-    fn: "addIndex",
-    params: ["role_permissions", { transaction }],
-  },
+  
 ];
 
 const rollbackCommands = (transaction) => [
-  {
-    fn: "removeIndex",
-    params: ["hospitals", { transaction }],
-  },
-  {
-    fn: "removeIndex",
-    params: ["role_permissions", { transaction }],
-  },
+  
   {
     fn: "removeColumn",
     params: ["gforms", "residentWard", { transaction }],

@@ -130,11 +130,8 @@ module.exports = {
         type: DataTypes.DATE
       },
     
-    },{
-      indexes:[{ unique:true,  fields:['bank', 'accnumber'] }]
     });
-   // await queryInterface.addConstraint('hospitals', ['bank', 'accnumber'], { type: 'unique', name:'custom_constraints'});
-
+   
   },
   async down(queryInterface, DataTypes) {
     await queryInterface.dropTable('hospitals');

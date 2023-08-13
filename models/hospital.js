@@ -178,11 +178,6 @@ module.exports = (sequelize, DataTypes) => {
   },
   {
       sequelize,
-      indexes:[{
-      fields:['bank','accnumber'],
-      type:'UNIQUE',
-      
-    }],
     modelName: 'hospital',
     
     

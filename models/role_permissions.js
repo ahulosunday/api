@@ -31,12 +31,6 @@ module.exports = (sequelize, DataTypes) => {
    {
      
     sequelize,
-    indexes:[{
-      fields:['roleId','permissionId'],
-      type:'UNIQUE',
-      name:'role_permissions_roleId_permissionId'
-      
-    }],
     modelName: 'role_permissions',
     
     

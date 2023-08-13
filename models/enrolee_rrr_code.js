@@ -52,12 +52,6 @@ module.exports = (sequelize, DataTypes) => {
     
     
   sequelize,
-  indexes:[{
-  type:'UNIQUE',
-  unique:true,
-  name:'enrolee_rrr_code_code_userId_user_rrrId',
-  fields:['code','userId','user_rrrId'],
-      }],
   modelName: 'enrolee_rrr_code',
  
     

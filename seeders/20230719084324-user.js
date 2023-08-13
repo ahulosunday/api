@@ -10,7 +10,7 @@ module.exports = {
      *
      */
       await queryInterface.bulkInsert('users', [{
-        username: 'ahulosunday@gmail.com',
+        username: 'admin@gmail.com',
         id:1,
         password: '$2a$10$dBkqwfARQbWy4kn569JppujDuSP.P4oNm0Oj7.P8PtC.i0FGbRLRG',
         surname: 'Super-admin',
@@ -20,7 +20,7 @@ module.exports = {
         roleid: 1,
         imgurl: 'images.png',
         phone:'08161381937',
-        isActive:true,
+        isActive:0,
         createdAt: '2023-07-31 06:51:23',
        updatedAt: '2023-07-31 06:51:23'
        

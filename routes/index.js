@@ -81,7 +81,7 @@ router.post('/country',requireJsonContent, country.addCountry)
 router.delete('/country/:id', country.deleteCountry )
 router.put('/country/:id',requireJsonContent, country.updateCountry)
 //========================================
-router.get('/hmos', hmo.getHmos);
+router.get('/hmos/:page/:per_page', hmo.getHmos);
 router.get('/hmo/:id',hmo.getHmo)
 router.post('/hmo',requireJsonContent, hmo.addHmo)
 router.delete('/hmo/:id', hmo.deleteHmo )
