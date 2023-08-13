@@ -3,10 +3,10 @@
 
 module.exports = {
   async up(queryInterface, DataTypes) {
-   await queryInterface.dropTable('hmos');
-     await queryInterface.dropTable('hospitals');
       await queryInterface.dropTable('enrolee_rrr_codes');
        await queryInterface.dropTable('gforms');
+      await queryInterface.dropTable('hmos');
+     await queryInterface.dropTable('hospitals');
        await queryInterface.dropTable('role_permissions');
        await queryInterface.dropTable('permissions');
        await queryInterface.dropTable('roles');
@@ -24,10 +24,11 @@ module.exports = {
     
   },
   async down(queryInterface, DataTypes) {
-    await queryInterface.dropTable('hmos');
-     await queryInterface.dropTable('hospitals');
+   
       await queryInterface.dropTable('enrolee_rrr_codes');
        await queryInterface.dropTable('gforms');
+          await queryInterface.dropTable('hmos');
+     await queryInterface.dropTable('hospitals');
        await queryInterface.dropTable('role_permissions');
        await queryInterface.dropTable('permissions');
        await queryInterface.dropTable('roles');
