@@ -154,7 +154,7 @@ router.get('/lookups/:id/country', lookup.lookUpCountry)
 //===============image function=========
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: function (req, file, cb){
     cb(null, './public/upload/')
   },
   filename: function (req, file, cb) {
