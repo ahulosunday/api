@@ -1,14 +1,36 @@
 const { country, users } = require('../models');
+const {getPagination, getPagingData} = require('../helpers/paging')
 
 
 const getCountrys = async(req, res) =>{
     try{
-        const Countrys = await country.findAll({ include: {model: users }})
-        return res.status(200).json(Countrys)
+        const data = await country.findAll({ 
+            include: {model: users }, 
+            order:[['name','ASC']]})
+         return res.status(200).json(data)
+    }
+    catch(err){
+        return res.status(500).json(err.message)
+    }
+
+}
+const getAllCountry = async(req, res)=>{
+    try{
+        const  page =  req.params.page
+        const per_page = req.params.per_page
+         const { limit, offset } = getPagination(page, per_page)
+        const data = await country.findAndCountAll({ 
+            include: {model: users }, 
+            order:[['name','ASC']],
+            limit:limit, offset:offset
+            })
+           const response = getPagingData(data, page, limit);
+        return res.status(200).json(response)
     }
     catch(err){
         return res.status(200).json(err.message)
     }
+
 
 }
 
@@ -77,6 +99,7 @@ module.exports = {
     addCountry, 
     deleteCountry, 
     updateCountry,
+    getAllCountry,
     
     
 }

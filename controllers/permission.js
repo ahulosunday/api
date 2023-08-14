@@ -1,11 +1,18 @@
 const { permissions, role, users, role_permissions } = require('../models');
 const jwt = require('jsonwebtoken')
+const {getPagination, getPagingData} = require('../helpers/paging')
 
 
 const getPermissions = async(req, res) =>{
     try{
-        const perm = await permissions.findAll()
-        return res.status(200).json(perm)
+         const  page =  req.params.page
+        const per_page = req.params.per_page
+         const { limit, offset } = getPagination(page, per_page)
+        const data = await permissions.findAndCountAll({ 
+            limit:limit, offset:offset
+            })
+           const response = getPagingData(data, page, limit);
+        return res.status(200).json(response)
     }
     catch(err){
         return res.status(200).json(err.message)

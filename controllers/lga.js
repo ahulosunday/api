@@ -1,11 +1,20 @@
 const { lga, users,country, regions,states } = require('../models');
 const jwt = require('jsonwebtoken')
+const {getPagination, getPagingData} = require('../helpers/paging')
 
 
 const getLgas = async(req, res) =>{
     try{
-        const Lga = await lga.findAll({include: [country,users, regions, states], orderby:{'stateId': 'DESC'} })
-        return res.status(200).json(Lga)
+        const  page =  req.params.page
+        const per_page = req.params.per_page
+         const { limit, offset } = getPagination(page, per_page)
+        const data = await lga.findAndCountAll({ 
+            include: [country,users, regions, states],
+            order:[['name','ASC'], ['stateId', 'ASC']],
+            limit:limit, offset:offset
+            })
+           const response = getPagingData(data, page, limit);
+        return res.status(200).json(response)
     }
     catch(err){
         return res.status(200).json(err.message)

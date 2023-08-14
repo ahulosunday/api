@@ -1,11 +1,21 @@
 const { users, gifshiptype, gifship, gifshipPackage } = require('../models');
 const jwt = require('jsonwebtoken')
+const { getPagination, getPagingData } = require('../helpers/paging')
 
 
 const getGifshipPackages = async(req, res) =>{
     try{
-        const GifshipPackage = await gifshipPackage.findAll({ include: [users, gifshiptype, gifship] })
-        return res.status(200).json(GifshipPackage)
+         const  page =  req.params.page
+        const per_page = req.params.per_page
+         const { limit, offset } = getPagination(page, per_page)
+        const data = await gifshipPackage.findAndCountAll({ 
+             include: [users, gifshiptype, gifship] , 
+            order:[['name','ASC']],
+            limit:limit, offset:offset
+            })
+           const response = getPagingData(data, page, limit);
+        return res.status(200).json(response)
+        
     }
     catch(err){
         return res.status(200).json(err.message)

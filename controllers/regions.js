@@ -1,11 +1,20 @@
 const { regions, users,country } = require('../models');
 const jwt = require('jsonwebtoken')
+const {getPagination, getPagingData} = require('../helpers/paging')
 
 
 const getRegions = async(req, res) =>{
     try{
-        const Regions = await regions.findAll({include: [country,users] })
-        return res.status(200).json(Regions)
+        const  page =  req.params.page
+        const per_page = req.params.per_page
+         const { limit, offset } = getPagination(page, per_page)
+        const data = await regions.findAndCountAll({ 
+            include: [country,users],
+            order:[['name','ASC']],
+            limit:limit, offset:offset
+            })
+           const response = getPagingData(data, page, limit);
+        return res.status(200).json(response)
     }
     catch(err){
         return res.status(200).json(err.message)

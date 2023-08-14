@@ -1,12 +1,19 @@
 const {role, } = require('../models');
 const perm = require('./role-permission')
-
+const {getPagination, getPagingData} = require('../helpers/paging')
 
 
 const getRoles = async(req, res) =>{
     try{
-        const roles = await role.findAll()
-        return res.status(200).json(roles)
+        const  page =  req.params.page
+        const per_page = req.params.per_page
+         const { limit, offset } = getPagination(page, per_page)
+        const data = await role.findAndCountAll({ 
+            order:[['name','ASC']],
+            limit:limit, offset:offset
+            })
+           const response = getPagingData(data, page, limit);
+        return res.status(200).json(response)
     }
     catch(err){
         return res.status(200).json(err.message)

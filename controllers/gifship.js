@@ -1,6 +1,7 @@
 
 const { where } = require('sequelize');
 const {gifship, users, gifshiptype }  = require('../models');
+const { getPagination, getPagingData } = require('../helpers/paging')
 
 const createGifship = async (req, res) => {
         try {
@@ -21,8 +22,13 @@ const GifshipbyId = async(req, res )=>{
 }
 const getGifship = async(req, res )=>{
     try{
-       const gif = await gifship.findAll({include: [users]});
+        const gif = await gifship.findAll({
+       include:[users]
+       
+       });
         return res.status(200).json(gif)
+       
+           
     }
     catch(err){
      return res.status(200).json(err)
@@ -36,11 +42,16 @@ const createGifshipType = async(req, res) =>{
 }
 const getGifshipList = async(req, res )=>{
     try{
-       const gif = await gifshiptype.findAll({
-       include:[users, gifship]
-       
-       });
-        return res.status(200).json(gif)
+         const  page =  req.params.page
+        const per_page = req.params.per_page
+         const { limit, offset } = getPagination(page, per_page)
+        const data = await gifshiptype.findAndCountAll({ 
+          include: [users, gifship], 
+            order:[['name','ASC']],
+            limit:limit, offset:offset
+            })
+           const response = getPagingData(data, page, limit);
+        return res.status(200).json(response)
     }
     catch(err){
      return res.status(200).json(err)

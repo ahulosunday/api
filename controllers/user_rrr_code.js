@@ -5,7 +5,9 @@ const jwt = require('jsonwebtoken')
 const getEnrolee_rrr_code = async(req, res) =>{
     try{
         const id = req.params.id
-        const User_rrrsCode = await enrolee_rrr_code.findOne({ where:{id: id}, include: [users, user_rrr ]})
+        const User_rrrsCode = await enrolee_rrr_code.findOne({ 
+            where:{id: id}, 
+            include: [users, user_rrr ]})
         return res.status(200).json(User_rrrsCode)
     }
     catch(err){

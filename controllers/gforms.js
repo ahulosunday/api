@@ -1,12 +1,20 @@
 const { json } = require('sequelize');
 const {gform,user_rrr, lga, users,country, regions,states,hmo, hospital, gifship, gifshiptype, gifshipPackage } = require('../models');
 const jwt = require('jsonwebtoken')
+const { getPagination, getPagingData} = require('../helpers/paging')
 
 const getGforms = async(req, res) =>{
     try{
-
-        const Gform = await gform.findAll({include: [country,users, regions, states, lga, hospital], orderby:{'surname': 'ASC'} })
-        return res.status(200).json(Gform)
+     const  page =  req.params.page
+        const per_page = req.params.per_page
+         const { limit, offset } = getPagination(page, per_page)
+        const data = await gform.findAndCountAll({ 
+             include: [country,users, regions, states, lga, hospital],
+              order:[['surname', 'ASC'], ['middlename', 'ASC'], ['lastname', 'ASC']],
+            limit:limit, offset:offset
+            })
+           const response = getPagingData(data, page, limit);
+           return res.status(200).json(response)
     }
     catch(err){
         return res.status(200).json(err.message)

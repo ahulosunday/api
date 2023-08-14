@@ -28,7 +28,7 @@ app.use('/api/auth', routes);
 app.listen({ port: port}, async () => {
   // console.log('app running on http://localhost:6001')
    await sequelize.authenticate()
-   console.log('App connected successfully: port: ' + port + ', Production? '+ inProduction)
+   console.log('App connected successfully: port: ' + port + ', Production ? '+ inProduction)
 
 })
 

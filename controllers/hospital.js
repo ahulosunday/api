@@ -1,11 +1,21 @@
 const { states, users,country, regions, lga, hospital, ward } = require('../models');
 const jwt = require('jsonwebtoken')
+const {getPagination, getPagingData } = require('../helpers/paging')
 
 
 const getHospitals = async(req, res) =>{
     try{
-        const hospitals = await hospital.findAll({include: [country,users, regions, states,lga, ward] })
-        return res.status(200).json(hospitals)
+       
+        const  page =  req.params.page
+        const per_page = req.params.per_page
+         const { limit, offset } = getPagination(page, per_page)
+        const data = await hospital.findAndCountAll({ 
+           include: [country,users, regions, states,lga, ward], 
+            order:[['name','ASC']],
+            limit:limit, offset:offset
+            })
+           const response = getPagingData(data, page, limit);
+        return res.status(200).json(response)
     }
     catch(err){
         return res.status(200).json(err.message)
