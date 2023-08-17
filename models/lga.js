@@ -36,8 +36,12 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       allowNull:false,
       validate:{
-        notEmpty:true,
-        notNull:true
+        notEmpty:{
+          msg:'LGA code is required',
+        },
+        notNull:{
+          msg:'LGA code can not be Null'
+        }
       }
 
     

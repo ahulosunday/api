@@ -5,6 +5,20 @@ const {getPagination, getPagingData} = require('../helpers/paging')
 
 const getPermissions = async(req, res) =>{
     try{
+        
+        const data = await permissions.findAll({ 
+           
+            })
+           
+        return res.status(200).json(data)
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
+}
+const getPermissionsPaging = async(req, res) =>{
+    try{
          const  page =  req.params.page
         const per_page = req.params.per_page
          const { limit, offset } = getPagination(page, per_page)
@@ -33,4 +47,5 @@ const getRolesPermissions = async(req, res) =>{
 module.exports = {
 getPermissions,
 getRolesPermissions,
+getPermissionsPaging
 }

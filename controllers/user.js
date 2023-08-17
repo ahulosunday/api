@@ -1,6 +1,7 @@
 const { users, gforms } = require('../models');
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const {getPagination, getPagingData} = require('../helpers/paging')
 const createUser = async (req, res) => {
     
     try {
@@ -17,6 +18,15 @@ const createUser = async (req, res) => {
         return res.status(500).json({ err: err })
     }
 }
+const BulkcreateUser = async (req, res) => {
+    
+    try {
+        const user = await users.bulkCreate(req.body);
+        return res.status(201).json(user);
+    } catch (err) {
+        return res.status(500).json({ err: err })
+    }
+}
 const findAllUser = async (req, res) => {
     
     try {
@@ -26,6 +36,24 @@ const findAllUser = async (req, res) => {
     } catch (err) {
         return res.status(500).json({ err: err })
     }
+}
+
+const getUsersPaging = async(req, res) =>{
+    try{
+        const  page =  req.params.page
+        const per_page = req.params.per_page
+         const { limit, offset } = getPagination(page, per_page)
+        const data = await users.findAndCountAll({ 
+           order:[['surname', 'ASC'], ['othername', 'ASC']],
+            limit:limit, offset:offset
+            })
+           const response = getPagingData(data, page, limit);
+        return res.status(200).json(response)
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
 }
 const ActivateUser = async (req, res) => {
     
@@ -79,5 +107,7 @@ module.exports = {
     findAllUser,
     changePassword,
     ActivateUser,
-    changePassport
+    changePassport,
+    getUsersPaging,
+    BulkcreateUser
 }

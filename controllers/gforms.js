@@ -1,9 +1,24 @@
-const { json } = require('sequelize');
 const {gform,user_rrr, lga, users,country, regions,states,hmo, hospital, gifship, gifshiptype, gifshipPackage } = require('../models');
 const jwt = require('jsonwebtoken')
 const { getPagination, getPagingData} = require('../helpers/paging')
 
 const getGforms = async(req, res) =>{
+    try{
+     
+        const data = await gform.findAll({ 
+             include: [country,users, regions, states, lga, hospital],
+              order:[['surname', 'ASC'], ['middlename', 'ASC'], ['lastname', 'ASC']]
+          
+            })
+        
+           return res.status(200).json(data)
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
+}
+const getGformsPaging = async(req, res) =>{
     try{
      const  page =  req.params.page
         const per_page = req.params.per_page
@@ -25,7 +40,7 @@ const getGformuserId = async(req, res) =>{
     try{
         const userId = req.params.userId
         const Gform = await gform.findAll({ where:{userId: userId},
-            include: [country,users, regions, states, lga, hospital,gifship,gifshiptype, gifshipPackage ],
+            include: [country,users, regions, states, lga, hospital,gifship,gifshiptype, gifshipPackage, hmo],
              orderby:{'surname': 'ASC'} 
              })
         return res.status(200).json(Gform)
@@ -136,4 +151,5 @@ module.exports = {
     deleteGform, 
     updateGform,
     getGformuserId,
+    getGformsPaging
 }

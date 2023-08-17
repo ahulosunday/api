@@ -5,9 +5,9 @@ const {getPagination, getPagingData} = require('../helpers/paging')
 const getCountrys = async(req, res) =>{
     try{
         const data = await country.findAll({ 
-            include: {model: users }, 
-            order:[['name','ASC']]})
-         return res.status(200).json(data)
+            include: [users ],
+            order:[['name','ASC']]});
+         return res.status(200).json(data);
     }
     catch(err){
         return res.status(500).json(err.message)

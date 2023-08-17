@@ -5,6 +5,20 @@ const {getPagination, getPagingData }= require('../helpers/paging')
 
 const getHmos = async(req, res) =>{
     try{
+       
+        const data = await hmo.findAll({ 
+            include: [users,country,regions,states,lga,ward], 
+            order:[['name','ASC'], ['code','ASC']]
+            })
+        return res.status(200).json(data)
+    }
+    catch(err){
+        return res.status(501).json(err.message)
+    }
+
+}
+const getHmoAll = async(req, res) =>{
+    try{
         const  page =  req.params.page
         const per_page = req.params.per_page
          const { limit, offset } = getPagination(page, per_page)
@@ -94,5 +108,6 @@ module.exports = {
     addHmo, 
     deleteHmo, 
     updateHmo,
+    getHmoAll
     
 }

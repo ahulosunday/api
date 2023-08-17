@@ -5,6 +5,22 @@ const {getPagination, getPagingData} = require('../helpers/paging')
 
 const getRegions = async(req, res) =>{
     try{
+       
+        const data = await regions.findAll({ 
+            include: [country,users],
+            order:[['name','ASC']]
+           
+            })
+          
+        return res.status(200).json(data)
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
+}
+const getRegionsPaging = async(req, res) =>{
+    try{
         const  page =  req.params.page
         const per_page = req.params.per_page
          const { limit, offset } = getPagination(page, per_page)
@@ -28,7 +44,7 @@ const loadRegions = async(req, res) =>{
         return res.status(200).json(Regions)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json(err.message);
     }
 
 }
@@ -92,6 +108,7 @@ module.exports = {
     addRegion, 
     deleteRegion, 
     updateRegion,
-    loadRegions
+    loadRegions,
+    getRegionsPaging
     
 }

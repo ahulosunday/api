@@ -5,6 +5,22 @@ const {getPagination, getPagingData} = require('../helpers/paging')
 
 const getLgas = async(req, res) =>{
     try{
+        
+        const data = await lga.findAll({ 
+            include: [country,users, regions, states],
+            order:[['name','ASC'], ['stateId', 'ASC']]
+           
+            })
+         
+        return res.status(200).json(data)
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
+}
+const getLgasPaging = async(req, res) =>{
+    try{
         const  page =  req.params.page
         const per_page = req.params.per_page
          const { limit, offset } = getPagination(page, per_page)
@@ -98,5 +114,6 @@ module.exports = {
     addLga, 
     deleteLga, 
     updateLga,
+    getLgasPaging,
     
 }

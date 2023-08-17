@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(gifship,{foreignKey: 'gifshipId'}) 
       this.belongsTo(gifshiptype,{foreignKey: 'gifshipTypeId'}) 
       this.belongsTo(gifshipPackage,{foreignKey: 'gifshipPackageId'}) 
-      this.belongsTo(hmo,{foreignKey: 'hmoId'}) 
+      this.belongsTo(hmo, {foreignKey: 'hmoId'}) 
       this.belongsTo(states,{foreignKey: 'regiteredState'}) 
       
     }

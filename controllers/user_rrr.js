@@ -1,16 +1,33 @@
-const { user_rrr, users, gifship, gifshiptype, gifshipPackage } = require('../models');
+const { user_rrr, users, gifship, gifshiptype, gifshipPackage, enrolee_rrr_code } = require('../models');
 const jwt = require('jsonwebtoken')
 const {getPagination, getPagingData} = require('../helpers/paging')
 
 
+
 const getUser_rrrs = async(req, res) =>{
+    try{
+       
+        const data = await user_rrr.findAll({ 
+            include: [users,gifship, gifshiptype, gifshipPackage ]
+           
+            })
+         
+        return res.status(200).json(data)
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
+}
+
+const getUser_rrrsPaging = async(req, res) =>{
     try{
         const  page =  req.params.page
         const per_page = req.params.per_page
          const { limit, offset } = getPagination(page, per_page)
         const data = await user_rrr.findAndCountAll({ 
             include: [users,gifship, gifshiptype, gifshipPackage ],
-            order:[['name','ASC']],
+            order:[['id','DESC']],
             limit:limit, offset:offset
             })
            const response = getPagingData(data, page, limit);
@@ -20,6 +37,17 @@ const getUser_rrrs = async(req, res) =>{
         return res.status(200).json(err.message)
     }
 
+}
+
+const getAllByUserId = async (req, res) =>{
+    try{
+        const userId = req.params.userId;
+        const qurey = await user_rrr.findOne({where:{userId: userId}, order:[['id', 'DESC']]})
+        return res.status(200).json(qurey)
+    }
+    catch(err){
+     return res.status(500).json(err.message)
+    }
 }
 
 
@@ -49,7 +77,6 @@ const getUser_rrrByRRR =async(req, res) =>{
 const getUser_rrrByUserId =async(req, res) =>{
    try{
         const userId = req.params.userId
-        
         const User_rrrs = await user_rrr.findAll({include: [users,gifship, gifshiptype, gifshipPackage ], where:{userId : userId, activated: 1} })
         return res.status(200).json(User_rrrs)
     }
@@ -82,20 +109,19 @@ const deleteUser_rrr = async(req, res) =>{
        // const token = req.cookies.access_token
        // if(!token) return res.status(401).json({err: "Not authenticated"})
         const User_rrrId = req.params.id
+        const delete_user_rrr = await enrolee_rrr_code.destroy({where:{user_rrrId: User_rrrId}})
         const ress = await user_rrr.destroy({ where:{id : User_rrrId}})
-        return res.status(200).json(token);    
+        return res.status(200).json(ress);    
         
     }
     catch(err){
         return res.status(200).json(err.message)
     }
 }
-
  const updateUser_rrr = async(req, res) =>{
    try{
         const User_rrrId = req.params.id
        const { rrr_number,	userId,	activated,	activatedby,	amount,	duration,	gifshipId,	gifshipTypeId,	gifshipPackageId,	activated_date,	expired_date, maxNumber, minNumber} = req.body
-    
         const ress = await country.findOne({ where:{id : User_rrrId}})
         ress.rrr_number = rrr_number
         ress.userId= userId
@@ -121,7 +147,6 @@ const activateUser_rrr = async(req, res) =>{
    try{
         const User_rrrId = req.params.id
        const {activated,	activatedby,	activated_date,	expired_date} = req.body
-    
         const ress = await country.findOne({ where:{id : User_rrrId}})
        ress.expired_date = expired_date
        ress.activated_date = activated_date
@@ -144,8 +169,8 @@ module.exports = {
     updateUser_rrr,
     getUser_rrrByRRR,
     getUser_rrrByUserId,
+    getUser_rrrsPaging,
+    getAllByUserId
     
     
 }
-
-//rrr_number	userId	activated	activatedby	amount	duration	gifshipId	gifshipTypeId	gifshipPackageId	activated_date	expired_date	

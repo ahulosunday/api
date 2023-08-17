@@ -15,6 +15,19 @@ const getEnrolee_rrr_code = async(req, res) =>{
     }
 
 }
+const getEnrolee_rrr_codeCount = async(req, res) =>{
+    try{
+        const user_rrrId = req.params.user_rrrId
+        const User_rrrsCode = await enrolee_rrr_code.findAndCountAll({ 
+            where:{user_rrrId: user_rrrId}, 
+            include: [users, user_rrr ]})
+        return res.status(200).json(User_rrrsCode)
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
+}
 const getEnrolee_rrr_codeByCode = async(req, res) =>{
     try{
         const code = req.params.code
@@ -80,15 +93,27 @@ catch(err){
     return res.status(500).json({ err: err.message })
 }    
 }
-
+const deleteEnrolee_rrr_codes = async(req, res) =>{
+try{
+    const userId = req.params.userId
+   const q =  await enrolee_rrr_code.destroy({userId: userId});
+   if(q) return 'OK';
+   else return 'ERROR';
+}
+catch(err){
+    return "ERROR"
+}    
+}
 
 module.exports = {
+    deleteEnrolee_rrr_codes,
     getEnrolee_rrr_code,
     getEnrolee_rrr_codes,
     getEnrolee_rrr_codeByUserId,
     getEnrolee_rrr_codeByCode,
     addEnrolee_rrr_code,
     getEnrolee_rrr_codeByUserIdCode,
-    addEnrolee_rrr_codes
+    addEnrolee_rrr_codes,
+    getEnrolee_rrr_codeCount
     
 }

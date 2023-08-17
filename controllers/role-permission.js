@@ -59,8 +59,6 @@ const deleteRolePemissions = async(req, res) =>{
 const deleteRolePemissionRoleId  = async(req, res) =>{
     try{
         const id = req.params.id
-        const token = req.cookies.access_token
-        if(!token) return res.status(401).json("Not authenticated")
         const ress = await role_permissions.destroy({ where:{roleId : id}})
 
         return true//res.status(200).json(ress)
@@ -75,8 +73,6 @@ const  deleteRolePemissionRoleIdPermissionId = async(req, res) =>{
     try{
         const roleId = req.params.roleId
         const permissionId = req.params.permissionId
-        const token = req.cookies.access_token
-        if(!token) return res.status(401).json("Not authenticated")
         const ress = await role_permissions.destroy({ where:{roleId : roleId, permissionId: permissionId}})
         return true
     }

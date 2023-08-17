@@ -1,33 +1,35 @@
-import { render } from '@react-email/render';
-import nodemailer from 'nodemailer';
+
+const  nodemailer = require('nodemailer')
+
 
 const send = async(req, res) =>{
+ 
    try{
     const { to, subject,msg }= req.body
 const transporter = nodemailer.createTransport({
-  host: 'smtp.forwardemail.net',
+  host: 'thirty.qservers.net',
   port: 465,
   secure: true,
   auth: {
-    user: 'my_user',
-    pass: 'my_password',
+    user: 'theroyalschools@theroyalschools.com.ng',
+    pass: '*g.R33fI+B@%',
   },
 });
 
-const emailHtml = render(msg);
 
 const options = {
-  from: 'you@example.com',
+  from: 'ahulosunday@gmail.com',
   to: to,
   subject: subject,
-  html: emailHtml,
+  html: msg,
 };
 
 const feedbact = await transporter.sendMail(options);
-return res.status(200).json(feedbact)
+
+return res.status(200).json(feedbact);
    }
    catch(err){
-return res.status(500).json(err)
+return res.status(501).json(err);
    }
 }
 
