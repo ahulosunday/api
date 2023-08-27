@@ -18,7 +18,7 @@ app.use(express.static('public'));
 
 app.use(
   cors({
-    origin: inProduction ? "https://aisnet.onrender.com" : "http://localhost:3000"
+    origin: inProduction ? "https://ahulosunday.github.io" : "http://localhost:3000"
   })
 );
 
