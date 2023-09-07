@@ -70,6 +70,10 @@ module.exports = (sequelize, DataTypes) => {
       }
 
     },
+      types: { 
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
         countryId: {
       type:DataTypes.INTEGER,
       allowNull:false,

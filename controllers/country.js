@@ -89,7 +89,7 @@ const deleteCountry = async(req, res) =>{
         return res.status(200).json(ress)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json(err.message);
     }
 }
 

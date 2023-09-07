@@ -55,7 +55,7 @@ const getHmo =async(req, res) =>{
 
 const addHmo = async(req, res) =>{
 try{
-     const col = await hmo.create({ name: req.body.name , code: req.body.code,userId: req.body.userId, address:req.body.address, phone: req.body.phone, email: req.body.email, countryId: req.body.countryId, regionId:req.body.regionId,stateId:req.body.stateId, lgaId: req.body.lgaId,wardId:req.body.wardId});
+     const col = await hmo.create({ name: req.body.name , code: req.body.code,userId: req.body.userId, address:req.body.address, phone: req.body.phone, email: req.body.email, countryId: req.body.countryId, regionId:req.body.regionId,stateId:req.body.stateId, lgaId: req.body.lgaId,wardId:req.body.wardId, types:req.body.types});
     return res.status(200).json(col)
 }
 catch(err){
@@ -81,7 +81,7 @@ const deleteHmo = async(req, res) =>{
  const updateHmo = async(req, res) =>{
    try{
         const HmoId = req.params.id
-        const {name, code, userId, address, phone, email, countryId, regionId,stateId,lgaId,wardId } = req.body
+        const {name, code, userId, address, phone, email, countryId, regionId,stateId,lgaId,wardId, types } = req.body
         const ress = await hmo.findOne({ where:{id : HmoId}})
         ress.name = name
         ress.code= code
@@ -94,6 +94,7 @@ const deleteHmo = async(req, res) =>{
         ress.stateId = stateId
         ress.lgaId = lgaId
         ress.wardId = wardId
+        ress.types = types
         ress.save()
         return res.status(200).json(ress)
     }

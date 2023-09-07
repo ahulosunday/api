@@ -18,11 +18,11 @@ const Login = async (req, res) => {
        const { password, ...other} = user
               res.cookie("access_token", token, {
         httpOnly: true
-       }).status(200).json(user);
+       }).status(200).json(user)
        }
-       return res.status(400).json({err: "Invalid username or Password!"});    
+       else return res.status(400).json({err: "Invalid username or Password!"});    
     } catch (err) {
-        return res.status(500).json({ err: "Invalid username or password" })
+       return res.status(500).json({ err: "Invalid username or password" })
     }
 }
 

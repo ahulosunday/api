@@ -34,7 +34,7 @@ const requireJsonContent = (request, response, next) => {
 //READ EXCEL FILE===========
 
 //Create user and login routes=============================
-router.post('/login', requireJsonContent, login.Login);
+router.post('/login', requireJsonContent, login.Login)
 router.post('/logout', logout.Logout);
 router.post('/users', requireJsonContent, user.createUser);
 router.post('/users/bulk', requireJsonContent, user.BulkcreateUser);
