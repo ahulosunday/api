@@ -102,7 +102,21 @@ const changePassport = async(req, res)=>{
 
     }
 }
+const findUserByUsername = async(req, res)=>{
+    try{
+       
+        const username = req.params.username
+      const userlist = await users.findOne({ where: {username: username} })
+      return res.status(200).json(userlist)     
+    }
+    catch(err){
+        return res.status(500).json(err)
+
+    }
+}
+
 module.exports = {
+    findUserByUsername,
     createUser,
     findAllUser,
     changePassword,

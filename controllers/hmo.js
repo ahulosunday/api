@@ -94,7 +94,7 @@ const deleteHmo = async(req, res) =>{
         ress.stateId = stateId
         ress.lgaId = lgaId
         ress.wardId = wardId
-        ress.types = types
+        ress.types = types //
         ress.save()
         return res.status(200).json(ress)
     }

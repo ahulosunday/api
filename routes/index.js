@@ -40,6 +40,7 @@ router.post('/users', requireJsonContent, user.createUser);
 router.post('/users/bulk', requireJsonContent, user.BulkcreateUser);
 router.put('/changepassword/:id', requireJsonContent, user.changePassword);
 router.get('/users', user.findAllUser);
+router.get('/findUserByUsername/:username/1/1/1/1', user.findUserByUsername);
 router.get('/users/:page/:per_page', user.getUsersPaging);
 router.put('/activate/:id/', requireJsonContent, user.ActivateUser)
 router.put('/upload/:id/change', requireJsonContent, user.changePassport)
@@ -158,13 +159,14 @@ router.delete('/gifshipList/:id', gifship.getGifshipDelete);
 router.get('/gifshipedit/:id', gifship.Gifshipone);
 router.put('/gifshipList/:id', gifship.GifshipUpdate);
 router.get('/gifshipLists/:id', gifship.GifshipbyId);
-//============GifshipPackage================
+//============GifshipPackage================getGifshipPackage
 router.get('/gifshipPackage/:page/:per_page', gifshipPackage.getGifshipPackages);
 router.post('/gifshipPackage', gifshipPackage.addGifshipPackage)
 router.delete('/gifshipPackage/:id', gifshipPackage.deleteGifshipPackage);
 router.get('/gifshipPackage/:id', gifshipPackage.getGifshipPackage);
 router.get('/gifshipPackageList/:id', gifshipPackage.getGifshipPackageWithGigshipTypeId);
 router.put('/gifshipPackage/:id', gifshipPackage.updateGifshipPackage);
+router.get('/getGifshipPackagesAll/1/1/all/1', gifshipPackage.getGifshipPackagesAll);
 //==============LOOKUPS TABLES==========
 router.get('/lookups/:id/lga', lookup.lookUpLga)
 router.get('/lookups/:id/state', lookup.lookUpState)

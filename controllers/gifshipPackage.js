@@ -23,6 +23,21 @@ const getGifshipPackages = async(req, res) =>{
 
 }
 
+const getGifshipPackagesAll = async(req, res) =>{
+    try{
+        
+        const data = await gifshipPackage.findAll({ 
+             include: [users, gifshiptype, gifship] , order:[['name','ASC']]
+            })
+        return res.status(200).json(data)
+        
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
+}
+
 const getGifshipPackageWithGigshipTypeId =async(req, res) =>{
    try{
         const GifshipTypeId = req.params.id
@@ -38,7 +53,7 @@ const getGifshipPackageWithGigshipTypeId =async(req, res) =>{
 const getGifshipPackage =async(req, res) =>{
    try{
         const GifshipPackageId = req.params.id
-        const GifshipPackage = await gifshipPackage.findOne({ where:{id : GifshipPackageId}})
+        const GifshipPackage = await gifshipPackage.findOne({ where:{id : GifshipPackageId}, include: [users, gifshiptype, gifship]})
         return res.status(200).json(GifshipPackage)
     }
     catch(err){
@@ -105,6 +120,7 @@ module.exports = {
     addGifshipPackage, 
     deleteGifshipPackage, 
     updateGifshipPackage,
-    getGifshipPackageWithGigshipTypeId
+    getGifshipPackageWithGigshipTypeId,
+    getGifshipPackagesAll
     
 }
