@@ -35,6 +35,7 @@ const requireJsonContent = (request, response, next) => {
 
 //Create user and login routes=============================
 router.post('/login', requireJsonContent, login.Login)
+router.post('/signin/0', requireJsonContent, login.signin)
 router.post('/logout', logout.Logout);
 router.post('/users', requireJsonContent, user.createUser);
 router.post('/users/bulk', requireJsonContent, user.BulkcreateUser);

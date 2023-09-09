@@ -88,7 +88,7 @@ module.exports = (sequelize, DataTypes) => {
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: false,
       validate:{
         notEmpty: true,
         notNull: true,
@@ -98,7 +98,7 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: false,
       validate:{
         notEmpty: true,
         notNull: true,
