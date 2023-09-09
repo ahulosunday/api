@@ -85,7 +85,7 @@ router.get('/xyx/:id/', requireJsonContent, enrolee_rrr_code.getEnrolee_rrr_code
 router.get('/code/:userId/0/', enrolee_rrr_code.getEnrolee_rrr_codeByUserId)
 router.get('/code/:code/', enrolee_rrr_code.getEnrolee_rrr_codeByCode);
 router.get('/code/:userId/:code/', requireJsonContent, enrolee_rrr_code.getEnrolee_rrr_codeByUserIdCode)
-router.post('/code/', requireJsonContent, enrolee_rrr_code.addEnrolee_rrr_code)
+router.post('/code/0', requireJsonContent, enrolee_rrr_code.addEnrolee_rrr_code)
 router.post('/codes/', requireJsonContent, enrolee_rrr_code.addEnrolee_rrr_codes)
 //=======================================================
 router.get('/country', country.getCountrys);
