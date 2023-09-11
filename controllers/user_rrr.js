@@ -88,13 +88,13 @@ const getUser_rrrByUserId =async(req, res) =>{
 
 const addUser_rrr = async(req, res) =>{
 try{
-    const { rrr_number,	userId,	activated,	activatedby,	amount,	duration,	gifshipId,	gifshipTypeId,	gifshipPackageId,	activated_date,	expired_date, maxNumber, minNumber} = req.body
+    const { rrr_number,	userId,	activated,	activatedby,	amount,	duration,	gifshipId,	gifshipTypeId,	gifshipPackageId,	activated_date,	expired_date, maxNumber, minNumber, authNumber} = req.body
     const q = await user_rrr.findOne({ where:{userId:userId, activated: 1}})
     if(q){
     q.activated = false
     q.save()
     }
-   const col = await user_rrr.create({ rrr_number:rrr_number,	userId:userId,	activated:activated,	activatedby:activatedby,	amount:amount,	duration:duration,	gifshipId:gifshipId,	gifshipTypeId:gifshipTypeId,	gifshipPackageId:gifshipPackageId,	activated_date:activated_date,	expired_date:expired_date, maxNumber:maxNumber, minNumber:minNumber});
+   const col = await user_rrr.create({ rrr_number:rrr_number,	userId:userId,	activated:activated,	activatedby:activatedby,	amount:amount,	duration:duration,	gifshipId:gifshipId,	gifshipTypeId:gifshipTypeId,	gifshipPackageId:gifshipPackageId,	activated_date:activated_date,	expired_date:expired_date, maxNumber:maxNumber, minNumber:minNumber, authNumber: authNumber});
     return res.status(200).json(col)
 }
 catch(err){
@@ -121,7 +121,7 @@ const deleteUser_rrr = async(req, res) =>{
  const updateUser_rrr = async(req, res) =>{
    try{
         const User_rrrId = req.params.id
-       const { rrr_number,	userId,	activated,	activatedby,	amount,	duration,	gifshipId,	gifshipTypeId,	gifshipPackageId,	activated_date,	expired_date, maxNumber, minNumber} = req.body
+       const { rrr_number,	userId,	activated,	activatedby,	amount,	duration,	gifshipId,	gifshipTypeId,	gifshipPackageId,	activated_date,	expired_date, maxNumber, minNumber, authNumber: authNumber} = req.body
         const ress = await country.findOne({ where:{id : User_rrrId}})
         ress.rrr_number = rrr_number
         ress.userId= userId
@@ -136,6 +136,7 @@ const deleteUser_rrr = async(req, res) =>{
         ress.expired_date = expired_date
         ress.minNumber = minNumber
         ress.maxNumber = maxNumber
+        ress.authNumber = authNumber
         ress.save()
         return res.status(200).json(ress)
     }

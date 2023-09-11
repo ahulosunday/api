@@ -129,6 +129,15 @@ defaultValue: DataTypes.DATE
         }
 
       }
+      ,  authNumber:{
+        type:DataTypes.STRING,
+        allowNull: false,
+        validate:{
+          notEmpty:true,
+          notNull:true
+        }
+
+      }
   }, {
     sequelize,
     modelName: 'user_rrr',
