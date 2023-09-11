@@ -22,7 +22,7 @@ const migrationCommands = (transaction) => [
     params: [
       "user_rrrs",
       "authNumber",
-      { type: Sequelize.STRING, field: "authNumber", allowNull: false },
+      { type: Sequelize.STRING, field: "authNumber", allowNull: true },
       { transaction },
     ],
   },
