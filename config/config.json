@@ -1,17 +1,17 @@
 {
   "production": { 
-    "username": "sequelize_db_user",
-    "password": "XWtDIHQEU4rGbKmrjgXC4oOGwAGd0mA3",
-    "database": "sequelize_db",
-    "host": "dpg-cj6cob17120s739vf9l0-a",
+    "username": "sequelize_database_user",
+    "password": "37BlRTW5Z4GBEsKTFRgPgYNDRfCbdwcu",
+    "database": "sequelize_database",
+    "host": "dpg-cjv42ih5mpss7393t8dg-a",
     "port": 5432,
     "dialect": "postgres"
   },
    "test": { 
-     "username": "sequelize_db_user",
-    "password": "XWtDIHQEU4rGbKmrjgXC4oOGwAGd0mA3",
-    "database": "sequelize_db",
-    "host": "dpg-cj6cob17120s739vf9l0-a",
+     "username": "sequelize_database_user",
+    "password": "37BlRTW5Z4GBEsKTFRgPgYNDRfCbdwcu",
+    "database": "sequelize_database",
+    "host": "dpg-cjv42ih5mpss7393t8dg-a",
     "port": 5432,
     "dialect": "postgres"
   },

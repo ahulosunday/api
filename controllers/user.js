@@ -60,7 +60,7 @@ const ActivateUser = async (req, res) => {
     try {
             const id = req.params.id
         const user = await users.findOne({where:{id: id}});
-        user.isActive = true;
+        user.isActive = 1;
         user.save()
         return res.status(201).json(user);
     } catch (err) {
