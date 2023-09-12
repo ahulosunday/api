@@ -33,15 +33,6 @@ app.listen({ port: port}, async () => {
 })
 
 /**
-  "production": { 
-    "username": "sequelize_db_user",
-    "password": "XWtDIHQEU4rGbKmrjgXC4oOGwAGd0mA3",
-    "database": "sequelize_db",
-    "host": "dpg-cj6cob17120s739vf9l0-a",
-    "port": 5432,
-    "dialect": "postgres"
-  },
-
-npm install pg body-parser xlsx cors express cookie-parser sequelize --save bcryptjs jsonwebtoken multer mysql2 nodemailer sequelize-cli --save
+npm install pg body-parser xlsx cors express cookie-parser sequelize --save bcryptjs jsonwebtoken multer mysql2 nodemailer sequelize-cli --save && sequelize db:migrate && sequelize db:seed:all
 
  */
