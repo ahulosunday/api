@@ -21,6 +21,7 @@ module.exports = {
        await queryInterface.dropTable('gifshiptypes');
        await queryInterface.dropTable('gifships');
        await queryInterface.dropTable('users');
+       
        */
        await queryInterface.sequelize.query('DROP TABLE IF EXISTS enrolee_rrr_codes CASCADE');
            await queryInterface.sequelize.query('DROP TABLE IF EXISTS gforms CASCADE');
