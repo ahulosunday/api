@@ -79,6 +79,7 @@ router.delete('/user-rrr/:id/', user_rrr.deleteUser_rrr)
 router.put('/user-rrr/:id/', requireJsonContent, user_rrr.updateUser_rrr)
 router.get('/user-rrr/rrr/:id/', user_rrr.getUser_rrrByRRR)
 router.get('/:userId/user-rrr/getuserid/rrr/rrr/', user_rrr.getAllByUserId )
+
 //====================================
 router.get('/codes/', requireJsonContent, enrolee_rrr_code.getEnrolee_rrr_codes);
 router.get('/codes/:user_rrrId/code/rrr/', enrolee_rrr_code.getEnrolee_rrr_codeCount);
@@ -88,6 +89,8 @@ router.get('/code/:code/', enrolee_rrr_code.getEnrolee_rrr_codeByCode);
 router.get('/code/:userId/:code/', requireJsonContent, enrolee_rrr_code.getEnrolee_rrr_codeByUserIdCode)
 router.post('/code/0', requireJsonContent, enrolee_rrr_code.addEnrolee_rrr_code)
 router.post('/codes/', requireJsonContent, enrolee_rrr_code.addEnrolee_rrr_codes)
+router.get('/:user_rrrId/codes/getuser_rrr/1/1/', enrolee_rrr_code.getEnrolee_rrr_codeByUser_rrrId )
+router.get('/:userId/codes/getuserid/rrr/rrr/0/', enrolee_rrr_code.getEnrolee_rrr_codeByUserIdAll )
 //=======================================================
 router.get('/country', country.getCountrys);
 router.get('/country/:page/:per_page', country.getAllCountry)

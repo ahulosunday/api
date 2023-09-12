@@ -39,6 +39,29 @@ const getEnrolee_rrr_codeByCode = async(req, res) =>{
     }
 
 }
+//user_rrrId
+const getEnrolee_rrr_codeByUser_rrrId = async(req, res) =>{
+    try{
+        const user_rrrId = req.params.user_rrrId
+        const User_rrrsCode = await enrolee_rrr_code.findAll({ where:{user_rrrId: user_rrrId}, include: [users, user_rrr ], order:[['id', 'DESC']]})
+        return res.status(200).json(User_rrrsCode)
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
+}
+const getEnrolee_rrr_codeByUserIdAll = async(req, res) =>{
+    try{
+        const userId = req.params.userId
+        const User_rrrsCode = await enrolee_rrr_code.findAll({ where:{userId: userId}, include: [users, user_rrr ], order:[['id', 'DESC']]})
+        return res.status(200).json(User_rrrsCode)
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
+}
 const getEnrolee_rrr_codeByUserId = async(req, res) =>{
     try{
         const userId = req.params.userId
@@ -114,6 +137,8 @@ module.exports = {
     addEnrolee_rrr_code,
     getEnrolee_rrr_codeByUserIdCode,
     addEnrolee_rrr_codes,
-    getEnrolee_rrr_codeCount
+    getEnrolee_rrr_codeCount,
+    getEnrolee_rrr_codeByUser_rrrId,
+    getEnrolee_rrr_codeByUserIdAll
     
 }
