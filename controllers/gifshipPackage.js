@@ -98,12 +98,12 @@ const deleteGifshipPackage = async(req, res) =>{
         const ress = await gifshipPackage.findOne({ where:{id : GifshipPackageId}})
         ress.name = name
         ress.amount= amount
-
         ress.userId = userId
         ress.gifshipTypeId = gifshipTypeId
         ress.gifshipId = gifshipId
         ress.qty = qty
         ress.duration= duration
+        ress.maxNumber = maxNumber
         ress.save()
         return res.status(200).json(ress)
     }
