@@ -10,7 +10,7 @@ const getHmos = async(req, res) =>{
             include: [users,country,regions,states,lga,ward], 
             order:[['name','ASC'], ['code','ASC']]
             })
-        return res.status(200).json(data)
+        return res.status(200).json(data);
     }
     catch(err){
         return res.status(501).json(err.message)
