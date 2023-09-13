@@ -10,14 +10,14 @@ module.exports = {
      * */ 
  
     await queryInterface.bulkInsert('role_permissions', [
-      { id: 56,
+      { id: 60,
          
      roleId: 1,
      permissionId: 55,
       createdAt: '2023-07-31 06:51:23',
        updatedAt: '2023-07-31 06:51:23'
     },
-    { id: 57,
+    { id: 61,
      roleId: 1,
      permissionId: 56,
       createdAt: '2023-07-31 06:51:23',

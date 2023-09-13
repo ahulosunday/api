@@ -6,13 +6,13 @@ module.exports = {
  
     await queryInterface.bulkInsert('permissions', [
       
-      { id:55,
+      { id:65,
         name: 'VIEW_USERS',
         description:"Can view users",
         createdAt: '2023-09-12 06:51:23',
        updatedAt: '2023-09-12 06:51:23'
       },
-      { id:56,
+      { id:66,
         name: 'DEACTIVATE_USERS',
         description:"Can deactivate users",
         createdAt: '2023-09-12 06:51:23',
