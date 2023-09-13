@@ -88,6 +88,22 @@ const changePassword = async(req, res)=>{
 
     }
 }
+const ResetPassword = async(req, res)=>{
+    try{
+       
+        const id = req.params.id
+      const salt = bcrypt.genSaltSync(10)
+      const hashedPassword = bcrypt.hashSync(req.body.password, salt)
+      const userlist = await users.findOne({ where: {id: id, username: req.body.username} })
+       userlist.password = hashedPassword
+       userlist.save()
+      return res.status(200).json(userlist)      
+    }
+    catch(err){
+        return res.status(500).json(err)
+
+    }
+}
 const changePassport = async(req, res)=>{
     try{
        
@@ -136,5 +152,6 @@ module.exports = {
     ActivateUser,
     changePassport,
     getUsersPaging,
-    BulkcreateUser
+    BulkcreateUser,
+    ResetPassword
 }
