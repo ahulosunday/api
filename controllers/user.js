@@ -114,8 +114,21 @@ const findUserByUsername = async(req, res)=>{
 
     }
 }
+const findUserByEmail = async(req, res)=>{
+    try{
+       
+        const email = req.params.email
+      const userlist = await users.findOne({ where: {email: email} })
+      return res.status(200).json(userlist)     
+    }
+    catch(err){
+        return res.status(500).json(err)
+
+    }
+}
 
 module.exports = {
+    findUserByEmail,
     findUserByUsername,
     createUser,
     findAllUser,

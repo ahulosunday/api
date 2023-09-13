@@ -42,6 +42,7 @@ router.post('/users/bulk', requireJsonContent, user.BulkcreateUser);
 router.put('/changepassword/:id', requireJsonContent, user.changePassword);
 router.get('/users', user.findAllUser);
 router.get('/findUserByUsername/:username/1/1/1/1', user.findUserByUsername);
+router.get('/find/email/1/:email/1/1/1/1', user.findUserByEmail);
 router.get('/users/:page/:per_page/0/1', user.getUsersPaging);
 router.put('/activate/:id/', requireJsonContent, user.ActivateUser)
 router.put('/upload/:id/change', requireJsonContent, user.changePassport)
