@@ -67,6 +67,19 @@ const ActivateUser = async (req, res) => {
         return res.status(500).json({ err: err })
     }
 }
+const DeactivateUser = async (req, res) => {
+    
+    try {
+            const id = req.params.id
+        const user = await users.findOne({where:{id: id}});
+        user.isActive = 0;
+        user.save()
+        return res.status(201).json(user);
+    } catch (err) {
+        return res.status(500).json({ err: err })
+    }
+}
+//
 const changePassword = async(req, res)=>{
     try{
        
@@ -150,6 +163,7 @@ module.exports = {
     findAllUser,
     changePassword,
     ActivateUser,
+    DeactivateUser,
     changePassport,
     getUsersPaging,
     BulkcreateUser,

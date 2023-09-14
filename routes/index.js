@@ -46,6 +46,7 @@ router.get('/findUserByUsername/:username/1/1/1/1', user.findUserByUsername);
 router.get('/find/email/1/:email/1/1/1/1', user.findUserByEmail);
 router.get('/users/:page/:per_page/0/1', user.getUsersPaging);
 router.put('/activate/:id/', requireJsonContent, user.ActivateUser)
+router.put('/deactivate/:id/1/1', user.DeactivateUser)
 router.put('/upload/:id/change', requireJsonContent, user.changePassport)
 router.post('/sendmail/user/auth/email/send', send.send)
 
@@ -81,7 +82,8 @@ router.delete('/user-rrr/:id/', user_rrr.deleteUser_rrr)
 router.put('/user-rrr/:id/', requireJsonContent, user_rrr.updateUser_rrr)
 router.get('/user-rrr/rrr/:id/', user_rrr.getUser_rrrByRRR)
 router.get('/:userId/user-rrr/getuserid/rrr/rrr/', user_rrr.getAllByUserId )
-
+router.get('/:sdate/:edate/get-exp/exp/0/1', user_rrr.getUser_rrrByExpired )
+//
 //====================================
 router.get('/codes/', requireJsonContent, enrolee_rrr_code.getEnrolee_rrr_codes);
 router.get('/codes/:user_rrrId/code/rrr/', enrolee_rrr_code.getEnrolee_rrr_codeCount);

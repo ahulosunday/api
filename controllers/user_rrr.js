@@ -1,7 +1,7 @@
 const { user_rrr, users, gifship, gifshiptype, gifshipPackage, enrolee_rrr_code } = require('../models');
 const jwt = require('jsonwebtoken')
 const {getPagination, getPagingData} = require('../helpers/paging')
-
+const { Op } = require('sequelize');
 
 
 const getUser_rrrs = async(req, res) =>{
@@ -77,7 +77,26 @@ const getUser_rrrByRRR =async(req, res) =>{
 const getUser_rrrByUserId =async(req, res) =>{
    try{
         const userId = req.params.userId
-        const User_rrrs = await user_rrr.findAll({include: [users,gifship, gifshiptype, gifshipPackage ], where:{userId : userId, activated: 1} })
+        const User_rrrs = await user_rrr.findAll({
+            include: [users,gifship, gifshiptype, gifshipPackage ], 
+            where:{userId : userId, activated: 1} })
+        return res.status(200).json(User_rrrs)
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
+}
+const getUser_rrrByExpired =async(req, res) =>{
+   try{
+        const startedDate = new Date(req.params.sdate);
+        const endDate = new Date(req.params.edate);
+
+      const User_rrrs = await  user_rrr.findAll({
+        where : { expired_date : {[Op.between] : [startedDate , endDate ]}},
+         include: [users, gifship, gifshiptype, gifshipPackage ]
+        })
+       
         return res.status(200).json(User_rrrs)
     }
     catch(err){
@@ -171,7 +190,8 @@ module.exports = {
     getUser_rrrByRRR,
     getUser_rrrByUserId,
     getUser_rrrsPaging,
-    getAllByUserId
+    getAllByUserId,
+    getUser_rrrByExpired
     
     
 }

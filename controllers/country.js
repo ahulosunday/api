@@ -16,7 +16,7 @@ const getCountrys = async(req, res) =>{
 }
 const getAllCountry = async(req, res)=>{
     try{
-        const  page =  req.params.page
+        const  page =  req.params.page;
         const per_page = req.params.per_page
          const { limit, offset } = getPagination(page, per_page)
         const data = await country.findAndCountAll({ 
