@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({users, country, states, hospital, gform}) {
       // define association 
-      this.belongsTo(users,{foreignKey: 'userId'})
+      this.belongsTo(users,{foreignKey: 'userId'});
       this.belongsTo(country,{foreignKey: 'countryId'})
       //this.hasMany(states, { foreignKey: 'regionId'})
       //this.hasMany(hospital,{foreignKey: 'regionId'})
