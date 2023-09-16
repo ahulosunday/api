@@ -19,6 +19,21 @@ const getUser_rrrs = async(req, res) =>{
     }
 
 }
+const getUser_rrrsByNotActivated = async(req, res) =>{
+    try{
+       
+        const data = await user_rrr.findAll({ where:{activated: 0},
+            include: [users,gifship, gifshiptype, gifshipPackage ]
+           
+            })
+         
+        return res.status(200).json(data)
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
+}
 
 const getUser_rrrsPaging = async(req, res) =>{
     try{
@@ -191,7 +206,8 @@ module.exports = {
     getUser_rrrByUserId,
     getUser_rrrsPaging,
     getAllByUserId,
-    getUser_rrrByExpired
+    getUser_rrrByExpired,
+    getUser_rrrsByNotActivated
     
     
 }

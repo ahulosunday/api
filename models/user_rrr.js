@@ -25,18 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         validate:{
           notEmpty: true,
           notNull:true
-          /*
-          len:{
-            args:[1,2],
-            msg: "Invalid NIN number"
-          },
-          isNumeric:{
-            args: true,
-            msg: "NIN must be numeric"
-          }
-          */
-          
-          
+                 
         }
         },
     userId: { 
