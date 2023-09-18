@@ -190,6 +190,7 @@ const bulkUpdate = async(req, res) =>{
     try{
         var data = []
          data = req.body
+         console.log(data)
        data.map( async (item)=>{
        const ress = await user_rrr.findOne({ where:{id : item.id}})
         ress.activated = 1
