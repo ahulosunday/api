@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(gifship, {foreignKey: 'gifshipId'})
       this.belongsTo(gifshiptype, {foreignKey: 'gifshipTypeId'})
       this.belongsTo(gifshipPackage, {foreignKey: 'gifshipPackageId'})
+      users.hasMany(this)
     }
   }
   user_rrr.init({
