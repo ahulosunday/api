@@ -79,7 +79,6 @@ const DeactivateUser = async (req, res) => {
         return res.status(500).json({ err: err })
     }
 }
-//
 const changePassword = async(req, res)=>{
     try{
        
@@ -156,6 +155,18 @@ const findUserByEmail = async(req, res)=>{
     }
 }
 
+const deleteUserById = async(req, res) =>{
+    try{
+       
+        const UserId = req.params.id
+        const delete_user = await users.destroy({where:{id: UserId}})
+        return res.status(200).json(delete_user);    
+        
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+}
 module.exports = {
     findUserByEmail,
     findUserByUsername,
@@ -167,5 +178,6 @@ module.exports = {
     changePassport,
     getUsersPaging,
     BulkcreateUser,
-    ResetPassword
+    ResetPassword,
+    deleteUserById
 }

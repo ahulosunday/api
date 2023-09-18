@@ -24,8 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     allowNull:false,
     validate:{
       notEmpty: true,
-      notNull: true,
-      isAlphanumeric: true
+      notNull: true
     }
     
     },
@@ -33,8 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     allowNull:false,
     validate:{
       notEmpty: true,
-      notNull: true,
-      isAlphanumeric: true
+      notNull: true
     }
     
     },
@@ -42,24 +40,24 @@ module.exports = (sequelize, DataTypes) => {
     allowNull:false,
     validate:{
       notEmpty: true,
-      notNull: true,
-     isInt:true
+      notNull: true
+    
     }
     },
     regionId:{type: DataTypes.INTEGER,
     allowNull:false,
     validate:{
       notEmpty: true,
-      notNull: true,
-      isInt:true
+      notNull: true
+      
     }
     },
     userId:{type: DataTypes.INTEGER,
     allowNull:false,
     validate:{
       notEmpty: true,
-      notNull: true,
-      isInt: true
+      notNull: true
+      
     }
     },
   }, {

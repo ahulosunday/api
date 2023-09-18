@@ -48,6 +48,7 @@ router.get('/users/:page/:per_page/0/1', user.getUsersPaging);
 router.put('/activate/:id/', requireJsonContent, user.ActivateUser)
 router.put('/deactivate/:id/1/1', user.DeactivateUser)
 router.put('/upload/:id/change', requireJsonContent, user.changePassport)
+router.delete('/users/:id', user.deleteUserById)
 router.post('/sendmail/user/auth/email/send', send.send)
 
 //========================================================
@@ -76,10 +77,12 @@ router.post('/role-permissions/', requireJsonContent, role_perm.addRolesPermissi
 router.get('/user-rrr/', user_rrr.getUser_rrrs);
 router.get('/user-rrr/:page/:per_page/0', user_rrr.getUser_rrrsPaging);
 router.get('/user-rrr/:id/', user_rrr.getUser_rrr)//
-router.get('/user-rrr/:userId/0/', user_rrr.getUser_rrrByUserId)
+router.get('/user-rrr/:userId/0/', user_rrr.getUser_rrrByUserId)//
+router.get('/rrr/:userId/0/0/1', user_rrr.getUser_rrrByUserIdAll)
 router.post('/user-rrr/', requireJsonContent, user_rrr.addUser_rrr)
 router.delete('/user-rrr/:id/', user_rrr.deleteUser_rrr)
 router.put('/user-rrr/:id/', requireJsonContent, user_rrr.updateUser_rrr)
+router.put('/user-rrr/', requireJsonContent, user_rrr.bulkUpdate)
 router.get('/user-rrr/rrr/:id/', user_rrr.getUser_rrrByRRR)
 router.get('/:userId/user-rrr/getuserid/rrr/rrr/', user_rrr.getAllByUserId )
 router.get('/:sdate/:edate/get-exp/exp/0/1', user_rrr.getUser_rrrByExpired )

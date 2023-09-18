@@ -34,7 +34,6 @@ const getUser_rrrsByNotActivated = async(req, res) =>{
     }
 
 }
-
 const getUser_rrrsPaging = async(req, res) =>{
     try{
         const  page =  req.params.page
@@ -53,7 +52,6 @@ const getUser_rrrsPaging = async(req, res) =>{
     }
 
 }
-
 const getAllByUserId = async (req, res) =>{
     try{
         const userId = req.params.userId;
@@ -64,8 +62,6 @@ const getAllByUserId = async (req, res) =>{
      return res.status(500).json(err.message)
     }
 }
-
-
 const getUser_rrr =async(req, res) =>{
    try{
         const User_rrrId = req.params.id
@@ -77,7 +73,6 @@ const getUser_rrr =async(req, res) =>{
     }
 
 }
-
 const getUser_rrrByRRR =async(req, res) =>{
    try{
         const rrr_number = req.params.id
@@ -95,6 +90,19 @@ const getUser_rrrByUserId =async(req, res) =>{
         const User_rrrs = await user_rrr.findAll({
             include: [users,gifship, gifshiptype, gifshipPackage ], 
             where:{userId : userId, activated: 1} })
+        return res.status(200).json(User_rrrs)
+    }
+    catch(err){
+        return res.status(200).json(err.message)
+    }
+
+}
+const getUser_rrrByUserIdAll =async(req, res) =>{
+   try{
+        const userId = req.params.userId
+        const User_rrrs = await user_rrr.findAll({
+            include: [users,gifship, gifshiptype, gifshipPackage ], 
+            where:{userId : userId} })
         return res.status(200).json(User_rrrs)
     }
     catch(err){
@@ -125,7 +133,7 @@ try{
     const { rrr_number,	userId,	activated,	activatedby,	amount,	duration,	gifshipId,	gifshipTypeId,	gifshipPackageId,	activated_date,	expired_date, maxNumber, minNumber, authNumber} = req.body
     const q = await user_rrr.findOne({ where:{userId:userId, activated: 1}})
     if(q){
-    q.activated = false
+    q.activated = 0
     q.save()
     }
    const col = await user_rrr.create({ rrr_number:rrr_number,	userId:userId,	activated:activated,	activatedby:activatedby,	amount:amount,	duration:duration,	gifshipId:gifshipId,	gifshipTypeId:gifshipTypeId,	gifshipPackageId:gifshipPackageId,	activated_date:activated_date,	expired_date:expired_date, maxNumber:maxNumber, minNumber:minNumber, authNumber: authNumber});
@@ -156,7 +164,7 @@ const deleteUser_rrr = async(req, res) =>{
    try{
         const User_rrrId = req.params.id
        const { rrr_number,	userId,	activated,	activatedby,	amount,	duration,	gifshipId,	gifshipTypeId,	gifshipPackageId,	activated_date,	expired_date, maxNumber, minNumber, authNumber: authNumber} = req.body
-        const ress = await country.findOne({ where:{id : User_rrrId}})
+        const ress = await user_rrr.findOne({ where:{id : User_rrrId}})
         ress.rrr_number = rrr_number
         ress.userId= userId
         ress.activated = activated
@@ -176,6 +184,25 @@ const deleteUser_rrr = async(req, res) =>{
     }
     catch(err){
         return res.status(200).json(err.message)
+    }
+}
+const bulkUpdate = async(req, res) =>{
+    try{
+        var data = []
+         data = req.body
+       data.map( async (item)=>{
+       const ress = await user_rrr.findOne({ where:{id : item.id}})
+        ress.activated = 1
+        ress.activatedby = item.activatedby
+        ress.activated_date =item.activated_date
+        ress.expired_date = item.expired_date
+        ress.save()
+      })
+   
+ return res.status(200).json(data.length)
+    }
+    catch(err){
+         return res.status(500).json(err.message)
     }
 }
 const activateUser_rrr = async(req, res) =>{
@@ -207,7 +234,9 @@ module.exports = {
     getUser_rrrsPaging,
     getAllByUserId,
     getUser_rrrByExpired,
-    getUser_rrrsByNotActivated
+    getUser_rrrsByNotActivated,
+    getUser_rrrByUserIdAll,
+    bulkUpdate
     
     
 }
