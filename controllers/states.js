@@ -15,7 +15,7 @@ const getStates = async(req, res) =>{
         return res.status(200).json(data)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -33,7 +33,7 @@ const getStatesPaging = async(req, res) =>{
         return res.status(200).json(response)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -46,7 +46,7 @@ const getState =async(req, res) =>{
         return res.status(200).json(States)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -58,7 +58,7 @@ try{
     return res.status(200).json(col)
 }
 catch(err){
-    return res.status(500).json({ err: err.message })
+    return res.status(500).json({ err: err.errors[0].message} )
 }
   
    
@@ -68,12 +68,17 @@ const deleteState = async(req, res) =>{
     try{
        
         const StateId = req.params.id
-       const ress = await states.destroy({ where:{id : StateId}})
-        return res.status(200).json(ress);    
+       await states.destroy({ where:{id : StateId}}).then(resp=>{
+        return res.status(200).json(ress); 
+       }).catch(err=>{
+         return res.status(500).json({ err: 'Unable to delete the selected State, another record(s) is using it'})
+        
+       })
+           
         
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.errors[0].message})
     }
 }
 
@@ -88,10 +93,15 @@ const deleteState = async(req, res) =>{
         ress.userId = userId
         ress.regionId = regionId
         ress.save()
-        return res.status(200).json(ress)
+       .then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(500).json({ err: err.errors[0].message})
+      })
+
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 }
 const loadStateswithRegion = async(req, res) =>{
@@ -101,7 +111,7 @@ const loadStateswithRegion = async(req, res) =>{
         return res.status(200).json(state)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }

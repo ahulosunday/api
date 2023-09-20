@@ -7,7 +7,7 @@ const getRolesPermissionAll = async(req, res) =>{
         return res.status(200).json(perrRole)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -18,7 +18,7 @@ const getRolesPermissions = async(req, res) =>{
         return res.status(200).json(perrRole)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -29,7 +29,7 @@ const getRolePemissionId = async(req, res) =>{
         return res.status(200).json(perrRole)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -39,7 +39,7 @@ try{
   return res.status(200).json(q)
 }
 catch(err){
-    return res.status(500).json({ err: err.message })
+    return res.status(500).json({ err: { err: err.errors[0].message} })
 }
   
    
@@ -53,7 +53,7 @@ const deleteRolePemissions = async(req, res) =>{
         return res.status(200).json(ress)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 }
 const deleteRolePemissionRoleId  = async(req, res) =>{
@@ -64,7 +64,7 @@ const deleteRolePemissionRoleId  = async(req, res) =>{
         return true//res.status(200).json(ress)
     }
     catch(err){
-       return false //res.status(200).json(err.message)
+       return false //res.status(200).json({ err: err.errors[0].message})
     }
 
 }

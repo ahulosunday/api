@@ -54,8 +54,7 @@ module.exports = (sequelize, DataTypes) => {
       validate:{
         notEmpty:{msg: 'Password can not be empty'},
         notNull:true,
-      }
-         
+      } 
     },
     email:{
       type:  DataTypes.STRING(40),
@@ -63,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate:{
         notEmpty:{msg: 'Email can not be empty'},
-        isEmail: true,
+        isEmail: {msg: 'Invalid email address'},
 
       }
       },

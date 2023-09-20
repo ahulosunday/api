@@ -15,7 +15,7 @@ const createUser = async (req, res) => {
         const user = await users.create({username:username, password:hashedPassword, email:email,uiid:uiid, roleid:roleid, imgurl: imgurl, surname: surname, othername: othername, phone: phone, isActive: isActive});
         return res.status(201).json({ user,});
     } catch (err) {
-        return res.status(500).json({ err: err })
+        return res.status(500).json({ err: err.errors[0].message})
     }
 }
 const BulkcreateUser = async (req, res) => {
@@ -24,7 +24,7 @@ const BulkcreateUser = async (req, res) => {
         const user = await users.bulkCreate(req.body);
         return res.status(201).json(user);
     } catch (err) {
-        return res.status(500).json({ err: err })
+        return res.status(500).json({ err: err.errors[0].message})
     }
 }
 const findAllUser = async (req, res) => {
@@ -34,7 +34,7 @@ const findAllUser = async (req, res) => {
         const user = await users.findAll({  order:[['surname', 'ASC'], ['othername', 'ASC']]});
         return res.status(201).json(user);
     } catch (err) {
-        return res.status(500).json({ err: err })
+        return res.status(500).json({ err: err.errors[0].message})
     }
 }
 
@@ -51,7 +51,7 @@ const getUsersPaging = async(req, res) =>{
         return res.status(200).json(response)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -62,9 +62,14 @@ const ActivateUser = async (req, res) => {
         const user = await users.findOne({where:{id: id}});
         user.isActive = 1;
         user.save()
-        return res.status(201).json(user);
+        .then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(200).json({ err: err.errors[0].message})
+      })
+
     } catch (err) {
-        return res.status(500).json({ err: err })
+        return res.status(500).json({ err: err.errors[0].message})
     }
 }
 const DeactivateUser = async (req, res) => {
@@ -74,9 +79,14 @@ const DeactivateUser = async (req, res) => {
         const user = await users.findOne({where:{id: id}});
         user.isActive = 0;
         user.save()
-        return res.status(201).json(user);
+       .then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(200).json({ err: err.errors[0].message})
+      })
+
     } catch (err) {
-        return res.status(500).json({ err: err })
+        return res.status(500).json({ err: err.errors[0].message})
     }
 }
 const changePassword = async(req, res)=>{
@@ -89,14 +99,14 @@ const changePassword = async(req, res)=>{
         if(await bcrypt.compare(req.body.cpassword, userlist.password)){
        userlist.password = hashedPassword
        userlist.save()
-      return res.status(200).json(userlist)
+        return res.status(200).json(userlist);
        }       
        
-   return res.status(501).json('Can not associate your current password with any user')
+   return res.status(501).json({err: 'Can not associate your current password with any user'})
 
     }
     catch(err){
-        return res.status(500).json(err)
+        return res.status(500).json({ err: err})
 
     }
 }
@@ -109,10 +119,15 @@ const ResetPassword = async(req, res)=>{
       const userlist = await users.findOne({ where: {id: id, username: req.body.username} })
        userlist.password = hashedPassword
        userlist.save()
-      return res.status(200).json(userlist)      
+     .then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(500).json({ err: err.errors[0].message})
+      })
+      
     }
     catch(err){
-        return res.status(500).json(err)
+        return res.status(500).json({ err: err.errors[0].message})
 
     }
 }
@@ -123,10 +138,15 @@ const changePassport = async(req, res)=>{
       const userlist = await users.findOne({ where: {id: id} })
        userlist.imgurl = req.body.imgurl
        userlist.save()
-      return res.status(200).json(userlist)     
+      .then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(200).json({ err: err.errors[0].message})
+      })
+     
     }
     catch(err){
-        return res.status(500).json(err)
+        return res.status(500).json({ err: err.errors[0].message})
 
     }
 }
@@ -138,7 +158,7 @@ const findUserByUsername = async(req, res)=>{
       return res.status(200).json(userlist)     
     }
     catch(err){
-        return res.status(500).json(err)
+        return res.status(500).json({ err: err.errors[0].message})
 
     }
 }
@@ -150,7 +170,7 @@ const findUserByEmail = async(req, res)=>{
       return res.status(200).json(userlist)     
     }
     catch(err){
-        return res.status(500).json(err)
+        return res.status(500).json({ err: err.errors[0].message})
 
     }
 }
@@ -159,12 +179,16 @@ const deleteUserById = async(req, res) =>{
     try{
        
         const UserId = req.params.id
-        const delete_user = await users.destroy({where:{id: UserId}})
-        return res.status(200).json(delete_user);    
+        await users.destroy({where:{id: UserId}}).then(delete_user=>{
+            return res.status(200).json(delete_user); 
+        }).catch(err=>{
+             return res.status(500).json({ err: 'Error occured, can not delete ...'})
+        })
+           
         
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.errors[0].message})
     }
 }
 module.exports = {

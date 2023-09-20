@@ -1,4 +1,4 @@
-const { hmo, users, country, regions, states,lga, ward } = require('../models');
+const { hmo,gform, users, country, regions, states,lga, ward } = require('../models');
 const jwt = require('jsonwebtoken')
 const {getPagination, getPagingData }= require('../helpers/paging')
 
@@ -13,7 +13,7 @@ const getHmos = async(req, res) =>{
         return res.status(200).json(data);
     }
     catch(err){
-        return res.status(501).json(err.message)
+       return res.status(500).json({ err: err.message})
     }
 
 }
@@ -31,7 +31,7 @@ const getHmoAll = async(req, res) =>{
         return res.status(200).json(response)
     }
     catch(err){
-        return res.status(501).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -48,7 +48,7 @@ const getHmo =async(req, res) =>{
         return res.status(200).json(Hmos)
     }
     catch(err){
-        return res.status(501).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -59,7 +59,7 @@ try{
     return res.status(200).json(col)
 }
 catch(err){
-    return res.status(500).json({ err: err.message })
+    return res.status(500).json({ err: err.errors[0].message})
 }
   
    
@@ -69,12 +69,22 @@ const deleteHmo = async(req, res) =>{
     try{
        
         const HmoId = req.params.id
-        const ress = await hmo.destroy({ where:{id : HmoId}})
-        return res.status(200).json(ress);    
+        const check = await gform.findOne({where:{hmoId: HmoId}})
+        if(check.length === 0){
+        await hmo.destroy({ where:{id : HmoId}}).then(ress=>{
+            return res.status(200).json(ress);
         
+        }).catch(err=>{
+             return res.status(500).json({ err: 'Unable to delete data already used'})
+        })
+
+    }
+    else{
+return res.status(500).json({ err: 'Unable to delete data already used'})
+    }
     }
     catch(err){
-        return res.status(501).json(err.message)
+       return res.status(500).json({ err: err.message})
     }
 }
 
@@ -96,10 +106,15 @@ const deleteHmo = async(req, res) =>{
         ress.wardId = wardId
         ress.types = types //
         ress.save()
-        return res.status(200).json(ress)
+        .then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(500).json({ err: err.errors[0].message})
+      })
+
     }
     catch(err){
-        return res.status(501).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 }
 

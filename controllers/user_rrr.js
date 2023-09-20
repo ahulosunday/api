@@ -12,10 +12,10 @@ const getUser_rrrs = async(req, res) =>{
            
             })
          
-        return res.status(200).json(data)
+        return res.status(500).json(data)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -30,7 +30,7 @@ const getUser_rrrsByNotActivated = async(req, res) =>{
         return res.status(200).json(data)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -48,7 +48,7 @@ const getUser_rrrsPaging = async(req, res) =>{
         return res.status(200).json(response)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -59,7 +59,7 @@ const getAllByUserId = async (req, res) =>{
         return res.status(200).json(qurey)
     }
     catch(err){
-     return res.status(500).json(err.message)
+     return res.status(500).json({ err: err.message})
     }
 }
 const getUser_rrr =async(req, res) =>{
@@ -69,7 +69,7 @@ const getUser_rrr =async(req, res) =>{
         return res.status(200).json(User_rrrs)
     }
     catch(err){
-        return res.status(200).json(err.message)
+       return res.status(500).json({ err: err.message})
     }
 
 }
@@ -80,7 +80,7 @@ const getUser_rrrByRRR =async(req, res) =>{
         return res.status(200).json(User_rrrs)
     }
     catch(err){
-        return res.status(200).json(err.message)
+       return res.status(500).json({ err: err.message})
     }
 
 }
@@ -93,7 +93,7 @@ const getUser_rrrByUserId =async(req, res) =>{
         return res.status(200).json(User_rrrs)
     }
     catch(err){
-        return res.status(200).json(err.message)
+       return res.status(500).json({ err: err.message})
     }
 
 }
@@ -106,7 +106,7 @@ const getUser_rrrByUserIdAll =async(req, res) =>{
         return res.status(200).json(User_rrrs)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -123,7 +123,7 @@ const getUser_rrrByExpired =async(req, res) =>{
         return res.status(200).json(User_rrrs)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -140,7 +140,7 @@ try{
     return res.status(200).json(col)
 }
 catch(err){
-    return res.status(500).json({ err: err.message });
+    return res.status(500).json({ err: err.errors[0].message} );
 }
   
    
@@ -151,13 +151,25 @@ const deleteUser_rrr = async(req, res) =>{
        // const token = req.cookies.access_token
        // if(!token) return res.status(401).json({err: "Not authenticated"})
         const User_rrrId = req.params.id
-        const delete_user_rrr = await enrolee_rrr_code.destroy({where:{user_rrrId: User_rrrId}})
-        const ress = await user_rrr.destroy({ where:{id : User_rrrId}})
-        return res.status(200).json(ress);    
+        await enrolee_rrr_code.destroy({where:{user_rrrId: User_rrrId}})
+        .then( async resp =>{
+             await user_rrr.destroy({ where:{id : User_rrrId}})
+             .then(ress=>{
+                return res.status(200).json(ress);  
+             })
+             .catch(errs=>{
+                return res.status(500).json({ err: 'Error occured, can not delete ...'})
+             })
+        }).catch(err=>{
+            return res.status(500).json({ err: 'Error occured ...'})
+        })
+       
+
+          
         
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.errors[0].message})
     }
 }
  const updateUser_rrr = async(req, res) =>{
@@ -180,10 +192,15 @@ const deleteUser_rrr = async(req, res) =>{
         ress.maxNumber = maxNumber
         ress.authNumber = authNumber
         ress.save()
-        return res.status(200).json(ress)
+        .then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(500).json({ err: err.errors[0].message})
+      })
+
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.errors[0].message})
     }
 }
 const bulkUpdate = async(req, res) =>{
@@ -203,7 +220,7 @@ const bulkUpdate = async(req, res) =>{
  return res.status(200).json(data.length)
     }
     catch(err){
-         return res.status(500).json(err.message)
+         return res.status(500).json({ err: err.errors[0].message})
     }
 }
 const activateUser_rrr = async(req, res) =>{
@@ -219,7 +236,7 @@ const activateUser_rrr = async(req, res) =>{
         return res.status(200).json(ress)
    }
    catch(err){
-     return res.status(200).json(err.message)
+     return res.status(500).json({ err: err.errors[0].message})
    }
 }
 

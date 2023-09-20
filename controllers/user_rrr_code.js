@@ -11,7 +11,7 @@ const getEnrolee_rrr_code = async(req, res) =>{
         return res.status(200).json(User_rrrsCode)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.errors[0].message})
     }
 
 }
@@ -24,7 +24,7 @@ const getEnrolee_rrr_codeCount = async(req, res) =>{
         return res.status(200).json(User_rrrsCode)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.errors[0].message})
     }
 
 }
@@ -35,7 +35,7 @@ const getEnrolee_rrr_codeByCode = async(req, res) =>{
         return res.status(200).json(User_rrrsCode)
     }
     catch(err){
-        return res.status(501).json(err.message)
+        return res.status(501).json({ err: err.errors[0].message})
     }
 
 }
@@ -47,7 +47,7 @@ const getEnrolee_rrr_codeByUser_rrrId = async(req, res) =>{
         return res.status(200).json(User_rrrsCode)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.errors[0].message})
     }
 
 }
@@ -58,7 +58,7 @@ const getEnrolee_rrr_codeByUserIdAll = async(req, res) =>{
         return res.status(200).json(User_rrrsCode)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.errors[0].message})
     }
 
 }
@@ -69,7 +69,7 @@ const getEnrolee_rrr_codeByUserId = async(req, res) =>{
         return res.status(200).json(User_rrrsCode)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.errors[0].message})
     }
 
 }
@@ -81,7 +81,7 @@ const getEnrolee_rrr_codeByUserIdCode = async(req, res) =>{
         return res.status(200).json(User_rrrsCode)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.errors[0].message})
     }
 
 }
@@ -91,7 +91,7 @@ const getEnrolee_rrr_codes = async(req, res) =>{
         return res.status(200).json(User_rrrsCode)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -103,7 +103,7 @@ const addEnrolee_rrr_code = async(req, res) =>{
         return res.status(200).json(User_rrrs)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -113,7 +113,7 @@ try{
   return res.status(200).json(q)
 }
 catch(err){
-    return res.status(500).json({ err: err.message })
+    return res.status(500).json({ err: err.errors[0].message})
 }    
 }
 const deleteEnrolee_rrr_codes = async(req, res) =>{

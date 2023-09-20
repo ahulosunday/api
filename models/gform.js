@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique:true,
       validate:{
-        notEmpty: true,
+        notEmpty:{msg: 'Reg. code can not be empty'},
         notNull: true,
       }
       
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate:{
-        notEmpty: true,
+        notEmpty:{msg: 'Surname can not be empty'},
         notNull: true,
       }
       
@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate:{
-        notEmpty: true,
+        notEmpty:{msg: 'Gender can not be empty'},
         notNull: true,
       }
       
@@ -71,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
       validate:{
-        notEmpty: true,
+        notEmpty:{msg: 'Date of birth can not be empty'},
         notNull: true,
       }
       
@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate:{
-        notEmpty: true,
+        notEmpty:{msg: 'Marital can not be empty'},
         notNull: true,
       }
       
@@ -90,7 +90,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: false,
       validate:{
-        notEmpty: true,
+        notEmpty:{msg: 'Phone number required'},
         notNull: true,
       }
       
@@ -100,7 +100,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate:{
-        notEmpty: true,
+        notEmpty:{msg: 'Email required'},
         notNull: true,
       
       }
@@ -110,7 +110,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate:{
-        notEmpty: true,
+         notEmpty:{msg: 'Address required'},
         notNull: true,
       }
       },

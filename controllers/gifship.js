@@ -7,7 +7,7 @@ const createGifship = async (req, res) => {
         try {
         
     } catch (err) {
-       return res.json(err)
+       return res.json({ err: err.errors[0].message})
     }
 }
 const GifshipbyId = async(req, res )=>{
@@ -17,7 +17,7 @@ const GifshipbyId = async(req, res )=>{
         return res.status(200).json(gif)
     }
     catch(err){
-     return res.status(200).json(err)
+     return res.status(500).json({ err: err.message})
     }
 }
 const getGifship = async(req, res )=>{
@@ -31,14 +31,19 @@ const getGifship = async(req, res )=>{
            
     }
     catch(err){
-     return res.status(200).json(err)
+     return res.status(500).json({ err: err.message})
     }
 }
 
 const createGifshipType = async(req, res) =>{
+    try{
     const {name,	gifshipId,	userId } = req.body
  const gType = await gifshiptype.create({name,	gifshipId,	userId})
  return res.status(200).json(gType)
+    }
+    catch(err){
+         return res.status(500).json({ err: err.errors[0].message})
+    }
 }
 const getGifshipList = async(req, res )=>{
     try{
@@ -54,18 +59,22 @@ const getGifshipList = async(req, res )=>{
         return res.status(200).json(response)
     }
     catch(err){
-     return res.status(200).json(err)
+     return res.status(500).json({ err: err.message})
     }
 }
 const getGifshipDelete = async(req, res )=>{
     try{
         const id  = req.params.id
        
-        const gif = await gifshiptype.destroy({ where:{id: id }});
-        return res.status(200).json("One record deleted successfully");
+        await gifshiptype.destroy({ where:{id: id }}).then(resp=>{
+             return res.status(200).json("One record deleted successfully");
+        }).catch(err=>{
+             return res.status(500).json({ err: "Error occured. Can not delete data already used"})
+        })
+       
     }
     catch(err){
-     return res.status(200).json(err)
+     return res.status(500).json({ err: err.message})
     }
 }
 const GifshipEdit = async(req, res )=>{
@@ -75,7 +84,7 @@ const GifshipEdit = async(req, res )=>{
         return res.status(200).json(gif);
     }
     catch(err){
-     return res.status(200).json(err)
+     return res.status(200).json({ err: err.errors[0].message})
     }
 }
 //Gifshipone
@@ -86,7 +95,7 @@ const Gifshipone = async(req, res )=>{
         return res.status(200).json(gif);
     }
     catch(err){
-     return res.status(200).json(err)
+     return res.status(200).json({ err: err.message})
     }
 }
 //============GifshipUpdate
@@ -99,12 +108,16 @@ const GifshipUpdate = async(req, res )=>{
       gif.gifshipId = gifshipId, 
       gif.userId = userId
 
-      await gif.save()
+      await gif.save().then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(500).json({ err: err.errors[0].message})
+      })
 
-        return res.status(200).json(gif);
+        
     }
     catch(err){
-     return res.status(200).json(err)
+     return res.status(200).json({ err: err.message})
     }
 }
 

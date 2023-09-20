@@ -15,7 +15,7 @@ const getWards = async(req, res) =>{
         return res.status(200).json(data)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.errors[0].message})
     }
 
 }
@@ -33,12 +33,10 @@ const getWardsPaging = async(req, res) =>{
         return res.status(200).json(response)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.errors[0].message})
     }
 
 }
-
-
 const getWard =async(req, res) =>{
    try{
         const WardId = req.params.id
@@ -46,7 +44,7 @@ const getWard =async(req, res) =>{
         return res.status(200).json(Ward)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -58,7 +56,7 @@ try{
     return res.status(200).json(col)
 }
 catch(err){
-    return res.status(500).json({ err: err.message })
+    return res.status(500).json({ err: err.errors[0].message})
 }
   
    
@@ -68,12 +66,17 @@ const deleteWard = async(req, res) =>{
     try{
        
         const WardId = req.params.id
-        const ress = await ward.destroy({ where:{id : WardId}})
-        return res.status(200).json(ress);    
+        await ward.destroy({ where:{id : WardId}}).then(resp=>{
+            return res.status(200).json(resp);   
+        })
+        .catch(err=>{
+            return res.status(500).json({ err: 'Error occured, can not delete ward already used'})
+        })
+         
         
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 }
 
@@ -90,10 +93,15 @@ const deleteWard = async(req, res) =>{
         ress.regionId = regionId
         ress.lgaId = lgaId
         ress.save()
-        return res.status(200).json(ress)
+        .then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(500).json({ err: err.errors[0].message})
+      })
+
     }
     catch(err){
-        return res.status(200).json(error.message)
+       return res.status(500).json({ err: err.errors[0].message})
     }
 }
 const loadWardswithLga = async(req, res) =>{
@@ -103,7 +111,7 @@ const loadWardswithLga = async(req, res) =>{
         return res.status(200).json(lga)
     }
     catch(error){
-        return res.status(200).json(error.message)
+       return res.status(500).json({ err: err.errors[0].message})
     }
 
 }

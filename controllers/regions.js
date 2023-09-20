@@ -15,7 +15,7 @@ const getRegions = async(req, res) =>{
         return res.status(200).json(data)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -33,7 +33,7 @@ const getRegionsPaging = async(req, res) =>{
         return res.status(200).json(response)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -44,12 +44,10 @@ const loadRegions = async(req, res) =>{
         return res.status(200).json(Regions)
     }
     catch(err){
-        return res.status(200).json(err.message);
+        return res.status(200).json({ err: err.errors[0].message});
     }
 
 }
-
-
 const getRegion =async(req, res) =>{
    try{
         const RegionId = req.params.id
@@ -57,7 +55,7 @@ const getRegion =async(req, res) =>{
         return res.status(200).json(Regions)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -69,20 +67,25 @@ try{
     return res.status(200).json(col)
 }
 catch(err){
-    return res.status(500).json({ err: err.message })
+   
+    return res.status(500).json({ err: err.errors[0].message})
 } 
 }
-
 const deleteRegion = async(req, res) =>{
     try{
         
         const RegionId = req.params.id
-        const ress = await regions.destroy({ where:{id : RegionId}})
-        return res.status(200).json(ress);    
+        await regions.destroy({ where:{id : RegionId}}).then(resp=>{
+            return res.status(200).json(resp);
+        })
+        .catch(err=>{
+            return res.status(200).json({err: 'Unable to delete the selected region'})
+        })
+            
         
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 }
 
@@ -95,10 +98,15 @@ const deleteRegion = async(req, res) =>{
         ress.countryId = countryId
         ress.userId = userId
         ress.save()
-        return res.status(200).json(req.body)
+       .then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(200).json({ err: err.errors[0].message})
+      })
+
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 }
 

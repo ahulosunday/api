@@ -40,8 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     unique:true,
     validate:{
       notEmpty:true,
-      notNull:true,
-      len:[11,11]
+      notNull:true
 
     }
     },

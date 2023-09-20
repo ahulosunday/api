@@ -10,7 +10,7 @@ const getCountrys = async(req, res) =>{
          return res.status(200).json(data);
     }
     catch(err){
-        return res.status(500).json(err.message)
+        return res.status(500).json({err: err.errors[0].message})
     }
 
 }
@@ -28,7 +28,7 @@ const getAllCountry = async(req, res)=>{
         return res.status(200).json(response)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({err: err.errors[0].message})
     }
 
 
@@ -42,7 +42,7 @@ const getCountry =async(req, res) =>{
         return res.status(200).json(Countrys)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({err: err.errors[0].message})
     }
 
 }
@@ -54,7 +54,7 @@ try{
     return res.status(200).json(col)
 }
 catch(err){
-    return res.status(500).json({ err: err.message })
+    return res.status(500).json( {err: err.errors[0].message} )
 }
   
    
@@ -65,18 +65,23 @@ const deleteCountry = async(req, res) =>{
         //const token = req.cookies.access_token
        // if(!token) return res.status(401).json("Not authenticated")
         const CountryId = req.params.id
-             
-        const ress = await country.destroy({ where:{id : CountryId}})
-        return res.status(200).json(token);    
+        await country.destroy({ where:{id : CountryId}})
+        .then(resp=>{
+           return res.status(200).json(resp); 
+        })
+        .catch(errs=>{
+            return res.status(500).json({err: 'Unable to delete the selected Country, another record(s) is using it.'}); 
+        })
+           
         
     }
     catch(err){
-        return res.status(200).json(err.message);
+       return res.status(200).json({err: err.errors[0].message});
     }
 }
 
  const updateCountry = async(req, res) =>{
-   try{
+  try{
         const CountryId = req.params.id
         const {name, code, shortname,currency, userId } = req.body
         const ress = await country.findOne({ where:{id : CountryId}})
@@ -85,12 +90,17 @@ const deleteCountry = async(req, res) =>{
         ress.shortname = shortname
         ress.currency = currency
         ress.userId = userId
-        ress.save()
-        return res.status(200).json(ress)
-    }
-    catch(err){
-        return res.status(200).json(err.message);
-    }
+        ress.save().then(resp=>{
+           return (res.status(200).json(resp))
+        }).catch(err=>{
+            return res.status(500).json({err:err.errors[0].message})
+        
+        })
+  }
+  catch(err){
+    return res.status(200).json({err:err.errors[0].message})
+  }  
+   
 }
 
 module.exports = {

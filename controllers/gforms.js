@@ -14,7 +14,7 @@ const getGforms = async(req, res) =>{
            return res.status(200).json(data)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({err: err.message})
     }
 
 }
@@ -32,7 +32,7 @@ const getGformsPaging = async(req, res) =>{
            return res.status(200).json(response)
     }
     catch(err){
-        return res.status(200).json(err.message)
+         return res.status(500).json({err: err.message})
     }
 
 }
@@ -46,7 +46,7 @@ const getGformuserId = async(req, res) =>{
         return res.status(200).json(Gform)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({err: err.message})
     }
 
 }
@@ -58,7 +58,7 @@ const getGform =async(req, res) =>{
         return res.status(200).json(Gform)
     }
     catch(err){
-        return res.status(200).json(err.message)
+         return res.status(500).json({err: err.message})
     }
 
 }
@@ -70,7 +70,7 @@ try{
     return res.status(200).json(col)
 }
 catch(err){
-    return res.status(500).json({ err: err.message })
+    return res.status(500).json({ err: err.errors[0].message})
 }
   
    
@@ -95,7 +95,7 @@ const deleteGform = async(req, res) =>{
         
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({err: err.errors[0].message})
     }
 }
 
@@ -135,11 +135,16 @@ const deleteGform = async(req, res) =>{
         ress.residentWard = residentWard
         ress.registeredWard	= registeredWard
         ress.wardOrigin = wardOrigin
-        ress.save()
-        return res.status(200).json(ress)
+        ress.save().then(resp=>{
+            return res.status(200).json(resp)
+        })
+        .catch(err=>{
+             return res.status(500).json({err: err.errors[0].message})
+        })
+        
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({err: err.errors[0].message})
     }
 }
 

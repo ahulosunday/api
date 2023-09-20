@@ -15,7 +15,7 @@ const getLgas = async(req, res) =>{
         return res.status(200).json(data)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -33,7 +33,7 @@ const getLgasPaging = async(req, res) =>{
         return res.status(200).json(response)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -46,7 +46,7 @@ const getLga =async(req, res) =>{
         return res.status(200).json(Lga)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -58,7 +58,7 @@ try{
     return res.status(200).json(col)
 }
 catch(err){
-    return res.status(500).json({ err: err.message })
+    return res.status(500).json({ err: err.errors[0].message})
 }
   
    
@@ -68,12 +68,16 @@ const deleteLga = async(req, res) =>{
     try{
        
         const LgaId = req.params.id
-        const ress = await lga.destroy({ where:{id : LgaId}})
-        return res.status(200).json(ress);    
+        await lga.destroy({ where:{id : LgaId}}).then(resp=>{
+            return res.status(200).json(resp); 
+        }).catch(err=>{
+            return res.status(500).json({ err: 'Unable to delete the selected LGA, another record(s) is using it'})
+        })
+           
         
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: 'Unable to delete the selected LGA, another record(s) is using it'})
     }
 }
 
@@ -88,11 +92,15 @@ const deleteLga = async(req, res) =>{
         ress.userId = userId
         ress.stateId = stateId
         ress.regionId = regionId
-        ress.save()
-        return res.status(200).json(ress)
+        ress.save().then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(500).json({ err: err.errors[0].message})
+      })
+
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.message})
     }
 }
 const loadLgaswithState = async(req, res) =>{
@@ -102,7 +110,7 @@ const loadLgaswithState = async(req, res) =>{
         return res.status(200).json(state)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }

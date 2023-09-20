@@ -13,7 +13,7 @@ const getPermissions = async(req, res) =>{
         return res.status(200).json(data)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -29,7 +29,7 @@ const getPermissionsPaging = async(req, res) =>{
         return res.status(200).json(response)
     }
     catch(err){
-        return res.status(200).json(err.message)
+       return res.status(500).json({ err: err.message})
     }
 
 }
@@ -40,7 +40,7 @@ const getRolesPermissions = async(req, res) =>{
         return res.status(200).json(perrRole)
     }
     catch(err){
-        return res.status(200).json(err.message)
+       return res.status(500).json({ err: err.message})
     }
 
 }

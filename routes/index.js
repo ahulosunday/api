@@ -46,7 +46,7 @@ router.get('/findUserByUsername/:username/1/1/1/1', user.findUserByUsername);
 router.get('/find/email/1/:email/1/1/1/1', user.findUserByEmail);
 router.get('/users/:page/:per_page/0/1', user.getUsersPaging);
 router.put('/activate/:id/', requireJsonContent, user.ActivateUser)
-router.put('/deactivate/:id/1/1', user.DeactivateUser)
+router.put('/deactivate/:id/1/1', requireJsonContent, user.DeactivateUser)
 router.put('/upload/:id/change', requireJsonContent, user.changePassport)
 router.delete('/users/:id', user.deleteUserById)
 router.post('/sendmail/user/auth/email/send', send.send)

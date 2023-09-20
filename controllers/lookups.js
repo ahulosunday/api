@@ -8,7 +8,7 @@ const lookUpWard = async(req, res) =>{
         return res.status(200).json(wards)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -19,7 +19,7 @@ const lookUpLga = async(req, res) =>{
         return res.status(200).json(Lga)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -30,7 +30,7 @@ const lookUpState = async(req, res) =>{
         return res.status(200).json(Lga)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -41,7 +41,7 @@ const lookUpRegion = async(req, res) =>{
         return res.status(200).json(Lga)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }
@@ -52,7 +52,7 @@ const lookUpCountry = async(req, res) =>{
         return res.status(200).json(Lga)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 
 }

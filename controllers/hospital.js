@@ -1,4 +1,4 @@
-const { states, users,country, regions, lga, hospital, ward } = require('../models');
+const { states,gform, users,country, regions, lga, hospital, ward } = require('../models');
 const jwt = require('jsonwebtoken')
 const {getPagination, getPagingData } = require('../helpers/paging')
 
@@ -16,7 +16,7 @@ const getHospitals = async(req, res) =>{
         return res.status(200).json(data)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -35,7 +35,7 @@ const getHospitalsPaging = async(req, res) =>{
         return res.status(200).json(response)
     }
     catch(err){
-        return res.status(200).json(err.message)
+         return res.status(500).json({ err: err.message})
     }
 
 }
@@ -48,7 +48,7 @@ const getHospital =async(req, res) =>{
         return res.status(200).json(hospitals)
     }
     catch(err){
-        return res.status(200).json(err.message)
+         return res.status(500).json({ err: err.message})
     }
 
 }
@@ -60,7 +60,7 @@ try{
         return res.status(200).json(hospitals)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 }
 const getHospitalWithLga = async(req, res)=>{
@@ -74,7 +74,7 @@ try{
         return res.status(200).json(hospitals)
     }
     catch(err){
-        return res.status(200).json(err.message)
+         return res.status(500).json({ err: err.message})
     }
 }
 //
@@ -85,7 +85,7 @@ try{
     return res.status(200).json(col)
 }
 catch(err){
-    return res.status(500).json({ err: err.message })
+    return res.status(500).json({ err: { err: err.errors[0].message} })
 }
   
    
@@ -95,12 +95,21 @@ const deleteHospital = async(req, res) =>{
     try{
         
         const hospitalId = req.params.id
-        const ress = await hospital.destroy({ where:{id : hospitalId}})
-        return res.status(200).json(ress);    
-        
+        const check = await gform.findOne({where:{hospitalId: hospitalId}})
+        if(check.length === 0){
+        await hospital.destroy({ where:{id : hospitalId}}).then(ress=>{
+             return res.status(200).json(ress); 
+        }).catch(err=>{
+             return res.status(500).json({ err: "Something went wrong, can not delete ..."})
+        })
+          
+        }
+        else{
+            return res.status(500).json({ err: "Already been used, can not delete ..."})
+        }
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 }
 
@@ -121,10 +130,15 @@ const deleteHospital = async(req, res) =>{
         ress.phone = phone
         ress.contactAddress = contactAddress
         ress.save()
-        return res.status(200).json(ress)
+       .then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(200).json({ err: err.errors[0].message})
+      })
+
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 }
 

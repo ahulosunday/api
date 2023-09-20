@@ -18,7 +18,7 @@ const getGifshipPackages = async(req, res) =>{
         
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -33,7 +33,7 @@ const getGifshipPackagesAll = async(req, res) =>{
         
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -45,7 +45,7 @@ const getGifshipPackageWithGigshipTypeId =async(req, res) =>{
         return res.status(200).json(GifshipPackage)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -57,7 +57,7 @@ const getGifshipPackage =async(req, res) =>{
         return res.status(200).json(GifshipPackage)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -69,7 +69,7 @@ try{
     return res.status(200).json(col)
 }
 catch(err){
-    return res.status(500).json({ err: err.message })
+    return res.status(500).json({ err: err.errors[0].message})
 }
   
    
@@ -82,12 +82,16 @@ const deleteGifshipPackage = async(req, res) =>{
         if(!token) return res.status(401).json("Not authenticated")
         */
         const GifshipPackageId = req.params.id;
-        const ress = await gifshipPackage.destroy({ where:{id : GifshipPackageId}})
-        return res.status(200).json(ress);    
+        await gifshipPackage.destroy({ where:{id : GifshipPackageId}}).then(ress=>{
+            return res.status(200).json(ress);
+        })
+          .catch(err=>{
+            return res.status(500).json({ err: 'Error occured. Can not delete data alredy used.'})
+          })  
         
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 }
 
@@ -105,10 +109,15 @@ const deleteGifshipPackage = async(req, res) =>{
         ress.duration= duration
         ress.maxNumber = maxNumber
         ress.save()
-        return res.status(200).json(ress)
+       .then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(500).json({ err: err.errors[0].message})
+      })
+
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 }
 

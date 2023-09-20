@@ -14,7 +14,7 @@ const getRoles = async(req, res) =>{
         return res.status(200).json(data)
     }
     catch(err){
-        return res.status(200).json(err.message)
+       return res.status(500).json({ err: err.message})
     }
 
 }
@@ -31,7 +31,7 @@ const getRolesPaing = async(req, res) =>{
         return res.status(200).json(response)
     }
     catch(err){
-        return res.status(200).json(err.message)
+       return res.status(500).json({ err: err.message})
     }
 
 }
@@ -44,7 +44,7 @@ const getRole =async(req, res) =>{
         return res.status(200).json(roles)
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(500).json({ err: err.message})
     }
 
 }
@@ -55,7 +55,7 @@ try{
     return res.status(200).json(rol)
 }
 catch(err){
-    return res.status(500).json({ err: err.message })
+    return res.status(500).json( { err: err.errors[0].message})
 }
   
    
@@ -73,7 +73,7 @@ const deleteRole = async(req, res) =>{
        return null
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 }
 
@@ -86,10 +86,15 @@ const deleteRole = async(req, res) =>{
         ress.description= description
         ress.userId = userId
         ress.save()
-        return res.status(200).json(ress)
+       .then(resp=>{
+        return res.status(200).json(resp);
+      }).catch(err=>{
+        return res.status(200).json({ err: err.errors[0].message})
+      })
+
     }
     catch(err){
-        return res.status(200).json(err.message)
+        return res.status(200).json({ err: err.errors[0].message})
     }
 }
 
