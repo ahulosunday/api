@@ -37,7 +37,26 @@ const findAllUser = async (req, res) => {
         return res.status(500).json({ err: err.errors[0].message})
     }
 }
-
+const findUserById = async (req, res) => {
+    
+    try {
+const id = req.params.id
+        const user = await users.findOne({where:{id: id},  order:[['surname', 'ASC'], ['othername', 'ASC']]});
+        return res.status(201).json(user);
+    } catch (err) {
+        return res.status(500).json({ err: err.message})
+    }
+}
+const findUserByUiid = async (req, res) => {
+    
+    try {
+const uiid = req.params.uiid
+        const user = await users.findOne({where:{uiid: uiid},  order:[['surname', 'ASC'], ['othername', 'ASC']]});
+        return res.status(201).json(user);
+    } catch (err) {
+        return res.status(500).json({ err: err.message})
+    }
+}
 const getUsersPaging = async(req, res) =>{
     try{
         const  page =  req.params.page
@@ -56,8 +75,7 @@ const getUsersPaging = async(req, res) =>{
 
 }
 const ActivateUser = async (req, res) => {
-    
-    try {
+     try {
             const id = req.params.id
         const user = await users.findOne({where:{id: id}});
         user.isActive = 1;
@@ -203,5 +221,7 @@ module.exports = {
     getUsersPaging,
     BulkcreateUser,
     ResetPassword,
-    deleteUserById
+    deleteUserById,
+    findUserById,
+    findUserByUiid
 }

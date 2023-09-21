@@ -49,6 +49,8 @@ router.put('/activate/:id/', requireJsonContent, user.ActivateUser)
 router.put('/deactivate/:id/1/1', requireJsonContent, user.DeactivateUser)
 router.put('/upload/:id/change', requireJsonContent, user.changePassport)
 router.delete('/users/:id', user.deleteUserById)
+router.get('/user/get/0/:id/1/0/0/0/0', user.findUserById)
+router.get('/user/get/0/:uiid/1/0/0/0/0/', user.findUserByUiid)
 router.post('/sendmail/user/auth/email/send', send.send)
 
 //========================================================
