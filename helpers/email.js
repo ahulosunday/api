@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 
 
 const options = {
-  from: 'ahulosunday@gmail.com',
+  from: 'noreply@gmail.com',
   to: to,
   subject: subject,
   html: msg,

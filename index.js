@@ -24,6 +24,18 @@ app.use(
 
 //================POSTS USERS==========
 app.use('/api/auth', routes);
+const cron = require('node-cron');
+
+cron.schedule('* * * * *', () => {
+  console.log('Running every minute ....');
+});
+
+console.log('Cron job started')
+/*
+cron.schedule('30 9 * * *', () => {
+  console.log('Running a task every day at 9:30 AM');
+});
+*/
 
 app.listen({ port: port}, async () => {
   // console.log('app running on http://localhost:6001')
