@@ -36,7 +36,7 @@ console.log('Running every minute ....')
 */
 cron.schedule('30 9 * * *', () => {
  console.log('Running a task every day at 9:30 AM');
-  const val = getUser_rrrByExpireToday.getUser_rrrByExpireToday(formatDate.formatDate(new Date('2024-09-15')));
+  const val = getUser_rrrByExpireToday.getUser_rrrByExpireToday(formatDate.formatDate(new Date()));
  const arr0 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(30);
  const arr1 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(20);
  const arr2 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(10);

@@ -276,7 +276,7 @@ const bulkUpdate = async(req, res) =>{
  return res.status(200).json(data.length)
     }
     catch(err){
-         return res.status(500).json({ err: err.errors[0].message})
+         return res.status(500).json({ err: err.message})
     }
 }
 const activateUser_rrr = async(req, res) =>{
