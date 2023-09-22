@@ -5,7 +5,8 @@ const express  = require('express');
 const routes = require('./routes');
 const cookieParser = require('cookie-parser')
 //require("dotenv").config({ path: "./.env" });
-
+const formatDate = require('./helpers/formatDate')
+const getUser_rrrByExpireToday = require('./controllers/user_rrr')
 const port = process.env.DB_PORT || 6001;
 const inProduction = process.env.NODE_ENV === "production";
 
@@ -25,17 +26,24 @@ app.use(
 //================POSTS USERS==========
 app.use('/api/auth', routes);
 const cron = require('node-cron');
-
-cron.schedule('* * * * *', () => {
-  console.log('Running every minute ....');
-});
-
-console.log('Cron job started')
 /*
-cron.schedule('30 9 * * *', () => {
-  console.log('Running a task every day at 9:30 AM');
+cron.schedule('* * * * *', () => {
+  console.log('Running every minute ....go');
+
 });
+console.log('Running every minute ....')
+
 */
+cron.schedule('30 9 * * *', () => {
+ console.log('Running a task every day at 9:30 AM');
+  const val = getUser_rrrByExpireToday.getUser_rrrByExpireToday(formatDate.formatDate(new Date('2024-09-15')));
+ const arr0 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(30);
+ const arr1 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(20);
+ const arr2 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(10);
+ const arr3 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(3);
+});
+
+
 
 app.listen({ port: port}, async () => {
   // console.log('app running on http://localhost:6001')

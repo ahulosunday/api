@@ -2,7 +2,9 @@ const { user_rrr, users, gifship, gifshiptype, gifshipPackage, enrolee_rrr_code 
 const jwt = require('jsonwebtoken')
 const {getPagination, getPagingData} = require('../helpers/paging')
 const { Op } = require('sequelize');
-
+const moment = require('moment')
+const msg = require('../helpers/messages')
+const mails = require('../helpers/email')
 
 const getUser_rrrs = async(req, res) =>{
     try{
@@ -127,7 +129,63 @@ const getUser_rrrByExpired =async(req, res) =>{
     }
 
 }
+const getUser_rrrByExpireToday = async(startedDates) =>{
+   try{
+        const startedDate = new Date(startedDates);
+       var obj ={}
+       const user = await  user_rrr.findAll({
+        where : { expired_date : startedDate, activated: 1 },
+         include: [users, gifship, gifshiptype, gifshipPackage ]
+        })
+        const results = user.map(async(result)=>{
+            const del = await user_rrr.findOne({where:{id:result.dataValues.id}})
+            del.activated = 0
+            del.save()
+            return result.dataValues.user.dataValues.email
+        })
+            const obj3 = Object.assign({
+                      msg: msg.deactivationMsg,
+                      to: results,
+                      subject: msg.deactivationTitle
+                    })
+            const email = mails.mails(obj3)
+           results (1)
+     
+    }
+    catch(err){
+        return (err.message)
+    }
 
+}
+const getUser_rrrByExpireNotify = async(days) =>{
+   try{
+
+      const User_rrrs = await  user_rrr.findAll({
+        where : { expired_date :  {
+      [Op.gte]: moment().subtract(days, 'days').toDate()
+    }, activated: 1 },
+         include: [users, gifship, gifshiptype, gifshipPackage ]
+        })
+       
+         const results = User_rrrs.map(async(result)=>{
+            const del = await user_rrr.findOne({where:{id:result.dataValues.id}})
+            del.activated = 0
+            del.save()
+            return result.dataValues.user.dataValues.email
+        })
+            const obj3 = Object.assign({
+                      msg: msg.noticeMsg,
+                      to: results,
+                      subject: msg.noticeTitle
+                    })
+            const email = mails.mails(obj3)
+           results (1)
+    }
+    catch(err){
+        return (err.message)
+    }
+
+}
 const addUser_rrr = async(req, res) =>{
 try{
     const { rrr_number,	userId,	activated,	activatedby,	amount,	duration,	gifshipId,	gifshipTypeId,	gifshipPackageId,	activated_date,	expired_date, maxNumber, minNumber, authNumber} = req.body
@@ -145,7 +203,6 @@ catch(err){
   
    
 }
-
 const deleteUser_rrr = async(req, res) =>{
     try{
        // const token = req.cookies.access_token
@@ -253,7 +310,9 @@ module.exports = {
     getUser_rrrByExpired,
     getUser_rrrsByNotActivated,
     getUser_rrrByUserIdAll,
-    bulkUpdate
+    bulkUpdate,
+    getUser_rrrByExpireToday,
+    getUser_rrrByExpireNotify
     
     
 }
