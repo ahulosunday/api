@@ -161,11 +161,11 @@ router.put('/hospital/:id', requireJsonContent, hospital.updateHospital)
 router.get('/forms/register', gform.getGforms);
 router.get('/forms/register/:page/:per_page', gform.getGformsPaging);
 router.get('/register/:id', gform.getGform)
-//router.get('/register/:id/hospital',hospital.getHospitalWithInclude)
 router.post('/register/add/', requireJsonContent, gform.addGform)
 router.delete('/register/:id', gform.deleteGform)
 router.put('/register/:id', requireJsonContent, gform.updateGform)
 router.get('/register/:userId/userId', gform.getGformuserId)
+router.get('/register/:userId/userId/auth/f', gform.getGformuserId)
 //=====================================================
 router.get('/gifship', gifship.getGifship);
 router.post('/gifship-type', gifship.createGifshipType)

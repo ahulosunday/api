@@ -53,7 +53,8 @@ app.listen({ port: port}, async () => {
 })
 
 /**
-npm install pg body-parser xlsx cors express cookie-parser sequelize --save bcryptjs jsonwebtoken multer mysql2 nodemailer sequelize-cli --save && sequelize db:migrate && sequelize db:seed:all
+npm install pg body-parser xlsx cors express cookie-parser sequelize --save bcryptjs jsonwebtoken multer mysql2 nodemailer sequelize-cli --save node-cron moment speakeasy 
+ && sequelize db:migrate && sequelize db:seed:all
 && sequelize db:migrate --name && sequelize db:seed --seed 220230725190525-role_permission_4.js
  */
- //speakeasy
+ 

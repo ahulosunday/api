@@ -41,7 +41,21 @@ const getGformuserId = async(req, res) =>{
         const userId = req.params.userId
         const Gform = await gform.findAll({ where:{userId: userId},
             include: [country,users, regions, states, lga, hospital,gifship,gifshiptype, gifshipPackage, hmo],
-             orderby:{'surname': 'ASC'} 
+            order:[['surname', 'ASC']] 
+             })
+        return res.status(200).json(Gform)
+    }
+    catch(err){
+        return res.status(500).json({err: err.message})
+    }
+
+}
+const getGformByuserId = async(req, res) =>{
+    try{
+        const userId = req.params.userId
+        const Gform = await gform.findOne({ where:{userId: userId},
+            include: [country,users, regions, states, lga, hospital,gifship,gifshiptype, gifshipPackage, hmo],
+             order:[['surname', 'ASC']]
              })
         return res.status(200).json(Gform)
     }
@@ -54,7 +68,8 @@ const getGformuserId = async(req, res) =>{
 const getGform =async(req, res) =>{
    try{
         const GformId = req.params.id
-        const Gform = await gform.findOne({ include:[users, states,lga,country,regions,hospital, hmo, gifship, gifshipPackage, gifshiptype], where:{id : GformId}})
+        const Gform = await gform.findOne({ include:[users, states,lga,country,regions,hospital, hmo, gifship, gifshipPackage, gifshiptype],
+         where:{id : GformId}})
         return res.status(200).json(Gform)
     }
     catch(err){
@@ -156,5 +171,6 @@ module.exports = {
     deleteGform, 
     updateGform,
     getGformuserId,
-    getGformsPaging
+    getGformsPaging,
+    getGformByuserId
 }
