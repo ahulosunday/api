@@ -4,7 +4,9 @@ const {getPagination, getPagingData} = require('../helpers/paging')
 const { Op } = require('sequelize');
 const moment = require('moment')
 const msg = require('../helpers/messages')
-const mails = require('../helpers/email')
+const mails = require('../helpers/email');
+const speakeasy = require('speakeasy');
+
 
 const getUser_rrrs = async(req, res) =>{
     try{
@@ -67,7 +69,10 @@ const getAllByUserId = async (req, res) =>{
 const getUser_rrr =async(req, res) =>{
    try{
         const User_rrrId = req.params.id
-        const User_rrrs = await user_rrr.findOne({include: [users,gifship, gifshiptype, gifshipPackage ], where:{id : User_rrrId}})
+        const User_rrrs = await user_rrr.findOne({
+            include: [users,gifship, gifshiptype, gifshipPackage ], 
+            where:{id : User_rrrId}
+            })
         return res.status(200).json(User_rrrs)
     }
     catch(err){
@@ -104,7 +109,7 @@ const getUser_rrrByUserIdAll =async(req, res) =>{
         const userId = req.params.userId
         const User_rrrs = await user_rrr.findAll({
             include: [users,gifship, gifshiptype, gifshipPackage ], 
-            where:{userId : userId} })
+            where:{userId : userId},  order:[['id', 'DESC']] })
         return res.status(200).json(User_rrrs)
     }
     catch(err){
@@ -185,6 +190,77 @@ const getUser_rrrByExpireNotify = async(days) =>{
         return (err.message)
     }
 
+}
+const RenewUser_rrr = async(req, res) =>{
+try{
+    const { rrr_number,	userId,	activated,	activatedby,	amount,	duration,	gifshipId,	gifshipTypeId,	gifshipPackageId,	activated_date,	expired_date, maxNumber, minNumber, authNumber, oldId} = req.body
+    const q = await user_rrr.findOne({ where:{userId:userId, activated: 1}})
+    if(q){
+    q.activated = 0
+    q.save()
+    }
+   const col = await user_rrr.create({ 
+    rrr_number:rrr_number,	userId:userId,	
+    activated:activated,	activatedby:activatedby,
+    	amount:amount,	duration:duration,	gifshipId:gifshipId,
+        	gifshipTypeId:gifshipTypeId,	gifshipPackageId:gifshipPackageId,
+            	activated_date:activated_date,	expired_date:expired_date, 
+                maxNumber:maxNumber, minNumber:minNumber,
+                 authNumber: authNumber}).then(async (results)=>{
+                const code = await enrolee_rrr_code.findAll({where:{user_rrrId: oldId}})
+//===================================
+const secret = speakeasy.generateSecret({ length: 50 });
+    const codex = speakeasy.totp({
+      // Use the Base32 encoding of the secret key
+    secret: secret.base32,
+      // Tell Speakeasy to use the Base32 
+    // encoding format for the secret key
+    encoding: 'base32'
+});
+//==============================
+              const obj2 = code.map((result, index)=>{
+              return Object.assign({
+                userId: result.dataValues.userId,
+                user_rrrId:results.id,
+                code:  codex + index 
+                })
+                 })
+                
+                 //renew the code table also ==============
+                    await enrolee_rrr_code.bulkCreate(obj2)
+                    .then( async (resp)=>{
+                         const obj3 = code.map((result)=>{
+                        return Object.assign(
+                            result.dataValues.userId
+                            )
+                            })
+                            // get the members email address =================
+                       await users.findAll({where:{id:{[Op.in]: obj3}}})
+                       .then(user=>{
+                        const obj4 = user.map((userx)=>{
+                        return Object.assign(
+                          userx.dataValues.email
+                        )
+                            })
+                           
+                        
+                            return res.status(200).json(obj4)
+                       })   
+                    //=========================
+                   
+                    })
+                    .catch(erro=>{
+                        return res.status(500).json({err: erro})
+                    })
+                    })
+                     .catch(errors1=>{
+                        return res.status(500).json({err: errors1})
+                    })
+                 
+}
+catch(err){
+    return res.status(500).json({ err: err.message} );
+}
 }
 const addUser_rrr = async(req, res) =>{
 try{
@@ -312,7 +388,8 @@ module.exports = {
     getUser_rrrByUserIdAll,
     bulkUpdate,
     getUser_rrrByExpireToday,
-    getUser_rrrByExpireNotify
+    getUser_rrrByExpireNotify,
+    RenewUser_rrr
     
     
 }

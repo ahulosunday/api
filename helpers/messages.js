@@ -2,11 +2,14 @@ const deactivationMsg = 'Your account has expired. Please contact our customer s
 const deactivationTitle = 'Subcription Expired'
 const noticeMsg = ''
 const noticeTitle = ''
-
+const ActivationMsg = ''
+const ActivationTitle = ''
 module.exports = { 
     deactivationMsg, 
     deactivationTitle,
     noticeMsg, 
-    noticeTitle
+    noticeTitle,
+    ActivationMsg,
+    ActivationTitle
 
 }
