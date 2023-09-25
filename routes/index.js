@@ -94,6 +94,7 @@ router.get('/rrr/not/activate/0/1/1/', user_rrr.getUser_rrrsByNotActivated )
 //====================================
 router.get('/codes/', requireJsonContent, enrolee_rrr_code.getEnrolee_rrr_codes);
 router.get('/codes/:user_rrrId/code/rrr/', enrolee_rrr_code.getEnrolee_rrr_codeCount);
+router.get('/codes/:ids', enrolee_rrr_code.getEnrolee_rrr_codeCountBy_In_Op);
 router.get('/xyx/:id/', requireJsonContent, enrolee_rrr_code.getEnrolee_rrr_code)
 router.get('/code/:userId/0/', enrolee_rrr_code.getEnrolee_rrr_codeByUserId)
 router.get('/code/:code/', enrolee_rrr_code.getEnrolee_rrr_codeByCode);

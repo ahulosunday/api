@@ -1,6 +1,6 @@
-const { user_rrr, users, enrolee_rrr_code } = require('../models');
+const { user_rrr, users, enrolee_rrr_code, sequelize } = require('../models');
 const jwt = require('jsonwebtoken')
-
+const { Op } = require('sequelize');
 
 const getEnrolee_rrr_code = async(req, res) =>{
     try{
@@ -28,6 +28,24 @@ const getEnrolee_rrr_codeCount = async(req, res) =>{
     }
 
 }
+const getEnrolee_rrr_codeCountBy_In_Op = async(req, res) =>{
+    try{ 
+       var numberArray =[]
+       numberArray =req.params.ids.split(',')
+       const User_rrrsCode = await enrolee_rrr_code.findAll({
+         attributes: [ ['user_rrrId', 'id'],[sequelize.fn('COUNT', sequelize.col('user_rrrId')), 'count']],
+           where:{user_rrrId:{[Op.in]: numberArray}},
+           order: [['createdAt','DESC']]
+           ,group: 'user_rrrId'
+            })
+           
+        return res.status(200).json(User_rrrsCode)
+    }
+    catch(err){
+        return res.status(500).json({ err: err.message})
+    }
+
+}
 const getEnrolee_rrr_codeByCode = async(req, res) =>{
     try{
         const code = req.params.code
@@ -43,7 +61,10 @@ const getEnrolee_rrr_codeByCode = async(req, res) =>{
 const getEnrolee_rrr_codeByUser_rrrId = async(req, res) =>{
     try{
         const user_rrrId = req.params.user_rrrId
-        const User_rrrsCode = await enrolee_rrr_code.findAll({ where:{user_rrrId: user_rrrId}, include: [users, user_rrr ], order:[['id', 'DESC']]})
+        const User_rrrsCode = await enrolee_rrr_code.findAll({ 
+            where:{user_rrrId: user_rrrId},
+             include: [users, user_rrr ],
+              order:[['id', 'DESC']]})
         return res.status(200).json(User_rrrsCode)
     }
     catch(err){
@@ -139,6 +160,7 @@ module.exports = {
     addEnrolee_rrr_codes,
     getEnrolee_rrr_codeCount,
     getEnrolee_rrr_codeByUser_rrrId,
-    getEnrolee_rrr_codeByUserIdAll
+    getEnrolee_rrr_codeByUserIdAll,
+    getEnrolee_rrr_codeCountBy_In_Op
     
 }

@@ -29,7 +29,7 @@ const feedbact = await transporter.sendMail(options);
 return res.status(200).json(feedbact);
    }
    catch(err){
-return res.status(501).json(err);
+return res.status(501).json(err.message);
    }
 }
 

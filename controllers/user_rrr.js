@@ -27,7 +27,8 @@ const getUser_rrrsByNotActivated = async(req, res) =>{
     try{
        
         const data = await user_rrr.findAll({ where:{activated: 0},
-            include: [users,gifship, gifshiptype, gifshipPackage ]
+            include: [users,gifship, gifshiptype, gifshipPackage ],
+            order :[['createdAt', 'DESC']]
            
             })
          
