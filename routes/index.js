@@ -82,6 +82,7 @@ router.get('/user-rrr/:id/', user_rrr.getUser_rrr)//
 router.get('/user-rrr/:userId/0/', user_rrr.getUser_rrrByUserId)//
 router.get('/rrr/:userId/0/0/1', user_rrr.getUser_rrrByUserIdAll)
 router.post('/user-rrr/', requireJsonContent, user_rrr.addUser_rrr)
+router.post('/user-rrr/code', requireJsonContent, user_rrr.addUser_rrrAndCode) //
 router.post('/user-rrr/renew/', requireJsonContent, user_rrr.RenewUser_rrr)
 router.delete('/user-rrr/:id/', user_rrr.deleteUser_rrr)
 router.put('/user-rrr/:id/', requireJsonContent, user_rrr.updateUser_rrr)
@@ -90,6 +91,7 @@ router.get('/user-rrr/rrr/:id/', user_rrr.getUser_rrrByRRR)
 router.get('/:userId/user-rrr/getuserid/rrr/rrr/', user_rrr.getAllByUserId )
 router.get('/:sdate/:edate/get-exp/exp/0/1', user_rrr.getUser_rrrByExpired )
 router.get('/rrr/not/activate/0/1/1/', user_rrr.getUser_rrrsByNotActivated )
+router.get('/rrr/:gifshipId/:gifshipTypeId/:gifshipPackageId/:userId/b/1/', user_rrr.getUser_rrrByUserIdAllBy4params )
 //
 //====================================
 router.get('/codes/', requireJsonContent, enrolee_rrr_code.getEnrolee_rrr_codes);

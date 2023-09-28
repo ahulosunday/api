@@ -64,7 +64,6 @@ const getGformByuserId = async(req, res) =>{
     }
 
 }
-
 const getGform =async(req, res) =>{
    try{
         const GformId = req.params.id

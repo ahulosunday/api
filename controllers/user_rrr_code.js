@@ -33,10 +33,10 @@ const getEnrolee_rrr_codeCountBy_In_Op = async(req, res) =>{
        var numberArray =[]
        numberArray =req.params.ids.split(',')
        const User_rrrsCode = await enrolee_rrr_code.findAll({
-         attributes: [ ['user_rrrId', 'id'],[sequelize.fn('COUNT', sequelize.col('user_rrrId')), 'count']],
+         attributes: [ ['user_rrrId', 'id'],[sequelize.fn('COUNT', sequelize.col('id')), 'count']],
            where:{user_rrrId:{[Op.in]: numberArray}},
-           order: [['createdAt','DESC']]
-           ,group: 'user_rrrId'
+           //order: [['createdAt','DESC']],
+           group: [['user_rrrId']]
             })
            
         return res.status(200).json(User_rrrsCode)
@@ -130,8 +130,10 @@ const addEnrolee_rrr_code = async(req, res) =>{
 }
 const addEnrolee_rrr_codes = async(req, res) =>{
 try{
-   const q =  await enrolee_rrr_code.bulkCreate(req.body);
+    const result = await sequelize.transaction(async (t) => {
+   const q =  await enrolee_rrr_code.bulkCreate(req.body, { transaction: t });
   return res.status(200).json(q)
+    });
 }
 catch(err){
     return res.status(500).json({ err: err.errors[0].message})
@@ -148,7 +150,6 @@ catch(err){
     return "ERROR"
 }    
 }
-
 module.exports = {
     deleteEnrolee_rrr_codes,
     getEnrolee_rrr_code,

@@ -192,7 +192,6 @@ const findUserByEmail = async(req, res)=>{
 
     }
 }
-
 const deleteUserById = async(req, res) =>{
     try{
        
