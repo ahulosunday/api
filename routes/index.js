@@ -39,6 +39,7 @@ router.post('/signin/0', requireJsonContent, login.signin)
 router.post('/logout', logout.Logout);
 router.post('/users', requireJsonContent, user.createUser);
 router.post('/users/bulk', requireJsonContent, user.BulkcreateUser);
+router.post('/users/bulk/:user_rrrId', requireJsonContent, user.BulkcreateUserAndCodes);
 router.put('/changepassword/:id', requireJsonContent, user.changePassword);
 router.put('/Resetpassword/:id/1/0', requireJsonContent, user.ResetPassword);
 router.get('/users', user.findAllUser);
