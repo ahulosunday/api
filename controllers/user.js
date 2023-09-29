@@ -1,7 +1,11 @@
-const { users, gforms } = require('../models');
+const { users, gforms, sequelize, enrolee_rrr_code } = require('../models');
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const {getPagination, getPagingData} = require('../helpers/paging')
+const speakeasy = require('speakeasy');
+const { Op} = require('sequelize');
+
+
 const createUser = async (req, res) => {
     
     try {
@@ -25,6 +29,69 @@ const BulkcreateUser = async (req, res) => {
         return res.status(201).json(user);
     } catch (err) {
         return res.status(500).json({ err: err.errors[0].message})
+    }
+}
+const BulkcreateUserAndCodes = async (req, res) => {
+    
+    try {
+         //===================================
+const secret = speakeasy.generateSecret({ length: 60 });
+    const codex = speakeasy.totp({
+      // Use the Base32 encoding of the secret key
+    secret: secret.base32,
+      // Tell Speakeasy to use the Base32 
+    // encoding format for the secret key
+    encoding: 'base32'
+});
+ var numberArray =[]
+ var obj3 = []
+        const result = await sequelize.transaction(async (t) => {
+            const user_rrrId = req.params.user_rrrId
+      
+      await users.bulkCreate(req.body, {transaction: t})
+      .then( async col=>{
+         const obj2 = col.map((result, index)=>{
+              return Object.assign({
+                userId: result.dataValues.id,
+                user_rrrId: user_rrrId,
+                code:  codex + 'Xyz'+ index 
+                })
+                 })
+                    await enrolee_rrr_code.bulkCreate(obj2, { transaction: t })
+                    .then( async(resp)=>{
+                       //get the inserted ids and codes===============
+                        obj3 = resp.map((result)=>{
+                            numberArray.push(result.dataValues.userId)
+                        return Object.assign({
+                            userId: result.dataValues.userId,
+                            code: result.dataValues.code,
+                         })
+                            })
+                           
+                           
+                    })
+                    .catch(errs=>{
+                        throw new Error(errs.message);
+                    
+                    })
+                    }).catch(err=>{
+          throw new Error(err.message);
+        })
+        }); // end of transaction. Note: Select is not done inside the transaction because numberArray will be empty without commit
+         await users.findAll({
+                                attributes: [ ['id', 'userId'], ['email', 'email'] ],
+                                where: { id:{[Op.in]: numberArray}},
+                                order:[['id','ASC']]
+                            }).then(exp=>{
+                                const d = JSON.stringify(exp)
+                                const arrs = obj3.map((item, i) => Object.assign({}, item, JSON.parse(d)[i]))
+                                return res.status(200).json(arrs)
+                               
+                            }).catch(r=>{
+                                throw new Error(r.message);
+                            })
+    } catch (err) {
+        return res.status(500).json({ err: err.message})
     }
 }
 const findAllUser = async (req, res) => {
@@ -192,7 +259,6 @@ const findUserByEmail = async(req, res)=>{
 
     }
 }
-
 const deleteUserById = async(req, res) =>{
     try{
        
@@ -223,5 +289,6 @@ module.exports = {
     ResetPassword,
     deleteUserById,
     findUserById,
-    findUserByUiid
+    findUserByUiid,
+    BulkcreateUserAndCodes
 }

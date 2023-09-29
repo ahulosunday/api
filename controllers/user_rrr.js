@@ -1,4 +1,4 @@
-const { user_rrr, users, gifship, gifshiptype, gifshipPackage, enrolee_rrr_code } = require('../models');
+const { user_rrr, users, gifship, gifshiptype, gifshipPackage, enrolee_rrr_code, sequelize } = require('../models');
 const jwt = require('jsonwebtoken')
 const {getPagination, getPagingData} = require('../helpers/paging')
 const { Op } = require('sequelize');
@@ -28,7 +28,7 @@ const getUser_rrrsByNotActivated = async(req, res) =>{
        
         const data = await user_rrr.findAll({ where:{activated: 0},
             include: [users,gifship, gifshiptype, gifshipPackage ],
-            order :[['createdAt', 'DESC']]
+            order :[['id', 'DESC']]
            
             })
          
@@ -118,6 +118,23 @@ const getUser_rrrByUserIdAll =async(req, res) =>{
     }
 
 }
+const getUser_rrrByUserIdAllBy4params =async(req, res) =>{
+   try{
+        const gifshipId = req.params.gifshipId
+         const gifshipTypeId = req.params.gifshipTypeId
+          const gifshipPackageId = req.params.gifshipPackageId
+           const userId = req.params.userId
+        const User_rrrs = await user_rrr.findAll({
+            include: [users,gifship, gifshiptype, gifshipPackage ], 
+            where:{gifshipId : gifshipId, gifshipTypeId : gifshipTypeId, gifshipPackageId : gifshipPackageId, userId : userId}, 
+             order:[['id', 'DESC']] })
+        return res.status(200).json(User_rrrs)
+    }
+    catch(err){
+        return res.status(500).json({ err: err.message})
+    }
+
+}
 const getUser_rrrByExpired =async(req, res) =>{
    try{
         const startedDate = new Date(req.params.sdate);
@@ -194,6 +211,8 @@ const getUser_rrrByExpireNotify = async(days) =>{
 }
 const RenewUser_rrr = async(req, res) =>{
 try{
+    const result = await sequelize.transaction(async (t) => {
+
     const { rrr_number,	userId,	activated,	activatedby,	amount,	duration,	gifshipId,	gifshipTypeId,	gifshipPackageId,	activated_date,	expired_date, maxNumber, minNumber, authNumber, oldId} = req.body
     const q = await user_rrr.findOne({ where:{userId:userId, activated: 1}})
     if(q){
@@ -201,13 +220,14 @@ try{
     q.save()
     }
    const col = await user_rrr.create({ 
+
     rrr_number:rrr_number,	userId:userId,	
     activated:activated,	activatedby:activatedby,
     	amount:amount,	duration:duration,	gifshipId:gifshipId,
         	gifshipTypeId:gifshipTypeId,	gifshipPackageId:gifshipPackageId,
             	activated_date:activated_date,	expired_date:expired_date, 
                 maxNumber:maxNumber, minNumber:minNumber,
-                 authNumber: authNumber}).then(async (results)=>{
+                 authNumber: authNumber},{ transaction: t }).then(async (results)=>{
                 const code = await enrolee_rrr_code.findAll({where:{user_rrrId: oldId}})
 //===================================
 const secret = speakeasy.generateSecret({ length: 50 });
@@ -228,7 +248,7 @@ const secret = speakeasy.generateSecret({ length: 50 });
                  })
                 
                  //renew the code table also ==============
-                    await enrolee_rrr_code.bulkCreate(obj2)
+                    await enrolee_rrr_code.bulkCreate(obj2, { transaction: t })
                     .then( async (resp)=>{
                          const obj3 = code.map((result)=>{
                         return Object.assign(
@@ -258,10 +278,12 @@ const secret = speakeasy.generateSecret({ length: 50 });
                         return res.status(500).json({err: errors1})
                     })
                  
+    });
 }
 catch(err){
     return res.status(500).json({ err: err.message} );
 }
+
 }
 const addUser_rrr = async(req, res) =>{
 try{
@@ -273,6 +295,50 @@ try{
     }
    const col = await user_rrr.create({ rrr_number:rrr_number,	userId:userId,	activated:activated,	activatedby:activatedby,	amount:amount,	duration:duration,	gifshipId:gifshipId,	gifshipTypeId:gifshipTypeId,	gifshipPackageId:gifshipPackageId,	activated_date:activated_date,	expired_date:expired_date, maxNumber:maxNumber, minNumber:minNumber, authNumber: authNumber});
     return res.status(200).json(col)
+}
+catch(err){
+    return res.status(500).json({ err: err.errors[0].message} );
+}  
+}
+const addUser_rrrAndCode = async(req, res) =>{
+try{
+    //===================================
+const secret = speakeasy.generateSecret({ length: 50 });
+    const codex = speakeasy.totp({
+      // Use the Base32 encoding of the secret key
+    secret: secret.base32,
+      // Tell Speakeasy to use the Base32 
+    // encoding format for the secret key
+    encoding: 'base32'
+});
+//==============================
+    const result = await sequelize.transaction(async (t) => {
+    const { rrr_number,	userId,	activated,	activatedby,	amount,	duration,	gifshipId,	gifshipTypeId,	gifshipPackageId,	activated_date,	expired_date, maxNumber, minNumber, authNumber} = req.body
+    const q = await user_rrr.findOne({ where:{userId:userId, activated: 1}})
+    if(q){
+    q.activated = 0
+    q.save()
+    }
+   await user_rrr.create({ rrr_number:rrr_number,
+   	userId:userId,	activated:activated,
+    	activatedby:activatedby,
+        amount:amount,	duration:duration,
+        	gifshipId:gifshipId,	gifshipTypeId:gifshipTypeId,
+            	gifshipPackageId:gifshipPackageId,
+                	activated_date:activated_date,
+                    	expired_date:expired_date, maxNumber:maxNumber, 
+                        minNumber:minNumber, authNumber: authNumber}
+                        ,{transaction:t}
+                        )
+                        .then(async resp=>{
+                        await enrolee_rrr_code.create({user_rrrId:resp.dataValues.id,
+                         userId:resp.dataValues.userId, code:codex +'XYz'},{transaction: t})
+                         .then(result=>{
+                            return res.status(200).json(result)
+                         })
+                          
+                        })
+})
 }
 catch(err){
     return res.status(500).json({ err: err.errors[0].message} );
@@ -390,7 +456,9 @@ module.exports = {
     bulkUpdate,
     getUser_rrrByExpireToday,
     getUser_rrrByExpireNotify,
-    RenewUser_rrr
+    RenewUser_rrr,
+    getUser_rrrByUserIdAllBy4params,
+    addUser_rrrAndCode
     
     
 }
