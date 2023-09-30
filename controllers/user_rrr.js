@@ -317,7 +317,12 @@ const secret = speakeasy.generateSecret({ length: 50 });
     const q = await user_rrr.findOne({ where:{userId:userId, activated: 1}})
     if(q){
     q.activated = 0
-    q.save()
+    q.save({transaction: t})
+    }
+    const uid = await users.findOne({ where:{id:userId}})
+    if(uid){
+    uid.isActive = 1
+    uid.save({transaction: t})
     }
    await user_rrr.create({ rrr_number:rrr_number,
    	userId:userId,	activated:activated,
