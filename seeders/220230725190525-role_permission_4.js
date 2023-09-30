@@ -13,13 +13,13 @@ module.exports = {
       { id: 60,
          
      roleId: 1,
-     permissionId: 55,
+     permissionId: 65,
       createdAt: '2023-07-31 06:51:23',
        updatedAt: '2023-07-31 06:51:23'
     },
     { id: 61,
      roleId: 1,
-     permissionId: 56,
+     permissionId: 66,
       createdAt: '2023-07-31 06:51:23',
        updatedAt: '2023-07-31 06:51:23'
     }
