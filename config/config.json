@@ -1,17 +1,17 @@
 {
   "production": { 
     "username": "db_5qpk_user",
-    "password": "48FqTmhO6WV9rHaqDd0ATzJC1reRSGiG",
-    "database": "db_5qpk",
-    "host": "dpg-ckbvbj4iibqc73d54f00-a",
+    "password": "GcrJIEbudgkaqsQGMMbIkYgcLusJFfQU",
+    "database": "dbs_tdz6",
+    "host": "dpg-ckc0au6smu8c73bkjmtg-a",
     "port": 5432,
     "dialect": "postgres"
   },
    "development": { 
-     "username": "db_5qpk_user",
-    "password": "48FqTmhO6WV9rHaqDd0ATzJC1reRSGiG",
-    "database": "db_5qpk",
-    "host": "dpg-ckbvbj4iibqc73d54f00-a",
+     "username": "dbs_tdz6_user",
+    "password": "GcrJIEbudgkaqsQGMMbIkYgcLusJFfQU",
+    "database": "dbs_tdz6",
+    "host": "dpg-ckc0au6smu8c73bkjmtg-a",
     "port": 5432,
     "dialect": "postgres"
   },
