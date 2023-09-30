@@ -19,7 +19,7 @@ app.use(express.static('public'));
 
 app.use(
   cors({
-    origin: inProduction ? "https://nhia.onrender.com" : "http://localhost:3000"
+    origin: inProduction ? "https://nhia-ng.onrender.com" : "http://localhost:3000"
   })
 );
 
