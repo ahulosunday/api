@@ -26,14 +26,14 @@ app.use(
 //================POSTS USERS==========
 app.use('/api/auth', routes);
 const cron = require('node-cron');
-/*
-cron.schedule('* * * * *', () => {
-  console.log('Running every minute ....go');
 
-});
-console.log('Running every minute ....')
+//cron.schedule('* * * * *', () => {
+  //console.log('Running every minute ....go');
+//const val = getUser_rrrByExpireToday.getUser_rrrByExpireToday(formatDate.formatDate(new Date()));
+//const arr3 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(3);
+//});
+//console.log('Running every minute ....')
 
-*/
 cron.schedule('30 9 * * *', () => {
  console.log('Running a task every day at 9:30 AM');
   const val = getUser_rrrByExpireToday.getUser_rrrByExpireToday(formatDate.formatDate(new Date()));
@@ -41,6 +41,7 @@ cron.schedule('30 9 * * *', () => {
  const arr1 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(20);
  const arr2 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(10);
  const arr3 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(3);
+  const arr4 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(2);
 });
 
 

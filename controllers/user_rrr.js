@@ -155,22 +155,25 @@ const getUser_rrrByExpired =async(req, res) =>{
 const getUser_rrrByExpireToday = async(startedDates) =>{
    try{
         const startedDate = new Date(startedDates);
-       var obj ={}
+       var obj =[]
        const user = await  user_rrr.findAll({
         where : { expired_date : startedDate, activated: 1 },
          include: [users, gifship, gifshiptype, gifshipPackage ]
         })
+      
         const results = user.map(async(result)=>{
             const del = await user_rrr.findOne({where:{id:result.dataValues.id}})
             del.activated = 0
             del.save()
-            return result.dataValues.user.dataValues.email
+            obj.push(result.dataValues.user.dataValues.email)
+            //return result.dataValues.user.dataValues.email
         })
             const obj3 = Object.assign({
                       msg: msg.deactivationMsg,
-                      to: results,
+                      to: obj,
                       subject: msg.deactivationTitle
                     })
+                  
             const email = mails.mails(obj3)
            results (1)
      
@@ -182,7 +185,7 @@ const getUser_rrrByExpireToday = async(startedDates) =>{
 }
 const getUser_rrrByExpireNotify = async(days) =>{
    try{
-
+     var obj =[]
       const User_rrrs = await  user_rrr.findAll({
         where : { expired_date :  {
       [Op.gte]: moment().subtract(days, 'days').toDate()
@@ -192,15 +195,16 @@ const getUser_rrrByExpireNotify = async(days) =>{
        
          const results = User_rrrs.map(async(result)=>{
             const del = await user_rrr.findOne({where:{id:result.dataValues.id}})
-            del.activated = 0
+            del.activated = 1
             del.save()
-            return result.dataValues.user.dataValues.email
+            obj.push(result.dataValues.user.dataValues.email)
         })
             const obj3 = Object.assign({
-                      msg: msg.noticeMsg,
-                      to: results,
+                      msg: msg.noticeMsg + '-- remaining period: '+ days + ' days',
+                      to: obj,
                       subject: msg.noticeTitle
                     })
+                   
             const email = mails.mails(obj3)
            results (1)
     }
