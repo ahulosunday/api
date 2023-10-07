@@ -106,6 +106,8 @@ router.post('/code/0', requireJsonContent, enrolee_rrr_code.addEnrolee_rrr_code)
 router.post('/codes/', requireJsonContent, enrolee_rrr_code.addEnrolee_rrr_codes)
 router.get('/:user_rrrId/codes/getuser_rrr/1/1/', enrolee_rrr_code.getEnrolee_rrr_codeByUser_rrrId )
 router.get('/:userId/codes/getuserid/rrr/rrr/0/', enrolee_rrr_code.getEnrolee_rrr_codeByUserIdAll )
+router.get('/getuserid/:uid/0/1/', enrolee_rrr_code.getActiveRegistration )
+
 //=======================================================
 router.get('/country', country.getCountrys);
 router.get('/country/:page/:per_page', country.getAllCountry)

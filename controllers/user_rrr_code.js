@@ -150,6 +150,49 @@ catch(err){
     return "ERROR"
 }    
 }
+const getActiveRegistration = async(req, res) =>{
+    try{
+        const uid = req.params.uid
+await enrolee_rrr_code.findAll({
+  include: [
+      {model: users, attributes: ['username', 'email', 'surname', 'othername'],
+      where:{
+        id: uid
+      }}, 
+      {model: user_rrr, attributes: ['rrr_number','expired_date', 'activated', 'activated_date','authNumber'],
+      where:{
+        activated: { [Op.ne]: 0 }
+      }
+      } 
+    ],
+    attributes: ['code'],
+    raw: true
+}).then(results=>{
+     const obj2 = results.map((result, index)=>{
+              return Object.assign({
+                code: result.code,
+                email:result['user.email'],
+                username:result['user.username'],
+                surname:result['user.surname'],
+                othername:result['user.othername'],
+                rrr_number:result['user_rrr.rrr_number'],
+                expired_date:result['user_rrr.expired_date'],
+                activated:result['user_rrr.activated'],
+                activated_date: result['user_rrr.activated_date'],
+                authNumber: result['user_rrr.authNumber']
+                })
+                 })
+
+    return res.status(200).json(obj2)
+}).catch(err=>{
+    return res.status(500).json({err: err.message})
+})
+
+    }
+    catch(err){
+return res.status(500).json({err: err.message})
+    }
+}
 module.exports = {
     deleteEnrolee_rrr_codes,
     getEnrolee_rrr_code,
@@ -162,6 +205,7 @@ module.exports = {
     getEnrolee_rrr_codeCount,
     getEnrolee_rrr_codeByUser_rrrId,
     getEnrolee_rrr_codeByUserIdAll,
-    getEnrolee_rrr_codeCountBy_In_Op
+    getEnrolee_rrr_codeCountBy_In_Op,
+    getActiveRegistration
     
 }

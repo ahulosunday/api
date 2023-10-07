@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser')
 //require("dotenv").config({ path: "./.env" });
 const formatDate = require('./helpers/formatDate')
 const getUser_rrrByExpireToday = require('./controllers/user_rrr')
+const getActiveRegistration = require('./controllers/user_rrr_code')
 const port = process.env.DB_PORT || 6001;
 const inProduction = process.env.NODE_ENV === "production";
 
@@ -28,7 +29,8 @@ app.use('/api/auth', routes);
 const cron = require('node-cron');
 
 //cron.schedule('* * * * *', () => {
-  //console.log('Running every minute ....go');
+//console.log('Running every minute ....go');
+ //const v = getActiveRegistration.getActiveRegistration()
 //const val = getUser_rrrByExpireToday.getUser_rrrByExpireToday(formatDate.formatDate(new Date()));
 //const arr3 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(3);
 //});
