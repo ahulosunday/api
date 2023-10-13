@@ -1,19 +1,18 @@
 {
   "production": { 
-    "username": "dbs_tdz6_user",
-    "password": "GcrJIEbudgkaqsQGMMbIkYgcLusJFfQU",
-    "database": "dbs_tdz6",
-    "host": "dpg-ckc0au6smu8c73bkjmtg-a",
-    "port": 5432,
-    "dialect": "postgres"
+     "username": "adedejisite",
+    "password": "NigeriaNreg2017!",
+    "database": "sequelize_db",
+    "host": "p3plcpnl0877.prod.phx3.secureserver.net",
+    "dialect": "mysql"
+    
   },
    "development": { 
-     "username": "dbs_tdz6_user",
-    "password": "GcrJIEbudgkaqsQGMMbIkYgcLusJFfQU",
-    "database": "dbs_tdz6",
-    "host": "dpg-ckc0au6smu8c73bkjmtg-a",
-    "port": 5432,
-    "dialect": "postgres"
+     "username": "adedejisite",
+    "password": "NigeriaNreg2017!",
+    "database": "sequelize_db",
+    "host": "p3plcpnl0877.prod.phx3.secureserver.net",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",

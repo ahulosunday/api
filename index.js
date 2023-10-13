@@ -59,5 +59,16 @@ app.listen({ port: port}, async () => {
 npm install pg body-parser xlsx cors express cookie-parser sequelize --save bcryptjs jsonwebtoken multer mysql2 nodemailer sequelize-cli --save node-cron moment speakeasy 
  && sequelize db:migrate && sequelize db:seed:all
 && sequelize db:migrate --name 2220230705145540-dropTable && sequelize db:seed --seed 220230725190525-role_permission_4.js
+ ==========================================
+ "username": "dbs_tdz6_user",
+    "password": "GcrJIEbudgkaqsQGMMbIkYgcLusJFfQU",
+    "database": "dbs_tdz6",
+    "host": "dpg-ckc0au6smu8c73bkjmtg-a",
+    "port": 5432,
+    "dialect": "postgres"
+    =========================================
+ 
+ 
+ 
  */
  

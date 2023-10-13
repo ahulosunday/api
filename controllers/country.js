@@ -10,7 +10,7 @@ const getCountrys = async(req, res) =>{
          return res.status(200).json(data);
     }
     catch(err){
-        return res.status(500).json({err: err.errors[0].message})
+        return res.status(500).json({err: err.errors[0].message});
     }
 
 }
