@@ -142,7 +142,8 @@ router.get('/state/region/:regionId', state.loadStateswithRegion)
 router.get('/lga', lga.getLgas);
 router.get('/lga/:page/:per_page/0', lga.getLgasPaging);
 router.get('/lga/:id', lga.getLga)
-router.post('/lga', requireJsonContent, lga.addLga)
+router.post('/lga', requireJsonContent, lga.addLga);
+router.post('/lga/bulk', requireJsonContent, lga.BulkaddLga)
 router.delete('/lga/:id', lga.deleteLga)
 router.put('/lga/:id', requireJsonContent, lga.updateLga)
 router.get('/lga/state/:stateId', lga.loadLgaswithState)
@@ -151,6 +152,7 @@ router.get('/ward', ward.getWards);
 router.get('/ward/:page/:per_page/0', ward.getWardsPaging);
 router.get('/ward/:id', ward.getWard)
 router.post('/ward', requireJsonContent, ward.addWard)
+router.post('/ward/bulk', requireJsonContent, ward.BulkaddWard)
 router.delete('/ward/:id', ward.deleteWard)
 router.put('/ward/:id', requireJsonContent, ward.updateWard)
 router.get('/ward/lga/:lgaId', ward.loadWardswithLga)

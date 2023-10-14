@@ -1,4 +1,4 @@
-const { lga, users,country, regions,states, ward } = require('../models');
+const { lga, users,country, regions,states, ward, sequelize } = require('../models');
 const jwt = require('jsonwebtoken')
 const {getPagination, getPagingData}=require('../helpers/paging')
 
@@ -61,7 +61,19 @@ catch(err){
   
    
 }
-
+const BulkaddWard = async(req, res) =>{
+try{
+    const result = await sequelize.transaction(async (t) => {
+     const col = await ward.bulkCreate(req.body, { transaction: t });
+    return res.status(200).json(col); });
+}
+catch(err){
+    return res.status(500).json({ err: err.message})
+}
+  
+   
+}
+ 
 const deleteWard = async(req, res) =>{
     try{
        
@@ -123,6 +135,7 @@ module.exports = {
     deleteWard, 
     updateWard,
     loadWardswithLga,
-    getWardsPaging
+    getWardsPaging,
+    BulkaddWard
     
 }
