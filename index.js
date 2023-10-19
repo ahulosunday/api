@@ -8,6 +8,8 @@ const cookieParser = require('cookie-parser')
 const formatDate = require('./helpers/formatDate')
 const getUser_rrrByExpireToday = require('./controllers/user_rrr')
 const getActiveRegistration = require('./controllers/user_rrr_code')
+const pdfs = require('./helpers/pdf')
+const gform = require('./controllers/gforms')
 const port = process.env.DB_PORT || 6001;
 const inProduction = process.env.NODE_ENV === "production";
 
@@ -27,13 +29,16 @@ app.use(
 //================POSTS USERS==========
 app.use('/api/auth', routes);
 const cron = require('node-cron');
+//const pdfRead = './public/upload/hmo.pdf'
 
-//cron.schedule('* * * * *', () => {
-//console.log('Running every minute ....go');
+cron.schedule('* * * * *', () => {
+console.log('Running every minute ....go');
+//const v = pdfs.getPDF(pdfRead)
+
  //const v = getActiveRegistration.getActiveRegistration()
 //const val = getUser_rrrByExpireToday.getUser_rrrByExpireToday(formatDate.formatDate(new Date()));
 //const arr3 = getUser_rrrByExpireToday.getUser_rrrByExpireNotify(3);
-//});
+});
 //console.log('Running every minute ....')
 
 cron.schedule('30 9 * * *', () => {
@@ -56,7 +61,7 @@ app.listen({ port: port}, async () => {
 })
 
 /**
-npm install pg body-parser xlsx cors express cookie-parser sequelize --save bcryptjs jsonwebtoken multer mysql2 nodemailer sequelize-cli --save node-cron moment speakeasy 
+npm install pg body-parser xlsx cors express cookie-parser sequelize --save bcryptjs jsonwebtoken multer mysql2 nodemailer sequelize-cli --save node-cron moment speakeasy pdf-parse pdfreader
  && sequelize db:migrate && sequelize db:seed:all
 && sequelize db:migrate --name 2220230705145540-dropTable && sequelize db:seed --seed 220230725190525-role_permission_4.js
  ==========================================

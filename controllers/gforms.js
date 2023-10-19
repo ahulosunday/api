@@ -1,6 +1,7 @@
-const {gform,user_rrr, lga, users,country, regions,states,hmo, hospital, gifship, gifshiptype, gifshipPackage } = require('../models');
+const {gform,user_rrr, lga, users,country, regions,states,hmo, hospital, gifship, gifshiptype, gifshipPackage, sequelize } = require('../models');
 const jwt = require('jsonwebtoken')
 const { getPagination, getPagingData} = require('../helpers/paging')
+const { Op } = require('sequelize');
 
 const getGforms = async(req, res) =>{
     try{
@@ -171,5 +172,6 @@ module.exports = {
     updateGform,
     getGformuserId,
     getGformsPaging,
-    getGformByuserId
+    getGformByuserId,
+  
 }
