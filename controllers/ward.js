@@ -26,7 +26,7 @@ const getWardsPaging = async(req, res) =>{
          const { limit, offset } = getPagination(page, per_page)
         const data = await ward.findAndCountAll({ 
             include: [country,users, regions, states, lga], 
-            order:[['name','ASC']],
+            order:[['name','ASC'], ['lgaId','ASC'], ['stateId','ASC']],
             limit:limit, offset:offset
             })
            const response = getPagingData(data, page, limit);

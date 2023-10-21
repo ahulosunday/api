@@ -33,7 +33,7 @@ const getLgasPaging = async(req, res) =>{
         return res.status(200).json(response)
     }
     catch(err){
-        return res.status(200).json({ err: err.errors[0].message})
+        return res.status(200).json({ err: err.message})
     }
 
 }
