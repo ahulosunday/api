@@ -22,6 +22,7 @@ const perm = require('../controllers/permission')
 const role_perm = require('../controllers/role-permission')
 const enrolee_rrr_code = require('../controllers/user_rrr_code');
 const { hashedPasswords } = require('../helpers/hashPassword');
+const account_type = require('../controllers/account_type')
 const send = require('../helpers/email')
 
 const requireJsonContent = (request, response, next) => {
@@ -195,6 +196,13 @@ router.get('/lookups/:id/lga', lookup.lookUpLga)
 router.get('/lookups/:id/state', lookup.lookUpState)
 router.get('/lookups/:id/region', lookup.lookUpRegion)
 router.get('/lookups/:id/country', lookup.lookUpCountry)
+//ACCOUNT TYPE TABLE======================
+router.get('/account/type/', account_type.getAllAccpount_type)
+router.get('/accout/type/:id/0', account_type.getOneAccount_typeById)
+router.get('/account/type/name/:name/0', account_type.getOneAccount_typeByName)
+router.post('/account/type/add',requireJsonContent, account_type.addAccount_type)
+router.put('/account/type/:id/', requireJsonContent, account_type.updateAccount_type)
+router.delete('/account/type/:id', account_type.deleteAccount_typeById)
 //===============image function=========
 
 const storage = multer.diskStorage({

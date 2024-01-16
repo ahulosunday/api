@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
    name: {
       type:DataTypes.STRING,
       allowNull:false,
-       unique: true,
+      // unique: true,
       validate:{
         notEmpty:true,
         notNull:true,
@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     code: {
       type:DataTypes.STRING,
       allowNull:false,
-      unique:true,
+      //unique:true,
       validate:{
         notEmpty:true,
         notNull:true
@@ -91,7 +91,11 @@ module.exports = (sequelize, DataTypes) => {
         notNull: true
       },
     },
-  }, {
+    
+  }, 
+
+  {
+    
     sequelize,
     modelName: 'ward',
   });
